@@ -86,7 +86,7 @@ export class LayoutComponent implements OnInit, OnDestroy
 
                 // Store the config
                 this.config = config;
-
+                this.config.layout = 'thin';
                 // Update the layout
                 this._updateLayout();
             });
