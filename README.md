@@ -8,7 +8,7 @@ Esta versión de node se encuentra en el enlace https://nodejs.org/gl/blog/relea
 Se debe instalar Angular CLI en su version 12.2.3 con el comando ``npm install -g @angular/cli@12.2.3``.
 
 ## Instalación (Mucha atención)
-Una vez tengamos instalado node y Angular  debemos ejecutar el comando ``npm install``. Ojo, no ejecutaremos nunca el comando ``npm update`` bajo ninguna circunstancia, debido a que si se lo realiza puede romper el proyecto y no se ejecutará.
+Una vez tengamos instalado node y Angular, nos dirigimos a la carpeta del proyecto y dentro de este debemos ejecutar el comando ``npm install``. Ojo, no ejecutaremos nunca el comando ``npm update`` bajo ninguna circunstancia, debido a que si se lo realiza puede romper el proyecto y no se ejecutará.
 
 ## Ejecución del proyecto
 Para ejecutar el proyecto usamos el comando ``ng serve -o``. De esta forma el proyecto se compilará y se abrirá en una pestaña del navegador. 
