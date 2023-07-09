@@ -22,7 +22,7 @@ En id le damos un nombre de id que identifique el item del menú.
 En type podemos ubicar solo estos valores:
 - aside: Abre un submenú, en lugar de la propiedad link, tiene la propiedad children.
 Esta configuración la realizamos de acuerdo al tipo de navegación, por defecto este proyecto se configuró en compact.
-``js
+```js
 export const defaultNavigation: FuseNavigationItem[] = [
     {
         id      : 'user-interface',
@@ -41,9 +41,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
         ]
     }
 ];
-``
+```
 - basic: Es un item de menú que lleva a otra parte, no hace nada más.
-``js
+```js
 export const defaultNavigation: FuseNavigationItem[] = [
     {
         {
@@ -56,9 +56,9 @@ export const defaultNavigation: FuseNavigationItem[] = [
         
     }
 ];
-``
+```
 - collapsable: Es un subitem de un menú aside que despliega subitems
-``js
+```js
 export const defaultNavigation: FuseNavigationItem[] = [
     {
         id      : 'user-interface',
@@ -84,18 +84,18 @@ export const defaultNavigation: FuseNavigationItem[] = [
         ]
     }
 ];
-``
+```
 - divider: actúa como un divisor de menú, no hace nada, en este caso solo necesita un id y el tipo.
-``js
+```js
 export const defaultNavigation: FuseNavigationItem[] = [
     {
         id  : 'divider-1',
         type: 'divider'
     },
 ];
-``
+```
 - group: Tiene una funcionalidad similar que aside
-``js
+```js
 export const defaultNavigation: FuseNavigationItem[] = [
     {
         id      : 'apps',
@@ -114,4 +114,4 @@ export const defaultNavigation: FuseNavigationItem[] = [
         ]
     },
 ];
-``
+```
