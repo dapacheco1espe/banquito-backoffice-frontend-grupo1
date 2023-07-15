@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClienteService } from 'app/services/clienteService';
 import { Cliente } from '../model/cliente';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create',
@@ -35,22 +36,33 @@ export class CreateComponent implements OnInit {
       if (!this.validateForm()) {
         return;
       }
-  
+    
       const cliente = new Cliente(this.tipoDocumento, this.numeroDocumento, this.name, this.lastname, this.genero, this.fechaNacimiento, this.direction, this.rol, this.estado);
       this.clienteService.create(cliente).subscribe(
-        
         data => {
-          this.isSaved = true;
-          this.errorMessage = null;
-          // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
-          this.router.navigate(['']);
+          Swal.fire({
+            title: '¡Éxito!',
+            text: 'El usuario se ha guardado correctamente.',
+            icon: 'success'
+          }).then(() => {
+            this.isSaved = true;
+            this.errorMessage = null;
+            // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
+            this.router.navigate(['/gestion/gestion-naturales']);
+          });
         },
         err => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Error al guardar el usuario. Por favor, inténtalo nuevamente.',
+            icon: 'error'
+          });
           this.isSaved = false;
           this.errorMessage = 'Error al guardar el usuario. Por favor, inténtalo nuevamente.';
         }
       );
     }
+    
   
     validateForm(): boolean {
       if (!this.tipoDocumento || !this.numeroDocumento || !this.name || !this.lastname ||
