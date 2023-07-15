@@ -1,0 +1,55 @@
+<div class="container mx-auto">
+  <table class="table-auto w-full bg-primary-100 text-white">
+    <thead>
+      <tr>
+        <th class="px-4 py-2 text-primary-800">Id</th>
+        <th class="px-4 py-2 text-primary-800">Tipo Documento</th>
+        <th class="px-4 py-2 text-primary-800">Numero Documento</th>
+        <th class="px-4 py-2 text-primary-800">Nombre</th>
+        <th class="px-4 py-2 text-primary-800">Apellido</th>
+        <th class="px-4 py-2 text-primary-800">Género</th>
+        <th class="px-4 py-2 text-primary-800">Fecha Nacimiento</th>
+        <th class="px-4 py-2 text-primary-800">Dirección</th>
+        <th class="px-4 py-2 text-primary-800">Rol</th>
+        <th class="px-4 py-2 text-primary-800">Estado</th>
+        <th class="px-4 py-2"></th>
+        <th class="px-4 py-2 text-primary-800">Acciones</th>
+        <th class="px-4 py-2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cli of cliente">
+        <td class="px-4 py-2 text-primary-500 text-center" >{{cli.id}}</td>
+        <td class="px-4 py-2 text-primary-500 text-center">{{cli.tipoDocumento}}</td>
+        <td class="px-4 py-2 text-primary-500 text-center">{{cli.numeroDocumento}}</td>
+        <td class="px-4 py-2 text-primary-500 text-center">{{cli.name}}</td>
+        <td class="px-4 py-2 text-primary-500 text-center">{{cli.lastname}}</td>
+        <td class="px-4 py-2 text-primary-500 text-center">{{cli.genero}}</td>
+        <td class="px-4 py-2 text-primary-500 text-center">{{cli.fechaNacimiento}}</td>
+        <td class="px-4 py-2 text-primary-500 text-center">{{cli.direction}}</td>
+        <td class="px-4 py-2 text-primary-500 text-center">{{cli.rol}}</td>
+        <td class="px-4 py-2 text-primary-500 text-center">{{cli.estado}}</td>
+        <td class="px-4 py-2 text-center">
+          <a class="text-blue-500 hover:text-blue-700 ju" routerLink="./detail/{{cli.id}}">
+            <mat-icon svgIcon="heroicons_outline:eye" class="text-blue-500 hover:text-blue-700"></mat-icon>
+          </a>
+        </td>
+        <td class="px-4 py-2 text-center">
+          <a class="text-yellow-500 hover:text-yellow-700 justify-center" routerLink="./update/{{cli.id}}">
+            <mat-icon svgIcon="heroicons_outline:pencil" class="text-yellow-500 hover:text-yellow-700 text-center"></mat-icon>
+          </a>
+        </td>
+        <td class="px-4 py-2 text-center">
+          <a class="text-red-500 hover:text-red-700" (click)="onDelete(cli.id)">
+            <mat-icon svgIcon="heroicons_outline:trash" class="text-red-500 hover:text-red-700"></mat-icon>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="mt-3">
+    <a class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg" routerLink="./create">
+      <i class="fas fa-plus-circle"></i> Crear Cliente Natural
+    </a>
+  </div>
+</div>

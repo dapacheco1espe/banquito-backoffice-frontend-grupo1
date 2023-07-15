@@ -1,0 +1,44 @@
+<div class="container mx-auto mt-5" *ngIf="cliente">
+    <div class="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden">
+      <div class="bg-gray-200 px-4 py-3 border-b border-gray-300">
+        <h4 class="text-center">Detalle del Cliente</h4>
+      </div>
+      <div class="p-4 justify-center w-full">
+        <ul class="list-group">
+          <li class="list-group-item">
+            <span class="font-semibold">Tipo de documento:</span> {{ cliente.tipoDocumento }}
+          </li>
+          <li class="list-group-item">
+            <span class="font-semibold">Número de documento:</span> {{ cliente.numeroDocumento }}
+          </li>
+          <li class="list-group-item">
+            <span class="font-semibold">Nombre:</span> {{ cliente.name }}
+          </li>
+          <li class="list-group-item">
+            <span class="font-semibold">Apellido:</span> {{ cliente.lastname }}
+          </li>
+          <li class="list-group-item">
+            <span class="font-semibold">Género:</span> {{ cliente.genero }}
+          </li>
+          <li class="list-group-item">
+            <span class="font-semibold">Fecha de nacimiento:</span> {{ cliente.fechaNacimiento }}
+          </li>
+          <li class="list-group-item">
+            <span class="font-semibold">Dirección:</span> {{ cliente.direction }}
+          </li>
+          <li class="list-group-item">
+            <span class="font-semibold">Rol:</span> {{ cliente.rol }}
+          </li>
+          <li class="list-group-item">
+            <span class="font-semibold">Estado:</span> {{ cliente.estado }}
+          </li>
+        </ul>
+      </div>
+      <div class="bg-gray-200 px-4 py-3 border-t border-gray-300">
+        <button class="bg-blue-500 text-white w-full py-2 rounded mt-3" routerLink="../../">
+            <i class="fas fa-arrow-alt-circle-left"></i> Volver
+          </button>
+      </div>
+    </div>
+  </div>
+  
