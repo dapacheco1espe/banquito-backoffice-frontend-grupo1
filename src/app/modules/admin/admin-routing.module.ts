@@ -24,6 +24,13 @@ const routes: Routes = [
                 (m) => m.AgencyModule
             ),
     },
+    {
+        path: 'geostructure',
+        loadChildren: () =>
+            import('app/modules/admin/geostructure/geostructure.module').then(
+                (m) => m.AgencyModule
+            ),
+    },
 ];
 
 @NgModule({
