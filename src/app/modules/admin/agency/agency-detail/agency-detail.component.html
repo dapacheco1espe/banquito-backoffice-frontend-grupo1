@@ -1,0 +1,173 @@
+<div class="w-full rounded-md bg-white p-5 h-screen flex flex-col items-center">
+    <div>
+        <h5
+            class="mb-5 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+        >
+            Detalle de la Agencia
+        </h5>
+    </div>
+    <div class="w-full max-w-xl">
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >
+                    Locación
+                </label>
+                <div>
+                    <div
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 disabled"
+                    >
+                        {{ dataUrl.ubication }}
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 px-1">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >
+                    Código SWIFT
+                </label>
+                <div>
+                    <div
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 disabled"
+                    >
+                        {{ dataUrl.code }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-1">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >
+                    Nombre de Agencia
+                </label>
+                <div>
+                    <div
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 disabled"
+                    >
+                        {{ dataUrl.name }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >
+                    Email
+                </label>
+                <div>
+                    <div
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 disabled"
+                    >
+                        {{ dataUrl.emailAddress }}
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 px-1">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >
+                    Numero de Teléfono
+                </label>
+                <div>
+                    <div
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    >
+                        {{ dataUrl.phoneNumber }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >
+                    Calle Principal
+                </label>
+                <div>
+                    <div
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 disabled"
+                    >
+                        {{ dataUrl.line1 }}
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 px-1">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >
+                    Calle Secundaria
+                </label>
+                <div>
+                    <div
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    >
+                        {{ dataUrl.line2 }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >
+                    Latitud Geográfica
+                </label>
+                <div>
+                    <div
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    >
+                        {{ dataUrl.latitude }}
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                >
+                    Longitud Geográfica
+                </label>
+                <div>
+                    <div
+                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    >
+                        {{ dataUrl.longitude }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="flex items-center">
+                <a
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-3"
+                    href="/admin/agency"
+                >
+                    <div class="flex items-center">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 h-6 mr-1"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+                            />
+                        </svg>
+                        <span> Regresar </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

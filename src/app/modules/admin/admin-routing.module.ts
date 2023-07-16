@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
+    // Home Module
     {
         path: '',
         loadChildren: () =>
@@ -10,6 +11,7 @@ const routes: Routes = [
                 (m) => m.HomeModule
             ),
     },
+    // Admin Management Options
     {
         path: 'admin-management',
         loadChildren: () =>
@@ -17,6 +19,7 @@ const routes: Routes = [
                 'app/modules/admin/admin-management/admin-management.module'
             ).then((m) => m.AdminManagementModule),
     },
+    //Agency Module
     {
         path: 'agency',
         loadChildren: () =>
@@ -24,6 +27,7 @@ const routes: Routes = [
                 (m) => m.AgencyModule
             ),
     },
+    // Geostructure Module
     {
         path: 'geostructure',
         loadChildren: () =>

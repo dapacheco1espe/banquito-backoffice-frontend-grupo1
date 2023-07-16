@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TableService } from './table.service';
+import { AgencyService } from 'app/services/agency.service';
 import { fuseAnimations } from '@fuse/animations';
 
 @Component({
@@ -30,7 +30,7 @@ export class AgencyComponent implements OnInit {
         },
     ];
     dataUrl: any[] = [];
-    constructor(private service: TableService) {
+    constructor(private service: AgencyService) {
         this.service.getData().subscribe((response: any) => {
             console.log(response);
             this.dataUrl = response;
