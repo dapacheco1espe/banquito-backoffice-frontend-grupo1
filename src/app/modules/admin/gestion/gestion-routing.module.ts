@@ -5,10 +5,12 @@ import { createComponent } from '@angular/compiler/src/core';
 import { CreateComponent } from '../client/gestion-naturales/create/create.component';
 
 
+
 const routes: Routes = [
   {path:'',
   component:GestionComponent
 },
+
 {path:'create',
 component:CreateComponent
 }

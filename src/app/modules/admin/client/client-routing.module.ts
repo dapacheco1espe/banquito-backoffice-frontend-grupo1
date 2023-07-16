@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClientComponent } from './client.component';
 import { GestionComponent } from '../gestion/gestion.component';
 
+
+
 const routes: Routes = [{
   path:'',
   component:ClientComponent
@@ -12,6 +14,8 @@ const routes: Routes = [{
 component: GestionComponent
 
  },
+
+
  
   {
     path: 'gestion-naturales',
@@ -21,10 +25,7 @@ component: GestionComponent
     path: 'gestion-juridicos',
     loadChildren: () => import('app/modules/admin/client/gestion-juridicos/gestion-juridicos.module') .then(m => m.GestionJuridicosModule),
   },
-  {
-    path: 'gestion-roles',
-    loadChildren: () => import('app/modules/admin/client/gestion-roles/gestion-roles.module') .then(m => m.GestionRolesModule),
-  },
+ 
   {
     path: 'create-naturales',
     loadChildren: () => import('app/modules/admin/client/gestion-naturales/create/create.module') .then(m => m.CreateModule),
@@ -36,8 +37,28 @@ component: GestionComponent
   {
     path: 'edit-naturales',
     loadChildren: () => import('app/modules/admin/client/gestion-naturales/update/update.module') .then(m => m.UpdateModule),
-  }
-
+  },
+  {
+    path: 'create-juridicos',
+    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/create/create.module') .then(m => m.CreateModule),
+  },
+  {
+    path: 'edit-juridicos',
+    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/update/update.module') .then(m => m.UpdateModule),
+  },
+  {
+    path: 'accounts',
+    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/accounts/accounts.module') .then(m => m.AccountsModule),
+  },
+  {
+    path: 'create-accounts',
+    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/accounts/create/create.module') .then(m => m.CreateModule),
+  },
+  {
+    path: 'edit-accounts',
+    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/accounts/update/update.module') .then(m => m.UpdateModule),
+  },
+  
   
 ];
 

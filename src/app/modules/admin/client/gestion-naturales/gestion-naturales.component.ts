@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Cliente } from "./model/cliente";
 import { ClienteService } from "app/services/clienteService";
 import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup } from "@angular/forms";
 
 
 @Component({
@@ -11,16 +12,22 @@ import Swal from 'sweetalert2';
 })
 export class GestionNaturalesComponent implements OnInit {
  
-
+  
   cliente: Cliente[] = [];
-
+  filteredCliente: Cliente[] = [];
+  searchForm: FormGroup;
   constructor(
+    private formBuilder: FormBuilder,
     private clienteService: ClienteService,
    
     
-  ) { }
+  ) {  this.searchForm = this.formBuilder.group({
+    numeroDocumento: [''],
+    nombreApellido: ['']
+  });}
 
   ngOnInit(): void {
+
     this.getCliente();
   }
 
@@ -28,11 +35,22 @@ export class GestionNaturalesComponent implements OnInit {
     this.clienteService.list().subscribe(
       data => {
         this.cliente = data;
+        this.filteredCliente = data;
       },
       err => {
         
       }
     );
+  }
+
+  filterData(): void {
+    const searchTerm = this.searchForm.get('numeroDocumento').value.toLowerCase();
+
+    this.filteredCliente = this.cliente.filter(cli => {
+      const matchNumeroDocumento = cli.numeroDocumento.toLowerCase().includes(searchTerm);
+
+      return matchNumeroDocumento;
+    });
   }
 
   onDelete(id: number): void {

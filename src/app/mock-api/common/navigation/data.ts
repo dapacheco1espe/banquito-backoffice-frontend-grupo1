@@ -36,11 +36,11 @@ export const compactNavigation: FuseNavigationItem[] = [
             },
             {
                 id      : 'payments',
-                title   : 'Pagos',
-                tooltip : 'Pagos',
+                title   : 'Cuentas Clientes Juridicos',
+                tooltip : 'Cuenta',
                 type    : 'basic',
                 icon    : 'heroicons_outline:currency-dollar',
-                //link    : '/account-operations'
+                link    : '/gestion/gestion-juridicos/accounts'
             },
             // {
             //     id      : 'history',

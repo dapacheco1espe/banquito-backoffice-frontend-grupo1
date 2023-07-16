@@ -1,17 +1,16 @@
-import { Component, OnInit } from "@angular/core";
-import { fuseAnimations } from '@fuse/animations';
-import { Cliente } from "./model/cliente";
-import { ClienteService } from "app/services/clienteService";
+import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import { FormBuilder, FormGroup, FormsModule } from "@angular/forms";
+import { Cliente } from '../model/cliente';
+import { FormGroup } from '@angular/forms';
+import { ClienteService } from 'app/services/clienteService';
 
 @Component({
-  selector: 'app-gestion-juridicos',
-  templateUrl: 'gestion-juridicos.component.html',
-  styleUrls: ['gestion-juridicos.component.scss'],
-  animations: fuseAnimations
+  selector: 'app-accounts',
+  templateUrl: './accounts.component.html',
+  styleUrls: ['./accounts.component.scss']
 })
-export class GestionJuridicosComponent implements OnInit {
+export class AccountsComponent implements OnInit {
+
   title = 'data-table';
   searchTerm: string = '';
   filteredData: any[] = [];
