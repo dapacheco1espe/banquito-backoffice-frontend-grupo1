@@ -15,7 +15,6 @@ component: GestionComponent
 
  },
 
-
  
   {
     path: 'gestion-naturales',
@@ -34,6 +33,10 @@ component: GestionComponent
   {
     path: 'edit-naturales',
     loadChildren: () => import('app/modules/admin/client/gestion-naturales/update/update.module') .then(m => m.UpdateModule),
+  },
+  {
+    path: 'delete-naturales',
+    loadChildren: () => import('app/modules/admin/client/gestion-naturales/delete/delete.module') .then(m => m.DeleteModule),
   },
  
   

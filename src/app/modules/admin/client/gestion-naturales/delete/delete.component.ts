@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ClienteService } from 'app/services/clienteService';
 import { Cliente } from '../model/cliente';
+import { ClienteService } from 'app/services/clienteService';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-update',
-  templateUrl: './update.component.html',
-  styleUrls: ['./update.component.scss']
+  selector: 'app-delete',
+  templateUrl: './delete.component.html',
+  styleUrls: ['./delete.component.scss']
 })
-export class UpdateComponent implements OnInit {
-
+export class DeleteComponent implements OnInit {
   typeDocumentId: String = this.activatedRoute.snapshot.params['typeDocumentId'];
   documentId: String = this.activatedRoute.snapshot.params['documentId'];;
   isSaved: boolean | null = null;
@@ -25,15 +24,15 @@ export class UpdateComponent implements OnInit {
   
     ngOnInit(): void {
       this.getCliente();
-     
+      this.onDelete();
     }
   
-    onUpdate(): void {
-      this.clienteService.update(this.typeDocumentId,this.documentId, this.cliente).subscribe(
+    onDelete(): void {
+      this.clienteService.delete(this.typeDocumentId,this.documentId, this.cliente).subscribe(
         data => {
           Swal.fire({
             title: '¡Éxito!',
-            text: 'El usuario se ha actualizado correctamente.',
+            text: 'El usuario ha sido eliminado correctamente.',
             icon: 'success',
             
           }).then(() => {
@@ -72,7 +71,4 @@ export class UpdateComponent implements OnInit {
       );
     }
 
-  
-  }
-
-
+}

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { GestionNaturalesComponent } from './gestion-naturales.component';
 import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
+import { DeleteComponent } from './delete/delete.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,8 @@ const routes: Routes = [
 },
 {path: 'create', component: CreateComponent},
 {path: 'update/:typeDocumentId/:documentId', component: UpdateComponent},
+{path: 'delete/:typeDocumentId/:documentId', component: DeleteComponent},
+
 
 ];
 

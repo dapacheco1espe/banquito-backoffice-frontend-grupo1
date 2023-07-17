@@ -27,7 +27,7 @@ export class ClienteService {
   public update(typeDocumentId: String, documentId: String, cliente: Cliente): Observable<any> {
     return this.httpClient.put<any>(`${this.clienteURL}/${typeDocumentId}/${documentId}`, cliente);
   }  
-  public delete(uniqueKey: String): Observable<any> {
-    return this.httpClient.delete<any>(this.clienteURL + `/${uniqueKey}`);
+  public delete(typeDocumentId: String, documentId: String, cliente: Cliente): Observable<any> {
+    return this.httpClient.put<any>(`${this.clienteURL}/${'deleteClient'}/${typeDocumentId}/${documentId}`, cliente);
   }
 }

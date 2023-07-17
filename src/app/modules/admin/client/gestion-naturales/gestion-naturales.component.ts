@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, FormsModule } from "@angular/forms";
 import { Cliente } from "./model/cliente";
 import { ClienteService } from "app/services/clienteService";
+import { ActivatedRoute, Router } from "@angular/router";
 
 
 @Component({
@@ -26,8 +27,12 @@ export class GestionNaturalesComponent implements OnInit {
   clientes: Cliente[] = [];
   filteredClientes: Cliente[] = [];
   searchForm: FormGroup;
-
-  constructor(private clienteService: ClienteService) {
+ 
+  isSaved: boolean | null = null;
+  errorMessage: string | null = null;
+  constructor(private clienteService: ClienteService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
     this.clienteService.list().subscribe(
       (data: Cliente[]) => {
         console.log(data);
@@ -41,6 +46,7 @@ export class GestionNaturalesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+ 
   
   }
 
@@ -79,7 +85,7 @@ export class GestionNaturalesComponent implements OnInit {
   get displayedData(): any[] {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    return this.clientes
+    return this.clientes.filter((item) => item.state === 'ACT')
       .filter(
         (item) =>
           item.typeDocumentId.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
@@ -109,41 +115,6 @@ export class GestionNaturalesComponent implements OnInit {
   setCurrentPage(page: number) {
     this.currentPage = page;
   }
+  
 
-  onDelete(uniqueKey: String): void {
-    Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'Esta acción no se puede deshacer',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Aceptar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.value) {
-        this.clienteService.delete(uniqueKey).subscribe(
-          (data: any) => {
-            Swal.fire(
-              'OK Cliente Eliminado',
-              data.message,
-              'success'
-            );
-            this.getCliente();
-          },
-          (err: any) => {
-            Swal.fire(
-              'Error',
-              err.error.message,
-              'error'
-            );
-          }
-        );
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelado',
-          'El cliente no ha sido eliminado',
-          'error'
-        );
-      }
-    });
-  }
 }
