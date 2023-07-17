@@ -41,9 +41,7 @@
                             }
                         ],
                         "stylePreprocessorOptions": {
-                            "includePaths": [
-                                "src/@fuse/styles"
-                            ]
+                            "includePaths": ["src/@fuse/styles"]
                         },
                         "styles": [
                             "src/@fuse/styles/tailwind.scss",
@@ -51,9 +49,12 @@
                             "src/styles/vendors.scss",
                             "src/@fuse/styles/main.scss",
                             "src/styles/styles.scss",
-                            "src/styles/tailwind.scss"
+                            "src/styles/tailwind.scss",
+                            "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "node_modules/@angular/cdk/bundles/cdk-drag-drop.umd.js"
+                        ]
                     },
                     "configurations": {
                         "production": {
@@ -119,19 +120,14 @@
                             "src/favicon-32x32.png",
                             "src/assets"
                         ],
-                        "styles": [
-                            "src/styles/styles.scss"
-                        ],
+                        "styles": ["src/styles/styles.scss"],
                         "scripts": []
                     }
                 },
                 "lint": {
                     "builder": "@angular-eslint/builder:lint",
                     "options": {
-                        "lintFilePatterns": [
-                            "src/**/*.ts",
-                            "src/**/*.html"
-                        ]
+                        "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
                     }
                 }
             }
@@ -139,6 +135,7 @@
     },
     "defaultProject": "fuse",
     "cli": {
+        "analytics": "aa3cd3f7-b831-4c29-b3ca-fa60e85d16c1",
         "defaultCollection": "@angular-eslint/schematics"
     }
 }

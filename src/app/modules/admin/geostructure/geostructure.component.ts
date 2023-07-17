@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
-import { GeostructureService } from './geostructure.service';
+import { GeostructureService } from 'app/services/geostructure.service';
+import { Geostructure } from './geostructure-model/geostructure';
 
 @Component({
     selector: 'app-geostructure',
@@ -9,26 +10,30 @@ import { GeostructureService } from './geostructure.service';
     animations: fuseAnimations,
 })
 export class GeostructureComponent implements OnInit {
-    title = 'data-table';
+    geostructures: Geostructure[] = [];
+    filteredGeostructure: Geostructure[] = [];
     searchTerm: string = '';
-    filteredData: any[] = [];
     selectedRowIndex: number = -1;
     showButtons: boolean = false;
     showNav: boolean = false;
     currentPage: number = 1;
     pageSize: number = 5;
-    dataUrl: any[] = [];
-    constructor(private service: GeostructureService) {
-        this.service.getData().subscribe((response: any) => {
-            console.log(response);
-            this.dataUrl = response;
+
+    constructor(private geostructureService: GeostructureService) {}
+
+    ngOnInit(): void {
+        this.getGeostructures();
+    }
+
+    // Traer agencias existentes
+    getGeostructures(): void {
+        this.geostructureService.list().subscribe((data) => {
+            this.geostructures = data;
         });
     }
 
-    ngOnInit(): void {}
-
     filterData() {
-        this.filteredData = this.dataUrl.filter(
+        this.filteredGeostructure = this.geostructures.filter(
             (item) =>
                 item.countryId
                     .toLowerCase()
@@ -46,7 +51,7 @@ export class GeostructureComponent implements OnInit {
     get displayedData(): any[] {
         const startIndex = (this.currentPage - 1) * this.pageSize;
         const endIndex = startIndex + this.pageSize;
-        return this.dataUrl
+        return this.geostructures
             .filter(
                 (item) =>
                     item.countryId
@@ -64,12 +69,12 @@ export class GeostructureComponent implements OnInit {
 
     get totalPages(): number[] {
         console.log(
-            Array(Math.ceil(this.dataUrl.length / this.pageSize))
+            Array(Math.ceil(this.geostructures.length / this.pageSize))
                 .fill(0)
                 .map((_, i) => i + 1)
         );
 
-        return Array(Math.ceil(this.dataUrl.length / this.pageSize))
+        return Array(Math.ceil(this.geostructures.length / this.pageSize))
             .fill(0)
             .map((_, i) => i + 1);
     }
