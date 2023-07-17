@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AgencyService } from 'app/services/agency.service';
 import { fuseAnimations } from '@fuse/animations';
+import Swal from 'sweetalert2';
+import { Agency } from './agency-model/agency';
 
 @Component({
     selector: 'app-agency',
@@ -9,38 +11,35 @@ import { fuseAnimations } from '@fuse/animations';
     animations: fuseAnimations,
 })
 export class AgencyComponent implements OnInit {
-    title = 'data-table';
+    agencies: Agency[] = [];
+    filteredAgencies: Agency[] = [];
     searchTerm: string = '';
-    filteredData: any[] = [];
     selectedRowIndex: number = -1;
     showButtons: boolean = false;
     showNav: boolean = false;
     currentPage: number = 1;
     pageSize: number = 5;
-    data: any[] = [
-        {
-            nombre: 'Maverick',
-            email: 'mrpaucar@espe.edu.ec',
-            rol: 'Administrador',
-        },
-        {
-            nombre: 'David',
-            email: 'datamayo@espe.edu.ec',
-            rol: 'Administrador',
-        },
-    ];
-    dataUrl: any[] = [];
-    constructor(private service: AgencyService) {
-        this.service.getData().subscribe((response: any) => {
-            console.log(response);
-            this.dataUrl = response;
+    constructor(
+        private service: AgencyService,
+        private agencyService: AgencyService
+    ) {}
+
+    ngOnInit(): void {
+        this.getAgencies();
+    }
+
+    // Traer agencias existentes
+    getAgencies(): void {
+        this.agencyService.list().subscribe((data) => {
+            console.log(data);
+            this.agencies = data;
+            console.log(this.agencies);
         });
     }
 
-    ngOnInit(): void {}
-
+    // Filtrar datos, funcion para input de busqueda
     filterData() {
-        this.filteredData = this.dataUrl.filter(
+        this.filteredAgencies = this.agencies.filter(
             (item) =>
                 item.name
                     .toLowerCase()
@@ -59,21 +58,11 @@ export class AgencyComponent implements OnInit {
         this.showButtons = false;
     }
 
-    rowClick(index: number) {
-        this.selectedRowIndex = index;
-        this.showButtons = true;
-        console.log(this.selectedRowIndex);
-    }
-
-    resetSelection() {
-        this.selectedRowIndex = -1;
-        this.showButtons = false;
-    }
-
-    get displayedData(): any[] {
+    // Datos desplegados
+    get displayedData(): Agency[] {
         const startIndex = (this.currentPage - 1) * this.pageSize;
         const endIndex = startIndex + this.pageSize;
-        return this.dataUrl
+        return this.agencies
             .filter(
                 (item) =>
                     item.name
@@ -95,14 +84,25 @@ export class AgencyComponent implements OnInit {
             .slice(startIndex, endIndex);
     }
 
+    rowClick(index: number) {
+        this.selectedRowIndex = index;
+        this.showButtons = true;
+        console.log(this.selectedRowIndex);
+    }
+
+    resetSelection() {
+        this.selectedRowIndex = -1;
+        this.showButtons = false;
+    }
+
     get totalPages(): number[] {
         console.log(
-            Array(Math.ceil(this.dataUrl.length / this.pageSize))
+            Array(Math.ceil(this.agencies.length / this.pageSize))
                 .fill(0)
                 .map((_, i) => i + 1)
         );
 
-        return Array(Math.ceil(this.dataUrl.length / this.pageSize))
+        return Array(Math.ceil(this.agencies.length / this.pageSize))
             .fill(0)
             .map((_, i) => i + 1);
     }

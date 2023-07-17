@@ -7,9 +7,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SharedModule } from 'app/shared/shared.module';
 import { AgencyComponent } from './agency.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AgencyCreateComponent } from './agency-create/agency-create.component';
 
 @NgModule({
-    declarations: [AgencyComponent],
+    declarations: [AgencyComponent, AgencyCreateComponent],
     imports: [
         SharedModule,
         AgencyRoutingModule,

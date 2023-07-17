@@ -6,7 +6,7 @@ import { AgencyCreateRoutingModule } from './agency-create-routing.module';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [AgencyCreateComponent],
+    declarations: [],
     imports: [CommonModule, FormsModule, AgencyCreateRoutingModule],
 })
 export class AgencyCreateModule {}
