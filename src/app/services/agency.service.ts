@@ -22,4 +22,8 @@ export class AgencyService {
     public detail(id: number): Observable<any> {
         return this.http.get(this.baseURL + `/${id}`);
     }
+
+    public update(id: number, agency: Agency): Observable<any> {
+        return this.http.put(this.baseURL + `/${id}`, agency);
+    }
 }

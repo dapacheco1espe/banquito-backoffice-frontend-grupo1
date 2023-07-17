@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AgencyService } from 'app/services/agency.service';
 import { Agency } from '../agency-model/agency';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
 
 @Component({
-    selector: 'app-agency-create',
-    templateUrl: './agency-create.component.html',
-    styleUrls: ['./agency-create.component.scss'],
+    selector: 'app-agency-update',
+    templateUrl: './agency-update.component.html',
+    styleUrls: ['./agency-update.component.scss'],
 })
-export class AgencyCreateComponent implements OnInit {
+export class AgencyUpdateComponent implements OnInit {
+    dataUrl: any = {};
+
     id!: number;
     ubication!: String;
     code!: string;
@@ -27,11 +29,44 @@ export class AgencyCreateComponent implements OnInit {
     isSaved: boolean | null = null;
     errorMessage: string | null = null;
 
-    constructor(private agencyService: AgencyService, private router: Router) {}
+    constructor(
+        private agencyService: AgencyService,
+        private router: Router,
+        private activatedRoute: ActivatedRoute
+    ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.getDetail();
+    }
 
-    onCreate(): void {
+    getDetail(): void {
+        const id = this.activatedRoute.snapshot.params.id;
+        this.agencyService.detail(id).subscribe(
+            (data) => {
+                this.dataUrl = data;
+                console.log(this.dataUrl);
+                this.id = this.dataUrl.id || 0;
+                this.ubication = this.dataUrl.ubication || '';
+                this.code = this.dataUrl.code || '';
+                this.name = this.dataUrl.name || '';
+                this.uniqueKey = this.dataUrl.uniqueKey || '';
+                this.state = this.dataUrl.state || '';
+                this.emailAddress = this.dataUrl.emailAddress || '';
+                this.phoneNumber = this.dataUrl.phoneNumber || '';
+                this.line1 = this.dataUrl.line1 || '';
+                this.line2 = this.dataUrl.line2 || '';
+                this.creationDate = this.dataUrl.creationDate || '';
+                this.latitude = this.dataUrl.latitude || 0;
+                this.longitude = this.dataUrl.longitude || 0;
+            },
+            (err) => {
+                console.log('No encuentra NADA');
+                this.router.navigate(['']);
+            }
+        );
+    }
+
+    onUpdate(): void {
         if (!this.validateForm()) {
             Swal.fire({
                 title: 'Error',
@@ -40,6 +75,7 @@ export class AgencyCreateComponent implements OnInit {
             });
             return;
         }
+        const id = this.activatedRoute.snapshot.params.id;
 
         const agency = new Agency(
             this.ubication,
@@ -55,12 +91,12 @@ export class AgencyCreateComponent implements OnInit {
             this.latitude,
             this.longitude
         );
-        this.agencyService.create(agency).subscribe(
+        this.agencyService.update(id, agency).subscribe(
             (data) => {
                 console.log('Hola');
                 Swal.fire({
                     title: '¡Éxito!',
-                    text: 'La nueva agencia se ha guardado correctamente.',
+                    text: 'La agencia se ha actualizado correctamente.',
                     icon: 'success',
                 }).then(() => {
                     this.isSaved = true;
@@ -81,7 +117,6 @@ export class AgencyCreateComponent implements OnInit {
             }
         );
     }
-
     validateForm(): boolean {
         let dateNow = new Date();
 
@@ -128,17 +163,6 @@ export class AgencyCreateComponent implements OnInit {
             this.errorMessage = 'El email debe tener un estructura estándar';
             return false;
         }
-        // // Latitud
-        // if (!/^-?([0-8]?[0-9]\.\d+|90\.0+)$/.test()) {
-        //     this.errorMessage = 'El email debe tener un estructura estándar';
-        //     return false;
-        // }
-        // // Longitud
-        // if (!/[0-9]{3}-[0-9]{4}$/.test(this.phoneNumber)) {
-        //     this.errorMessage = 'El email debe tener un estructura estándar';
-        //     return false;
-        // }
-        // Si todas las validaciones pasan, se considera el formulario válido
         this.errorMessage = null;
         return true;
     }

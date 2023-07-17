@@ -8,9 +8,10 @@ import { SharedModule } from 'app/shared/shared.module';
 import { AgencyComponent } from './agency.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AgencyCreateComponent } from './agency-create/agency-create.component';
+import { AgencyUpdateComponent } from './agency-update/agency-update.component';
 
 @NgModule({
-    declarations: [AgencyComponent, AgencyCreateComponent],
+    declarations: [AgencyComponent, AgencyCreateComponent, AgencyUpdateComponent],
     imports: [
         SharedModule,
         AgencyRoutingModule,
