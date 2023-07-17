@@ -4,8 +4,9 @@ import { fuseAnimations } from '@fuse/animations';
 
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, FormsModule } from "@angular/forms";
-import { Cliente } from "./model1/cliente";
-import { ClienteService } from "app/services/companyService";
+import {Company} from "./model/company";
+import {CompanyService} from "app/services/companyService";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-gestion-juridicos',
@@ -23,16 +24,18 @@ export class GestionJuridicosComponent implements OnInit {
   currentPage: number = 1;
   pageSize: number = 10;
   dataUrl: any[] = [];
-  clientes: Cliente[] = [];
-  filteredClientes: Cliente[] = [];
+  company: Company[] = [];
+  filteredCompany: Company[] = [];
   searchForm: FormGroup;
-
-  constructor(private clienteService: ClienteService 
-  ) {
+ 
+  isSaved: boolean | null = null;
+  errorMessage: string | null = null;
+  constructor(private clienteService: CompanyService
+    ) {
     this.clienteService.list().subscribe(
-      (data: Cliente[]) => {
+      (data: Company[]) => {
         console.log(data);
-        this.clientes = data;
+        this.company = data;
       },
       (err: any) => {
         // Manejar errores si es necesario
@@ -42,13 +45,14 @@ export class GestionJuridicosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+ 
   
   }
 
   getCliente(): void {
     this.clienteService.list().subscribe(
       data => {
-        this.clientes = data;
+        this.company = data;
       },
       err => {
         
@@ -58,48 +62,20 @@ export class GestionJuridicosComponent implements OnInit {
 
   filterData() {
     console.log(this.filteredData);
-    this.filteredData = this.clientes.filter(
-      
-        (item) =>
-           item.branchId
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.locationId
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.groupName
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.emailAddress
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.phoneNumber
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.line1
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.line2
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.latitude
-                .toFixed()
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.longitude
-                .toFixed()
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.comments
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.state
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase())
-
+    this.filteredData = this.company.filter(
+      (item) =>
+        item.uniqueKey.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.groupName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.emailAddress.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.phoneNumber.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.line1.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.line2.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.latitude.toFixed().toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.longitude.toFixed().toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.state.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
     this.showButtons = false;
-}
+  }
 
   rowClick(index: number) {
     this.selectedRowIndex = index;
@@ -110,98 +86,35 @@ export class GestionJuridicosComponent implements OnInit {
   get displayedData(): any[] {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
-    return this.clientes
-        .filter(
-          (item) =>
-          item.branchId
-               .toLowerCase()
-               .includes(this.searchTerm.toLowerCase()) ||
-           item.locationId
-               .toLowerCase()
-               .includes(this.searchTerm.toLowerCase()) ||
-           item.groupName
-               .toLowerCase()
-               .includes(this.searchTerm.toLowerCase()) ||
-           item.emailAddress
-               .toLowerCase()
-               .includes(this.searchTerm.toLowerCase()) ||
-           item.phoneNumber
-               .toLowerCase()
-               .includes(this.searchTerm.toLowerCase()) ||
-           item.line1
-               .toLowerCase()
-               .includes(this.searchTerm.toLowerCase()) ||
-           item.line2
-               .toLowerCase()
-               .includes(this.searchTerm.toLowerCase()) ||
-           item.latitude
-               .toFixed()
-               .toLowerCase()
-               .includes(this.searchTerm.toLowerCase()) ||
-           item.longitude
-               .toFixed()
-               .toLowerCase()
-               .includes(this.searchTerm.toLowerCase()) ||
-           item.comments
-               .toLowerCase()
-               .includes(this.searchTerm.toLowerCase()) ||
-           item.state
-               .toLowerCase()
-               .includes(this.searchTerm.toLowerCase())
-        )
-        .slice(startIndex, endIndex);
-}
+    return this.company.filter(
+      (item) =>
+        item.groupName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.emailAddress.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.phoneNumber.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.line1.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.line2.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.latitude.toFixed().toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.longitude.toFixed().toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        item.state.toLowerCase().includes(this.searchTerm.toLowerCase())
+    )
+      .slice(startIndex, endIndex);
+  }
 
-get totalPages(): number[] {
-  console.log(
-      Array(Math.ceil(this.clientes.length / this.pageSize))
-          .fill(0)
-          .map((_, i) => i + 1)
-  );
+  get totalPages(): number[] {
+    console.log(
+      Array(Math.ceil(this.company.length / this.pageSize))
+        .fill(0)
+        .map((_, i) => i + 1)
+    );
 
-  return Array(Math.ceil(this.clientes.length / this.pageSize))
+    return Array(Math.ceil(this.company.length / this.pageSize))
       .fill(0)
       .map((_, i) => i + 1);
-}
-
-setCurrentPage(page: number) {
-  this.currentPage = page;
-}
-
-  onDelete(id: number): void {
-    Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'Esta acción no se puede deshacer',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Aceptar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.value) {
-        this.clienteService.delete(id).subscribe(
-          (data: any) => {
-            Swal.fire(
-              'OK Cliente Eliminado',
-              data.message,
-              'success'
-            );
-            this.getCliente();
-          },
-          (err: any) => {
-            Swal.fire(
-              'Error',
-              err.error.message,
-              'error'
-            );
-          }
-        );
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelado',
-          'El cliente no ha sido eliminado',
-          'error'
-        );
-      }
-    });
   }
+
+  setCurrentPage(page: number) {
+    this.currentPage = page;
+  }
+  
+
 }

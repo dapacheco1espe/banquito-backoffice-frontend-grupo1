@@ -44,17 +44,16 @@
         <table class="border-collapse w-full table-auto mt-4">
             <thead>
                 <tr>
-                    <th class="px-4 py-2">branchId</th>
-                    <th class="px-4 py-2">locationId</th>
-                    <th class="px-4 py-2">groupName</th>
-                    <th class="px-4 py-2">emailAddress</th>
-                    <th class="px-4 py-2">phoneNumber</th>
-                    <th class="px-4 py-2">line1</th>
-                    <th class="px-4 py-2">line2</th>
-                    <th class="px-4 py-2">latitude</th>
-                    <th class="px-4 py-2">longitude</th>
-                    <th class="px-4 py-2">comments</th>
-                    <th class="px-4 py-2">state</th>
+                    <th class="px-4 py-2">Empresa</th>
+                    <th class="px-4 py-2">Email</th>
+                    <th class="px-4 py-2">Numero Telefono</th>
+                    <th class="px-4 py-2">Calle Principal</th>
+                    <th class="px-4 py-2">Calle Secundaria</th>
+                    <th class="px-4 py-2">Latitude</th>
+                    <th class="px-4 py-2">Longitude</th>
+                    <th class="px-4 py-2">Estado</th>
+                    <th class="px-4 py-2">Creacion</th>
+                    <th class="px-4 py-2">Modificacion</th>
                     <th class="px-4 py-2">Acciones</th> <!-- Columna para los botones de acciones -->
                 </tr>
             </thead>
@@ -62,8 +61,6 @@
                 <tr *ngFor="let item of displayedData; let i = index"
                     [ngClass]="{ 'selected-row': selectedRowIndex === item.uniqueKey }" (click)="rowClick(item.uniqueKey)"
                     class="cursor-pointer hover:bg-blue-300 text-sm">
-                    <td class="border px-4 py-2 text-center">{{ item.branchId }}</td>
-                    <td class="border px-4 py-2 text-center">{{ item.locationId }}</td>
                     <td class="border px-4 py-2 text-center">{{ item.groupName }}</td>
                     <td class="border px-4 py-2 text-center">{{ item.emailAddress }}</td>
                     <td class="border px-4 py-2 text-center">{{ item.phoneNumber }}</td>
@@ -71,8 +68,9 @@
                     <td class="border px-4 py-2 text-center">{{ item.line2 }}</td>
                     <td class="border px-4 py-2 text-center">{{ item.latitude }}</td>
                     <td class="border px-4 py-2 text-center">{{ item.longitude }}</td>
-                    <td class="border px-4 py-2 text-center">{{ item.comments }}</td>
                     <td class="border px-4 py-2 text-center">{{ item.state }}</td>
+                    <td class="border px-4 py-2 text-center">{{ item.creationDate | date:'short' }}</td>
+                    <td class="border px-4 py-2 text-center">{{ item.lastModifiedDate | date:'short' }}</td>
                     <td class="border px-4 py-2 text-center">
                         <div class="flex">
                             <button type="button" routerLink="./update/{{item.id}}"

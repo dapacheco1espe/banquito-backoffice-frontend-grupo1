@@ -30,9 +30,8 @@ export class GestionNaturalesComponent implements OnInit {
  
   isSaved: boolean | null = null;
   errorMessage: string | null = null;
-  constructor(private clienteService: ClienteService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute) {
+  constructor(private clienteService: ClienteService
+    ) {
     this.clienteService.list().subscribe(
       (data: Cliente[]) => {
         console.log(data);

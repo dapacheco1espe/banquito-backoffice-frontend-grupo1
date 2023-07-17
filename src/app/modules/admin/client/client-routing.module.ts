@@ -38,6 +38,10 @@ component: GestionComponent
     path: 'delete-naturales',
     loadChildren: () => import('app/modules/admin/client/gestion-naturales/delete/delete.module') .then(m => m.DeleteModule),
   },
+  {
+    path: 'create-juridicos',
+    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/create/create.module') .then(m => m.CreateModule),
+  }
  
   
   
