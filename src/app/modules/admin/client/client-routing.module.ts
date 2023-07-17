@@ -30,34 +30,12 @@ component: GestionComponent
     path: 'create-naturales',
     loadChildren: () => import('app/modules/admin/client/gestion-naturales/create/create.module') .then(m => m.CreateModule),
   },
-  {
-    path: 'detail-naturales',
-    loadChildren: () => import('app/modules/admin/client/gestion-naturales/detail/detail.module') .then(m => m.DetailModule),
-  },
+ 
   {
     path: 'edit-naturales',
     loadChildren: () => import('app/modules/admin/client/gestion-naturales/update/update.module') .then(m => m.UpdateModule),
   },
-  {
-    path: 'create-juridicos',
-    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/create/create.module') .then(m => m.CreateModule),
-  },
-  {
-    path: 'edit-juridicos',
-    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/update/update.module') .then(m => m.UpdateModule),
-  },
-  {
-    path: 'accounts',
-    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/accounts/accounts.module') .then(m => m.AccountsModule),
-  },
-  {
-    path: 'create-accounts',
-    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/accounts/create/create.module') .then(m => m.CreateModule),
-  },
-  {
-    path: 'edit-accounts',
-    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/accounts/update/update.module') .then(m => m.UpdateModule),
-  },
+ 
   
   
 ];

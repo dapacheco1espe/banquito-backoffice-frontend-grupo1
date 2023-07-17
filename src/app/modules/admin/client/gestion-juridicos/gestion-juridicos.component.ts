@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { fuseAnimations } from '@fuse/animations';
-import { Cliente } from "./model/cliente";
-import { ClienteService } from "app/services/clienteService";
+
+
 import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, FormsModule } from "@angular/forms";
+import { Cliente } from "./model1/cliente";
+import { ClienteService } from "app/services/companyService";
 
 @Component({
   selector: 'app-gestion-juridicos',
@@ -59,38 +61,39 @@ export class GestionJuridicosComponent implements OnInit {
     this.filteredData = this.clientes.filter(
       
         (item) =>
-           item.id
+           item.branchId
+                .toLowerCase()
+                .includes(this.searchTerm.toLowerCase()) ||
+            item.locationId
+                .toLowerCase()
+                .includes(this.searchTerm.toLowerCase()) ||
+            item.groupName
+                .toLowerCase()
+                .includes(this.searchTerm.toLowerCase()) ||
+            item.emailAddress
+                .toLowerCase()
+                .includes(this.searchTerm.toLowerCase()) ||
+            item.phoneNumber
+                .toLowerCase()
+                .includes(this.searchTerm.toLowerCase()) ||
+            item.line1
+                .toLowerCase()
+                .includes(this.searchTerm.toLowerCase()) ||
+            item.line2
+                .toLowerCase()
+                .includes(this.searchTerm.toLowerCase()) ||
+            item.latitude
                 .toFixed()
                 .toLowerCase()
                 .includes(this.searchTerm.toLowerCase()) ||
-            item.name
+            item.longitude
+                .toFixed()
                 .toLowerCase()
                 .includes(this.searchTerm.toLowerCase()) ||
-            item.tipoDocumento
+            item.comments
                 .toLowerCase()
                 .includes(this.searchTerm.toLowerCase()) ||
-            item.numeroDocumento
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.name
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.lastname
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.genero
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.fechaNacimiento
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.direction
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.rol
-                .toLowerCase()
-                .includes(this.searchTerm.toLowerCase()) ||
-            item.estado
+            item.state
                 .toLowerCase()
                 .includes(this.searchTerm.toLowerCase())
 
@@ -109,41 +112,42 @@ export class GestionJuridicosComponent implements OnInit {
     const endIndex = startIndex + this.pageSize;
     return this.clientes
         .filter(
-            (item) =>
-            item.id
-            .toFixed()
-            .toLowerCase()
-            .includes(this.searchTerm.toLowerCase()) ||
-        item.name
-            .toLowerCase()
-            .includes(this.searchTerm.toLowerCase()) ||
-        item.tipoDocumento
-            .toLowerCase()
-            .includes(this.searchTerm.toLowerCase()) ||
-        item.numeroDocumento
-            .toLowerCase()
-            .includes(this.searchTerm.toLowerCase()) ||
-        item.name
-            .toLowerCase()
-            .includes(this.searchTerm.toLowerCase()) ||
-        item.lastname
-            .toLowerCase()
-            .includes(this.searchTerm.toLowerCase()) ||
-        item.genero
-            .toLowerCase()
-            .includes(this.searchTerm.toLowerCase()) ||
-        item.fechaNacimiento
-            .toLowerCase()
-            .includes(this.searchTerm.toLowerCase()) ||
-        item.direction
-            .toLowerCase()
-            .includes(this.searchTerm.toLowerCase()) ||
-        item.rol
-            .toLowerCase()
-            .includes(this.searchTerm.toLowerCase()) ||
-        item.estado
-            .toLowerCase()
-            .includes(this.searchTerm.toLowerCase())
+          (item) =>
+          item.branchId
+               .toLowerCase()
+               .includes(this.searchTerm.toLowerCase()) ||
+           item.locationId
+               .toLowerCase()
+               .includes(this.searchTerm.toLowerCase()) ||
+           item.groupName
+               .toLowerCase()
+               .includes(this.searchTerm.toLowerCase()) ||
+           item.emailAddress
+               .toLowerCase()
+               .includes(this.searchTerm.toLowerCase()) ||
+           item.phoneNumber
+               .toLowerCase()
+               .includes(this.searchTerm.toLowerCase()) ||
+           item.line1
+               .toLowerCase()
+               .includes(this.searchTerm.toLowerCase()) ||
+           item.line2
+               .toLowerCase()
+               .includes(this.searchTerm.toLowerCase()) ||
+           item.latitude
+               .toFixed()
+               .toLowerCase()
+               .includes(this.searchTerm.toLowerCase()) ||
+           item.longitude
+               .toFixed()
+               .toLowerCase()
+               .includes(this.searchTerm.toLowerCase()) ||
+           item.comments
+               .toLowerCase()
+               .includes(this.searchTerm.toLowerCase()) ||
+           item.state
+               .toLowerCase()
+               .includes(this.searchTerm.toLowerCase())
         )
         .slice(startIndex, endIndex);
 }

@@ -11,10 +11,11 @@ import Swal from 'sweetalert2';
 })
 export class UpdateComponent implements OnInit {
 
-  id!:number
+  typeDocumentId!: String;
+  documentId!: String;
   isSaved: boolean | null = null;
   errorMessage: string | null = null;
-  
+
   cliente!: Cliente;
     constructor(
       private clienteService: ClienteService,
@@ -24,16 +25,19 @@ export class UpdateComponent implements OnInit {
   
     ngOnInit(): void {
       this.getCliente();
+     
     }
   
     onUpdate(): void {
-      this.clienteService.update(this.id, this.cliente).subscribe(
+      this.clienteService.update(this.typeDocumentId,this.documentId, this.cliente).subscribe(
         data => {
           Swal.fire({
             title: '¡Éxito!',
             text: 'El usuario se ha actualizado correctamente.',
-            icon: 'success'
+            icon: 'success',
+            
           }).then(() => {
+            
             this.isSaved = true;
             this.errorMessage = null;
             // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
@@ -46,25 +50,27 @@ export class UpdateComponent implements OnInit {
             text: 'Error al guardar el usuario. Por favor, inténtalo nuevamente.',
             icon: 'error'
           });
+          
           this.isSaved = false;
           this.errorMessage = 'Error al guardar el usuario. Por favor, inténtalo nuevamente.';
         }
       );
     }
-  
     getCliente(): void {
-      this.id = this.activatedRoute.snapshot.params.id;
-      this.clienteService.detail(this.id).subscribe(
+      const typeDocumentId = this.activatedRoute.snapshot.params.typeDocumentId;
+      const documentId = this.activatedRoute.snapshot.params.documentId;
+      console.log(this.typeDocumentId, this.documentId);
+      this.clienteService.detail(typeDocumentId, documentId).subscribe(
         data => {
           this.cliente = data;
           console.log(this.cliente);
         },
         err => {
-          
           this.router.navigate(['']);
         }
       );
     }
+
   
   }
 

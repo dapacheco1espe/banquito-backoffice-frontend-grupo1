@@ -3,11 +3,11 @@
         <div class="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4 m-2 hover:animate-spin">
             <div>
                 <h1 class="font-bold text-3xl text-blue-600">Detalles</h1>
-                <p class="text-gray-400">Gestion de clientes juridicos.</p>
+                <p class="text-gray-400">Gestión de clientes jurídicos.</p>
             </div>
         </div>
     </div>
-    <div class="flex border-b border-b-2 border-primary-500 py-2">
+    <div class="flex border-b border-primary-500 py-2">
         <button type="button" routerLink="./create"
             class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
             <div class="flex items-center justify-between">
@@ -44,33 +44,35 @@
         <table class="border-collapse w-full table-auto mt-4">
             <thead>
                 <tr>
-                    <th class="px-4 py-2">ID</th>
-                    <th class="px-4 py-2">Tipo de Documento</th>
-                    <th class="px-4 py-2">Número de Documento</th>
-                    <th class="px-4 py-2">Nombre</th>
-                    <th class="px-4 py-2">Apellido</th>
-                    <th class="px-4 py-2">Género</th>
-                    <th class="px-4 py-2">Fecha de Nacimiento</th>
-                    <th class="px-4 py-2">Dirección</th>
-                    <th class="px-4 py-2">Rol</th>
-                    <th class="px-4 py-2">Estado</th>
+                    <th class="px-4 py-2">branchId</th>
+                    <th class="px-4 py-2">locationId</th>
+                    <th class="px-4 py-2">groupName</th>
+                    <th class="px-4 py-2">emailAddress</th>
+                    <th class="px-4 py-2">phoneNumber</th>
+                    <th class="px-4 py-2">line1</th>
+                    <th class="px-4 py-2">line2</th>
+                    <th class="px-4 py-2">latitude</th>
+                    <th class="px-4 py-2">longitude</th>
+                    <th class="px-4 py-2">comments</th>
+                    <th class="px-4 py-2">state</th>
                     <th class="px-4 py-2">Acciones</th> <!-- Columna para los botones de acciones -->
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let item of displayedData; let i = index"
-                    [ngClass]="{ 'selected-row': selectedRowIndex === item.id }" (click)="rowClick(item.id)"
+                    [ngClass]="{ 'selected-row': selectedRowIndex === item.uniqueKey }" (click)="rowClick(item.uniqueKey)"
                     class="cursor-pointer hover:bg-blue-300 text-sm">
-                    <td class="border px-4 py-2 text-center">{{ item.id }}</td>
-                    <td class="border px-4 py-2 text-center">{{ item.tipoDocumento }}</td>
-                    <td class="border px-4 py-2 text-center">{{ item.numeroDocumento }}</td>
-                    <td class="border px-4 py-2 text-center">{{ item.name }}</td>
-                    <td class="border px-4 py-2 text-center">{{ item.lastname }}</td>
-                    <td class="border px-4 py-2 text-center">{{ item.genero }}</td>
-                    <td class="border px-4 py-2 text-center">{{ item.fechaNacimiento }}</td>
-                    <td class="border px-4 py-2 text-center">{{ item.direction }}</td>
-                    <td class="border px-4 py-2 text-center">{{ item.rol }}</td>
-                    <td class="border px-4 py-2 text-center">{{ item.estado }}</td>
+                    <td class="border px-4 py-2 text-center">{{ item.branchId }}</td>
+                    <td class="border px-4 py-2 text-center">{{ item.locationId }}</td>
+                    <td class="border px-4 py-2 text-center">{{ item.groupName }}</td>
+                    <td class="border px-4 py-2 text-center">{{ item.emailAddress }}</td>
+                    <td class="border px-4 py-2 text-center">{{ item.phoneNumber }}</td>
+                    <td class="border px-4 py-2 text-center">{{ item.line1 }}</td>
+                    <td class="border px-4 py-2 text-center">{{ item.line2 }}</td>
+                    <td class="border px-4 py-2 text-center">{{ item.latitude }}</td>
+                    <td class="border px-4 py-2 text-center">{{ item.longitude }}</td>
+                    <td class="border px-4 py-2 text-center">{{ item.comments }}</td>
+                    <td class="border px-4 py-2 text-center">{{ item.state }}</td>
                     <td class="border px-4 py-2 text-center">
                         <div class="flex">
                             <button type="button" routerLink="./update/{{item.id}}"
