@@ -18,6 +18,7 @@ export class ClienteService {
   public list(): Observable<Cliente[]> {
     return this.httpClient.get<Cliente[]>(this.clienteURL);
   }
+
   public detail(typeDocumentId: String, documentId: String): Observable<Cliente> {
     return this.httpClient.get<Cliente>(this.clienteURL+`/${typeDocumentId}/${documentId}`);
   }

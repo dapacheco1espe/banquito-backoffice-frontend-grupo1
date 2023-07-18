@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class CreateComponent implements OnInit {
   branchId!: String;
   locationId!: String;
-  uniqueKey: String = '1';
+  uniqueKey!: String;
   groupName!: String;
   emailAddress!: String;
   phoneNumber!: String;

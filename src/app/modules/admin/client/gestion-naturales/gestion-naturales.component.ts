@@ -1,119 +1,68 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
-
 import Swal from 'sweetalert2';
-import { FormBuilder, FormGroup, FormsModule } from "@angular/forms";
-import { Cliente } from "./model/cliente";
-import { ClienteService } from "app/services/clienteService";
-import { ActivatedRoute, Router } from "@angular/router";
-
+import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
+import { Cliente } from './model/cliente';
+import { ClienteService } from 'app/services/clienteService';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-gestion-naturales',
   templateUrl: 'gestion-naturales.component.html',
   styleUrls: ['gestion-naturales.component.scss'],
-  animations: fuseAnimations
+  animations: fuseAnimations,
 })
 export class GestionNaturalesComponent implements OnInit {
-  title = 'data-table';
-  searchTerm: string = '';
-  filteredData: any[] = [];
-  selectedRowIndex: number = -1;
-  showButtons: boolean = false;
-  showNav: boolean = false;
-  currentPage: number = 1;
-  pageSize: number = 10;
-  dataUrl: any[] = [];
-  clientes: Cliente[] = [];
-  filteredClientes: Cliente[] = [];
-  searchForm: FormGroup;
  
-  isSaved: boolean | null = null;
-  errorMessage: string | null = null;
-  constructor(private clienteService: ClienteService
-    ) {
-    this.clienteService.list().subscribe(
-      (data: Cliente[]) => {
-        console.log(data);
-        this.clientes = data;
-      },
-      (err: any) => {
-        // Manejar errores si es necesario
-      }
-    );
-    
-  }
+  cliente: Cliente | undefined;
+  typeDocumentId!: String;
+  documentId!: String;
+  constructor(
+    private clienteService: ClienteService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
- 
-  
+    this.getCliente();
   }
 
   getCliente(): void {
-    this.clienteService.list().subscribe(
-      data => {
-        this.clientes = data;
+    this.clienteService.detail(this.typeDocumentId, this.documentId).subscribe(
+      (data) => {
+        this.cliente = data;
+        console.log(this.cliente);
       },
-      err => {
-        
+      (err) => {
+        // Mostrar mensaje de error con SweetAlert
       }
     );
   }
-
-  filterData() {
-    console.log(this.filteredData);
-    this.filteredData = this.clientes.filter(
-      (item) =>
-        item.documentId.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.firstName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.lastName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.gender.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.emailAddress.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.role.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.state.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
-    this.showButtons = false;
-  }
-
-  rowClick(index: number) {
-    this.selectedRowIndex = index;
-    this.showButtons = true;
-    console.log(this.selectedRowIndex);
-  }
-
-  get displayedData(): any[] {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    return this.clientes.filter((item) => item.state === 'ACT')
-      .filter(
-        (item) =>
-          item.typeDocumentId.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          item.documentId.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          item.firstName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          item.lastName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          item.gender.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          item.emailAddress.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          item.role.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          item.state.toLowerCase().includes(this.searchTerm.toLowerCase())
-      )
-      .slice(startIndex, endIndex);
-  }
-
-  get totalPages(): number[] {
-    console.log(
-      Array(Math.ceil(this.clientes.length / this.pageSize))
-        .fill(0)
-        .map((_, i) => i + 1)
-    );
-
-    return Array(Math.ceil(this.clientes.length / this.pageSize))
-      .fill(0)
-      .map((_, i) => i + 1);
-  }
-
-  setCurrentPage(page: number) {
-    this.currentPage = page;
-  }
+  buscarCliente(): void {
+    this.clienteService.detail(this.typeDocumentId, this.documentId).subscribe(
+      (data) => {
+        this.cliente = data;
+        console.log(this.cliente);
   
-
+        // Mostrar mensaje de éxito con SweetAlert
+        Swal.fire({
+          icon: 'success',
+          title: 'Cliente encontrado',
+          text: 'La información del cliente ha sido cargada correctamente.',
+          confirmButtonText: 'Aceptar',
+        });
+      },
+      (err) => {
+        // Mostrar mensaje de error con SweetAlert
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'El cliente no pudo ser encontrado.',
+          confirmButtonText: 'Aceptar',
+        });
+  
+        this.router.navigate(['/gestion/gestion-naturales']);
+      }
+    );
+  }
 }
