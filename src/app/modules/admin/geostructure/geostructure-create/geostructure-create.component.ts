@@ -19,8 +19,8 @@ export class GeostructureCreateComponent implements OnInit {
     phoneCode!: string;
     name!: string;
     geostructureLevels!: GeostructureLevel[];
-    items = ['Item 1', 'Item 2', 'Item 3'];
-    newElement: string = '';
+    items = ['Provincia', 'Cantón', 'Parroquia'];
+    newElement!: string;
 
     isSaved: boolean | null = null;
     errorMessage: string | null = null;
@@ -104,12 +104,18 @@ export class GeostructureCreateComponent implements OnInit {
 
     dropItem(event: CdkDragDrop<string[]>) {
         moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+        console.log('this.items', this.items);
     }
 
-    agregarElemento() {
+    newElementFoo() {
         if (this.newElement.trim()) {
             this.items.push(this.newElement);
             this.newElement = ''; // Limpiar el campo de entrada después de agregar
+            console.log('this.items', this.items);
         }
+    }
+
+    deleteElement(index: number) {
+        this.items.splice(index, 1);
     }
 }

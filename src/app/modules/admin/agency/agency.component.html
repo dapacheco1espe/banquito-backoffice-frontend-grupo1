@@ -45,6 +45,17 @@
                 <span class="ml-2">Agregar</span>
             </div>
         </button>
+        <div class="relative w-100">
+            <select
+                id="location"
+                name="location"
+                class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            >
+                <option value="ZONA10">ZONA10</option>
+                <option value="ZONA11">ZONA11</option>
+                <option value="ZONA12">ZONA12</option>
+            </select>
+        </div>
         <input
             [(ngModel)]="searchTerm"
             class="appearance-none bg-transparent w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"

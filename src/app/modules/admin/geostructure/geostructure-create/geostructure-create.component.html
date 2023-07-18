@@ -18,14 +18,14 @@
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                     for="countryId"
                 >
-                    Código de País
+                    Código de País (ISO 3166-1 alfa-3)
                 </label>
                 <input
                     type="text"
                     id="countryId"
                     name="countryId"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                    placeholder="BAQECEQXXX"
+                    placeholder="ECU"
                     autocomplete="off"
                     required
                     pattern="^[A-Z]{3}$"
@@ -91,21 +91,35 @@
             </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
-            <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
-                <input
-                    [(ngModel)]="newElement"
-                    placeholder="Nuevo elemento"
-                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                />
-            </div>
-            <div class="w-full md:w-1/2 px-1">
-                <button
-                    type="button"
-                    (click)="agregarElemento()"
-                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+            <div class="w-full px-1 mb-6 md:mb-0">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="element"
                 >
-                    Agregar
-                </button>
+                    División Administrativa (Provincias, Departamentos,
+                    Cantones, etc.)
+                </label>
+                <div class="flex items-center">
+                    <div class="flex-grow">
+                        <input
+                            type="text"
+                            id="element"
+                            name="element"
+                            [(ngModel)]="newElement"
+                            placeholder="Nuevo elemento"
+                            class="appearance-none block flex-grow bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
+                        />
+                    </div>
+                    <div class="px-1">
+                        <button
+                            type="button"
+                            (click)="newElementFoo()"
+                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                        >
+                            Agregar
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
@@ -114,8 +128,29 @@
                 class="example-list"
                 (cdkDropListDropped)="dropItem($event)"
             >
-                <div class="example-box" *ngFor="let item of items" cdkDrag>
-                    {{ item }}
+                <div
+                    class="example-box"
+                    *ngFor="let item of items; let i = index"
+                    cdkDrag
+                >
+                    <span class="mr-5">{{ i + 1 }}</span>
+                    <span class="mr-5">{{ item }}</span>
+                    <button *ngIf="i !== 0" (click)="deleteElement(i)">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 h-6"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
