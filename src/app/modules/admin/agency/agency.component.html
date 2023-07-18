@@ -45,15 +45,46 @@
                 <span class="ml-2">Agregar</span>
             </div>
         </button>
-        <div class="relative w-100">
+        <div class="relative w-1/3 mr-2 mb-2">
             <select
-                id="location"
-                name="location"
                 class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                [(ngModel)]="selectedProvincia"
+                (ngModelChange)="onSelectProvincia($event)"
             >
-                <option value="ZONA10">ZONA10</option>
-                <option value="ZONA11">ZONA11</option>
-                <option value="ZONA12">ZONA12</option>
+                <option value="">Provincia</option>
+                <option
+                    *ngFor="let provincia of provincias"
+                    [value]="provincia"
+                >
+                    {{ provincia }}
+                </option>
+            </select>
+        </div>
+        <div class="relative w-1/3 mr-2 mb-2">
+            <select
+                class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                [(ngModel)]="selectedCanton"
+                (ngModelChange)="onSelectCanton($event)"
+            >
+                <option value="">Cantón</option>
+                <option *ngFor="let canton of cantones" [value]="canton">
+                    {{ canton }}
+                </option>
+            </select>
+        </div>
+        <div class="relative w-1/3 mr-2 mb-2">
+            <select
+                class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                [(ngModel)]="selectedParroquia"
+                (ngModelChange)="onSelectParroquia($event)"
+            >
+                <option value="">Parroquia</option>
+                <option
+                    *ngFor="let parroquia of parroquias"
+                    [value]="parroquia"
+                >
+                    {{ parroquia }}
+                </option>
             </select>
         </div>
         <input
@@ -64,7 +95,18 @@
             (input)="filterData()"
         />
     </div>
-    <div class="overflow-x-auto">
+    <!-- Tarjeta de advertencia -->
+    <div
+        class="bg-yellow-200 text-yellow-800 p-4 mt-4"
+        *ngIf="!selectedProvincia || !selectedCanton || !selectedParroquia"
+    >
+        Por favor, selecciona una provincia, un cantón y una parroquia para ver
+        los resultados.
+    </div>
+    <div
+        class="overflow-x-auto"
+        *ngIf="selectedProvincia && selectedCanton && selectedParroquia"
+    >
         <table class="border-collapse w-full table-auto mt-4 overflow">
             <thead>
                 <tr>

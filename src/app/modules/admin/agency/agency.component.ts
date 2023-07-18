@@ -19,6 +19,15 @@ export class AgencyComponent implements OnInit {
     showNav: boolean = false;
     currentPage: number = 1;
     pageSize: number = 5;
+
+    provincias: string[] = ['Provincia 1', 'Provincia 2', 'Provincia 3'];
+    cantones: string[] = [];
+    parroquias: string[] = [];
+
+    selectedProvincia: string = '';
+    selectedCanton: string = '';
+    selectedParroquia: string = '';
+
     constructor(
         private service: AgencyService,
         private agencyService: AgencyService
@@ -109,5 +118,53 @@ export class AgencyComponent implements OnInit {
 
     setCurrentPage(page: number) {
         this.currentPage = page;
+    }
+
+    onSelectProvincia(provincia: string) {
+        this.selectedProvincia = provincia;
+        this.selectedCanton = '';
+        this.selectedParroquia = '';
+        this.cantones = this.getCantonesPorProvincia(provincia);
+        this.parroquias = [];
+    }
+
+    onSelectCanton(canton: string) {
+        this.selectedCanton = canton;
+        this.selectedParroquia = '';
+        this.parroquias = this.getParroquiasPorCanton(canton);
+    }
+
+    onSelectParroquia(parroquia: string) {
+        this.selectedParroquia = parroquia;
+    }
+
+    getCantonesPorProvincia(provincia: string): string[] {
+        // Aquí debes implementar la lógica para obtener los cantones según la provincia seleccionada
+        // Puedes hacer una llamada a tu servicio o cargar los datos desde un arreglo o una base de datos
+        // Devuelve un arreglo con los cantones correspondientes
+        // Ejemplo de implementación:
+        if (provincia === 'Provincia 1') {
+            return ['Cantón 1.1', 'Cantón 1.2', 'Cantón 1.3'];
+        } else if (provincia === 'Provincia 2') {
+            return ['Cantón 2.1', 'Cantón 2.2', 'Cantón 2.3'];
+        } else if (provincia === 'Provincia 3') {
+            return ['Cantón 3.1', 'Cantón 3.2', 'Cantón 3.3'];
+        }
+        return [];
+    }
+
+    getParroquiasPorCanton(canton: string): string[] {
+        // Aquí debes implementar la lógica para obtener las parroquias según el cantón seleccionado
+        // Puedes hacer una llamada a tu servicio o cargar los datos desde un arreglo o una base de datos
+        // Devuelve un arreglo con las parroquias correspondientes
+        // Ejemplo de implementación:
+        if (canton === 'Cantón 1.1') {
+            return ['Parroquia 1.1.1', 'Parroquia 1.1.2', 'Parroquia 1.1.3'];
+        } else if (canton === 'Cantón 2.1') {
+            return ['Parroquia 2.1.1', 'Parroquia 2.1.2', 'Parroquia 2.1.3'];
+        } else if (canton === 'Cantón 3.1') {
+            return ['Parroquia 3.1.1', 'Parroquia 3.1.2', 'Parroquia 3.1.3'];
+        }
+        return [];
     }
 }
