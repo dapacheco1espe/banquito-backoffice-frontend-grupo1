@@ -8,7 +8,8 @@ import { Agency } from 'app/modules/admin/agency/agency-model/agency';
     providedIn: 'root',
 })
 export class AgencyService {
-    private baseURL = environment.apiResrURL + '/agencies';
+    private baseURL =
+        environment.apiResrURL + '/bankEntity/findAllBranches/ACT';
     constructor(private http: HttpClient) {}
 
     public list(): Observable<Agency[]> {
