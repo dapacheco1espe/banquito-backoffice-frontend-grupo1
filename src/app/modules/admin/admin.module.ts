@@ -11,6 +11,6 @@ import { HolidayComponent } from './holiday/holiday.component';
 
 @NgModule({
     declarations: [],
-    imports: [SharedModule, AdminRoutingModule],
+    imports: [SharedModule, AdminRoutingModule, CommonModule],
 })
 export class AdminModule {}

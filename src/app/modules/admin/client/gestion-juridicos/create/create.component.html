@@ -1,0 +1,95 @@
+<div class="flex w-full justify-center items-center h-screen bg-white">
+  <div class="w-full max-w-md p-4 justify-center">
+    <h4 class="text-center">Crear Cliente</h4>
+    <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="branchId" class="block mb-1">Branch ID:</label>
+          <input type="text" id="branchId" name="branchId" class="w-full border-gray-300 border p-2 rounded h-10"
+            placeholder="Ingrese el Branch ID" autocomplete="off" required [(ngModel)]="branchId">
+          <div *ngIf="f.submitted && f.controls.branchId.invalid" class="text-red-500 mt-1">
+            Branch ID es requerido.
+          </div>
+        </div>
+        <div>
+          <label for="locationId" class="block mb-1">Location ID:</label>
+          <input type="text" id="locationId" name="locationId" class="w-full border-gray-300 border p-2 rounded h-10"
+            placeholder="Ingrese el Location ID" autocomplete="off" required [(ngModel)]="locationId">
+          <div *ngIf="f.submitted && f.controls.locationId.invalid" class="text-red-500 mt-1">
+            Location ID es requerido.
+          </div>
+        </div>
+        <div>
+          <label for="groupName" class="block mb-1">Nombre del grupo:</label>
+          <input type="text" id="groupName" name="groupName" class="w-full border-gray-300 border p-2 rounded h-10"
+            placeholder="Ingrese el nombre del grupo" autocomplete="off" required [(ngModel)]="groupName">
+          <div *ngIf="f.submitted && f.controls.groupName.invalid" class="text-red-500 mt-1">
+            Nombre del grupo es requerido.
+          </div>
+        </div>
+        <div>
+          <label for="emailAddress" class="block mb-1">Correo electrónico:</label>
+          <input type="email" id="emailAddress" name="emailAddress"
+            class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Ingrese el correo electrónico"
+            autocomplete="off" required [(ngModel)]="emailAddress">
+          <div *ngIf="f.submitted && f.controls.emailAddress.invalid" class="text-red-500 mt-1">
+            Correo electrónico es requerido y debe ser una dirección de correo válida.
+          </div>
+        </div>
+        <div>
+          <label for="phoneNumber" class="block mb-1">Número de teléfono:</label>
+          <input type="text" id="phoneNumber" name="phoneNumber" class="w-full border-gray-300 border p-2 rounded h-10"
+            placeholder="Ingrese el número de teléfono" autocomplete="off" required [(ngModel)]="phoneNumber">
+          <div *ngIf="f.submitted && f.controls.phoneNumber.invalid" class="text-red-500 mt-1">
+            Número de teléfono es requerido.
+          </div>
+        </div>
+        <div>
+          <label for="line1" class="block mb-1">Dirección línea 1:</label>
+          <input type="text" id="line1" name="line1" class="w-full border-gray-300 border p-2 rounded h-10"
+            placeholder="Ingrese la dirección línea 1" autocomplete="off" required [(ngModel)]="line1">
+          <div *ngIf="f.submitted && f.controls.line1.invalid" class="text-red-500 mt-1">
+            Dirección línea 1 es requerida.
+          </div>
+        </div>
+        <div>
+          <label for="line2" class="block mb-1">Dirección línea 2:</label>
+          <input type="text" id="line2" name="line2" class="w-full border-gray-300 border p-2 rounded h-10"
+            placeholder="Ingrese la dirección línea 2" autocomplete="off" [(ngModel)]="line2">
+        </div>
+        <div>
+          <label for="latitude" class="block mb-1">Latitud:</label>
+          <input type="text" id="latitude" name="latitude" class="w-full border-gray-300 border p-2 rounded h-10"
+            placeholder="Ingrese la latitud" autocomplete="off" required [(ngModel)]="latitude">
+          <div *ngIf="f.submitted && f.controls.latitude.invalid" class="text-red-500 mt-1">
+            Latitud es requerida.
+          </div>
+        </div>
+        <div>
+          <label for="longitude" class="block mb-1">Longitud:</label>
+          <input type="text" id="longitude" name="longitude" class="w-full border-gray-300 border p-2 rounded h-10"
+            placeholder="Ingrese la longitud" autocomplete="off" required [(ngModel)]="longitude">
+          <div *ngIf="f.submitted && f.controls.longitude.invalid" class="text-red-500 mt-1">
+            Longitud es requerida.
+          </div>
+        </div>
+        <div>
+          <label for="comments" class="block mb-1">Comentarios:</label>
+          <textarea id="comments" name="comments" class="w-full border-gray-300 border p-2 rounded" rows="3"
+            placeholder="Ingrese los comentarios" [(ngModel)]="comments"></textarea>
+        </div>
+      </div>
+      <button class="bg-green-500 text-white w-full py-2 rounded mt-3" [disabled]="!f.valid">
+        <i class="fas fa-plus-circle"></i> Crear
+      </button>
+      <button class="bg-blue-500 text-white w-full py-2 rounded mt-3" routerLink="../">
+        <i class="fas fa-arrow-alt-circle-left"></i> Volver
+      </button>
+    </form>
+    <div *ngIf="isSaved !== null" class="text-center mt-3">
+      <p [ngClass]="{'text-green-500': isSaved, 'text-red-500': !isSaved}">
+        {{ isSaved ? 'Usuario guardado con éxito' : 'Error al guardar el usuario' }}
+      </p>
+    </div>
+  </div>
+</div>

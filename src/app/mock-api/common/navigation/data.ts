@@ -12,20 +12,45 @@ export const defaultNavigation: FuseNavigationItem[] = [
 ];
 export const compactNavigation: FuseNavigationItem[] = [
     {
-        id      : 'dashboards',
-        title   : 'Dashboards',
-        tooltip : 'Dashboards',
-        type    : 'aside',
+        id      : 'home',
+        title   : 'Home',
+        tooltip : 'Inicio',
+        type    : 'basic',
         icon    : 'heroicons_outline:home',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        link    : '/gestion'
     },
     {
-        id      : 'apps',
-        title   : 'Apps',
-        tooltip : 'Apps',
+        id      : 'gestion',
+        title   : 'Gestion',
+        tooltip : 'Gestion',
         type    : 'aside',
-        icon    : 'heroicons_outline:qrcode',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        icon    : 'heroicons_outline:identification',
+        children: [
+            {
+                id      : 'clientes',
+                title   : 'Clientes',
+                tooltip : 'Clientes',
+                type    : 'basic',
+                icon    : 'heroicons_outline:users',
+                link    : '/gestion/clientes'
+            },
+            {
+                id      : 'payments',
+                title   : 'Cuentas Clientes Juridicos',
+                tooltip : 'Cuenta',
+                type    : 'basic',
+                icon    : 'heroicons_outline:currency-dollar',
+                link    : '/gestion/gestion-juridicos/accounts'
+            },
+            // {
+            //     id      : 'history',
+            //     title   : 'Historial de transancciones',
+            //     tooltip : 'Historial de transacciones',
+            //     type    : 'basic',
+            //     icon    : 'heroicons_outline:document-text',
+            //     //link    : '/account-history'
+            // }
+        ]
     },
     {
         id      : 'pages',
