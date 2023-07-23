@@ -54,9 +54,9 @@
                 <option value="">Provincia</option>
                 <option
                     *ngFor="let provincia of provincias"
-                    [value]="provincia"
+                    [value]="provincia.name"
                 >
-                    {{ provincia }}
+                    {{ provincia.name }}
                 </option>
             </select>
         </div>
@@ -67,8 +67,8 @@
                 (ngModelChange)="onSelectCanton($event)"
             >
                 <option value="">Cantón</option>
-                <option *ngFor="let canton of cantones" [value]="canton">
-                    {{ canton }}
+                <option *ngFor="let canton of cantones" [value]="canton.name">
+                    {{ canton.name }}
                 </option>
             </select>
         </div>
@@ -81,9 +81,9 @@
                 <option value="">Parroquia</option>
                 <option
                     *ngFor="let parroquia of parroquias"
-                    [value]="parroquia"
+                    [value]="parroquia.uuid"
                 >
-                    {{ parroquia }}
+                    {{ parroquia.name }}
                 </option>
             </select>
         </div>
