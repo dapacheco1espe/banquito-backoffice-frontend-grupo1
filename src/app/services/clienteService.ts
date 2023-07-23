@@ -32,6 +32,6 @@ export class ClienteService {
     return this.httpClient.put<any>(`${this.clienteURL}/${'deleteClient'}/${typeDocumentId}/${documentId}`, cliente);
   }
   public createPhone(typeDocumentId: String, documentId: String, cliente: Cliente): Observable<any> {
-    return this.httpClient.put<any>(`${this.clienteURL}/${'phone'}/${typeDocumentId}/${documentId}`, cliente);
+    return this.httpClient.put<any>(`${this.clienteURL}/${'phones'}/${typeDocumentId}/${documentId}`, cliente);
   }
 }

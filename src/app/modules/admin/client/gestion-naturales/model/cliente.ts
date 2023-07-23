@@ -15,7 +15,9 @@ export class Cliente {
     state: String;
     closedDate: String;
     comments: String;
-  
+    phoneType: String;
+    phoneNumber:String;
+    isDefault: true;
     constructor(
       branchId: String,
       typeDocumentId: String,
@@ -26,7 +28,10 @@ export class Cliente {
       birthDate: String,
       emailAddress: String,
       role: String,
-      comments: String
+      comments: String,
+      phoneType: String,
+      phoneNumber:String,
+      isDefault: true,
     ) {
       this.branchId = branchId;
       this.typeDocumentId = typeDocumentId;
@@ -38,7 +43,14 @@ export class Cliente {
       this.emailAddress = emailAddress;
       this.role = role;
       this.comments = comments;
+      this.phoneType = phoneType;
+      this.phoneNumber = phoneNumber;
+      this.isDefault= isDefault;
     }
     // Constructor adicional con parámetros opcionales
 
 }
+export class clientePhone{
+  phoneType: String;
+  phoneNumber: String;
+  isDefault: true;}

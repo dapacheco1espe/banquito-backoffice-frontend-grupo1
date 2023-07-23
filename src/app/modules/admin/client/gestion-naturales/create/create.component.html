@@ -15,7 +15,7 @@
           <label for="typeDocumentId" class="block mb-1">Tipo de documento:</label>
           <select id="typeDocumentId" name="typeDocumentId" class="w-full border-gray-300 border p-2 rounded h-10"
             [(ngModel)]="typeDocumentId" required>
-            <option value="CED">Cédula</option>
+            <option value="IDE">Cédula</option>
             <option value="PAS">Pasaporte</option>
           </select>
           <div *ngIf="f.submitted && f.controls.typeDocumentId.invalid" class="text-red-500 mt-1">
@@ -96,10 +96,10 @@
           </div>
         </div>
       </div>
-      <button class="bg-green-500 text-white w-full py-2 rounded mt-3" [disabled]="!f.valid">
+      <button class="bg-green-500 text-white w-full py-2 rounded mt-3" [disabled]="!f.valid" >
         <i class="fas fa-plus-circle"></i> Crear
       </button>
-      <button class="bg-blue-500 text-white w-full py-2 rounded mt-3" routerLink="../">
+      <button class="bg-blue-500 text-white w-full py-2 rounded mt-3" routerLink="./phone">
         <i class="fas fa-arrow-alt-circle-left"></i> Volver
       </button>
     </form>
@@ -108,5 +108,6 @@
         {{ isSaved ? 'Usuario guardado con éxito' : 'Error al guardar el usuario' }}
       </p>
     </div>
+
   </div>
 </div>

@@ -25,6 +25,9 @@ export class CreateComponent implements OnInit {
   state!: String;
   closedDate!: Date;
   comments!: String;
+  phoneType: String;
+  phoneNumber: String;
+  isDefault: true;
   isSaved: boolean | null = null;
   errorMessage: string | null = null;
 
@@ -80,20 +83,20 @@ export class CreateComponent implements OnInit {
 
     // Si todos los campos son válidos, procedemos a crear el cliente
     const cliente = new Cliente(this.branchId, this.typeDocumentId, this.documentId, this.firstName, this.lastName,
-      this.gender, this.birthDate, this.emailAddress, this.role, this.comments);
+      this.gender, this.birthDate, this.emailAddress, this.role, this.comments, this.phoneType, this.phoneNumber, this.isDefault);
 
     this.clienteService.create(cliente).subscribe(
       data => {
         Swal.fire({
           title: '¡Éxito!',
-          text: 'El usuario se ha guardado correctamente.',
+          text: 'El usuario se ha guardado correctamente, complete el formulario de telefono',
           icon: 'success'
         }).then(() => {
           this.isSaved = true;
           this.errorMessage = null;
           // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
-          this.router.navigate(['/gestion/gestion-naturales']);
-        });
+          this.router.navigate(['/gestion/gestion-naturales/createPhone/'+this.typeDocumentId+'/'+this.documentId]
+          );
       },
       err => {
         Swal.fire({
@@ -105,6 +108,6 @@ export class CreateComponent implements OnInit {
         this.errorMessage = 'Error al guardar el usuario. Por favor, inténtalo nuevamente.';
       }
     );
-  }
+  })
 
-}
+}}
