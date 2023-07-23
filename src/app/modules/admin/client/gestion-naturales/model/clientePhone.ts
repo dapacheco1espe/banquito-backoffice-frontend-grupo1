@@ -1,12 +1,12 @@
 export class clientePhone{
     phoneType: String;
     phoneNumber: String;
-    isDefault: true;
+    isDefault: boolean;
     constructor(
       phoneType: String,
       phoneNumber: String,
       isDefault: true
-     
+
     ) {
     this.phoneType = phoneType;
       this.phoneNumber = phoneNumber;

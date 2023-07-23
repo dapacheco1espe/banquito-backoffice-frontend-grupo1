@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
 import { Cliente } from '../modules/admin/client/gestion-naturales/model/cliente';
+import {clientePhone} from "../modules/admin/client/gestion-naturales/model/clientePhone";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
-  
+
 
   clienteURL = environment.apiResrURL + '/api/v2/clients';
 
@@ -27,11 +28,17 @@ export class ClienteService {
   }
   public update(typeDocumentId: String, documentId: String, cliente: Cliente): Observable<any> {
     return this.httpClient.put<any>(`${this.clienteURL}/${'update'}/${typeDocumentId}/${documentId}`, cliente);
-  }  
+  }
   public delete(typeDocumentId: String, documentId: String, cliente: Cliente): Observable<any> {
     return this.httpClient.put<any>(`${this.clienteURL}/${'deleteClient'}/${typeDocumentId}/${documentId}`, cliente);
   }
-  public createPhone(typeDocumentId: String, documentId: String, cliente: Cliente): Observable<any> {
-    return this.httpClient.put<any>(`${this.clienteURL}/${'phones'}/${typeDocumentId}/${documentId}`, cliente);
+  public createPhone(
+      typeDocumentId: String,
+      documentId: String,
+      //aqui adjuntas en body request le adjuntas un array de telefonos
+      phoneList:clientePhone[]
+
+  ): Observable<Cliente> {
+    return this.httpClient.put<Cliente>(`${this.clienteURL}/${'phones'}/${typeDocumentId}/${documentId}`, phoneList);
   }
 }
