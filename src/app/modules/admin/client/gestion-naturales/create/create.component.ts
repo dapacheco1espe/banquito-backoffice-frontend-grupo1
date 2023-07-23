@@ -12,12 +12,12 @@ import Swal from 'sweetalert2';
 export class CreateComponent implements OnInit {
   branchId!: String;
   typeDocumentId!: String;
-  documentId!: String;
+  documentId!: string;
   firstName!: String;
   lastName!: String;
   gender!: String;
   birthDate!: String;
-  emailAddress!: String;
+  emailAddress!: string;
   creationDate!: Date;
   activationDate!: Date;
   lastModifiedDate!: Date;
@@ -37,9 +37,50 @@ export class CreateComponent implements OnInit {
   }
 
   onCreate(): void {
-    
+    // Validar que todos los campos estén llenos
+    if (
+      !this.branchId ||
+      !this.typeDocumentId ||
+      !this.documentId ||
+      !this.firstName ||
+      !this.lastName ||
+      !this.gender ||
+      !this.birthDate ||
+      !this.emailAddress ||
+      !this.role ||
+      !this.comments
+    ) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Por favor, complete todos los campos.',
+        icon: 'error'
+      });
+      return;
+    }
 
-  const cliente = new Cliente(this.branchId,this.typeDocumentId,this.documentId,this.firstName,this.lastName,this.gender,this.birthDate,this.emailAddress,this.role,this.comments);
+    // Validar formato de cédula (que sean solo números y 10 dígitos)
+    if (!/^\d{10}$/.test(this.documentId)) {
+      Swal.fire({
+        title: 'Error',
+        text: 'El número de cédula debe contener solo números y tener 10 dígitos.',
+        icon: 'error'
+      });
+      return;
+    }
+
+    // Validar formato de correo electrónico
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(this.emailAddress)) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Ingrese una dirección de correo electrónico válida.',
+        icon: 'error'
+      });
+      return;
+    }
+
+    // Si todos los campos son válidos, procedemos a crear el cliente
+    const cliente = new Cliente(this.branchId, this.typeDocumentId, this.documentId, this.firstName, this.lastName,
+      this.gender, this.birthDate, this.emailAddress, this.role, this.comments);
 
     this.clienteService.create(cliente).subscribe(
       data => {

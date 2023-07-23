@@ -26,9 +26,12 @@ export class ClienteService {
     return this.httpClient.post<any>(this.clienteURL, cliente);
   }
   public update(typeDocumentId: String, documentId: String, cliente: Cliente): Observable<any> {
-    return this.httpClient.put<any>(`${this.clienteURL}/${typeDocumentId}/${documentId}`, cliente);
+    return this.httpClient.put<any>(`${this.clienteURL}/${'update'}/${typeDocumentId}/${documentId}`, cliente);
   }  
   public delete(typeDocumentId: String, documentId: String, cliente: Cliente): Observable<any> {
     return this.httpClient.put<any>(`${this.clienteURL}/${'deleteClient'}/${typeDocumentId}/${documentId}`, cliente);
+  }
+  public createPhone(typeDocumentId: String, documentId: String, cliente: Cliente): Observable<any> {
+    return this.httpClient.put<any>(`${this.clienteURL}/${'phone'}/${typeDocumentId}/${documentId}`, cliente);
   }
 }

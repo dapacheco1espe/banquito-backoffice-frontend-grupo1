@@ -1,109 +1,112 @@
 <div class="flex w-full justify-center items-center h-screen bg-white">
-    <div class="w-full max-w-md p-4 justify-center">
-      <h4 class="text-center">Crear Cliente</h4>
-      <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
-        <div class="grid grid-cols-2 gap-4">
-            <div>
-                <label for="branchId" class="block mb-1">Branch ID:</label>
-                <input type="text" id="branchId" name="branchId" class="w-full border-gray-300 border p-2 rounded h-10"
-                  placeholder="Ingrese el Branch ID" autocomplete="off" required [(ngModel)]="branchId">
-                <div *ngIf="f.submitted && f.controls.branchId.invalid" class="text-red-500 mt-1">
-                  Branch ID es requerido.
-                </div>
-              </div>
-          <div>
-            <label for="typeDocumentId" class="block mb-1">Tipo de documento:</label>
-            <select id="typeDocumentId" name="typeDocumentId" class="w-full border-gray-300 border p-2 rounded h-10"
-              [(ngModel)]="typeDocumentId" required>
-              <option value="IDE">Cédula</option>
-              <option value="PAS">Pasaporte</option>
-            </select>
-            <div *ngIf="f.submitted && f.controls.typeDocumentId.invalid" class="text-red-500 mt-1">
-              Tipo de documento es requerido.
-            </div>
-          </div>
-          <div>
-            <label for="documentId" class="block mb-1">Número de documento:</label>
-            <input type="text" id="documentId" name="documentId"
-              class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Ingrese el número de documento"
-              autocomplete="off" required pattern="[0-9]{1,10}" [(ngModel)]="documentId">
-            <div *ngIf="f.submitted && f.controls.documentId.invalid" class="text-red-500 mt-1">
-              Número de documento es requerido y debe contener solo números (máximo 10 dígitos).
-            </div>
-          </div>
-          <div>
-            <label for="firstName" class="block mb-1">Nombre:</label>
-            <input type="text" id="firstName" name="firstName" class="w-full border-gray-300 border p-2 rounded h-10"
-              placeholder="Ingrese el nombre" autocomplete="off" required [(ngModel)]="firstName">
-            <div *ngIf="f.submitted && f.controls.firstName.invalid" class="text-red-500 mt-1">
-              Nombre es requerido.
-            </div>
-          </div>
-          <div>
-            <label for="lastName" class="block mb-1">Apellido:</label>
-            <input type="text" id="lastName" name="lastName" class="w-full border-gray-300 border p-2 rounded h-10"
-              placeholder="Ingrese el apellido" autocomplete="off" required [(ngModel)]="lastName">
-            <div *ngIf="f.submitted && f.controls.lastName.invalid" class="text-red-500 mt-1">
-              Apellido es requerido.
-            </div>
-          </div>
-          <div>
-            <label for="gender" class="block mb-1">Género:</label>
-            <select id="gender" name="gender" class="w-full border-gray-300 border p-2 rounded h-10" [(ngModel)]="gender"
-              required>
-              <option value="MAS">Masculino</option>
-              <option value="FEM">Femenino</option>
-            </select>
-            <div *ngIf="f.submitted && f.controls.gender.invalid" class="text-red-500 mt-1">
-              Género es requerido.
-            </div>
-          </div>
-          <div>
-            <label for="birthDate" class="block mb-1">Fecha de nacimiento:</label>
-            <input type="date" id="birthDate" name="birthDate"
-              class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Seleccione la fecha de nacimiento" required
-              [(ngModel)]="birthDate">
-            <div *ngIf="f.submitted && f.controls.birthDate.invalid" class="text-red-500 mt-1">
-              Fecha de nacimiento es requerida.
-            </div>
-          </div>
-          <div>
-            <label for="emailAddress" class="block mb-1">Correo electrónico:</label>
-            <input type="email" id="emailAddress" name="emailAddress"
-              class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Ingrese el correo electrónico"
-              autocomplete="off" required [(ngModel)]="emailAddress">
-            <div *ngIf="f.submitted && f.controls.emailAddress.invalid" class="text-red-500 mt-1">
-              Correo electrónico es requerido y debe ser una dirección de correo válida.
-            </div>
-          </div>
-          <div>
-            <label for="rol" class="block mb-1">Rol:</label>
-            <select id="rol" name="rol" class="w-full border-gray-300 border p-2 rounded h-10" [(ngModel)]="role" required>
-              <option value="BEN">Beneficiario</option>
-              <option value="DUE">Dueño</option>
-            </select>
-            <div *ngIf="f.submitted && f.controls.rol.invalid" class="text-red-500 mt-1">
-              Rol es requerido.
-            </div>
-          </div>
-          <div>
-            <label for="comments" class="block mb-1">Comentarios:</label>
-            <textarea id="comments" name="comments" class="w-full border-gray-300 border p-2 rounded" rows="3"
-              placeholder="Ingrese los comentarios" [(ngModel)]="comments"></textarea>
+  <div class="w-full max-w-md p-4 justify-center">
+    <h4 class="text-center">Crear Cliente</h4>
+    <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="branchId" class="block mb-1">Branch ID:</label>
+          <input type="text" id="branchId" name="branchId" class="w-full border-gray-300 border p-2 rounded h-10"
+            placeholder="Ingrese el Branch ID" autocomplete="off" required [(ngModel)]="branchId">
+          <div *ngIf="f.submitted && f.controls.branchId.invalid" class="text-red-500 mt-1">
+            Branch ID es requerido.
           </div>
         </div>
-        <button class="bg-green-500 text-white w-full py-2 rounded mt-3" [disabled]="!f.valid">
-          <i class="fas fa-plus-circle"></i> Crear
-        </button>
-        <button class="bg-blue-500 text-white w-full py-2 rounded mt-3" routerLink="../">
-          <i class="fas fa-arrow-alt-circle-left"></i> Volver
-        </button>
-      </form>
-      <div *ngIf="isSaved !== null" class="text-center mt-3">
-        <p [ngClass]="{'text-green-500': isSaved, 'text-red-500': !isSaved}">
-          {{ isSaved ? 'Usuario guardado con éxito' : 'Error al guardar el usuario' }}
-        </p>
+        <div>
+          <label for="typeDocumentId" class="block mb-1">Tipo de documento:</label>
+          <select id="typeDocumentId" name="typeDocumentId" class="w-full border-gray-300 border p-2 rounded h-10"
+            [(ngModel)]="typeDocumentId" required>
+            <option value="CED">Cédula</option>
+            <option value="PAS">Pasaporte</option>
+          </select>
+          <div *ngIf="f.submitted && f.controls.typeDocumentId.invalid" class="text-red-500 mt-1">
+            Tipo de documento es requerido.
+          </div>
+        </div>
+        <div>
+          <label for="documentId" class="block mb-1">Número de documento:</label>
+          <input type="text" id="documentId" name="documentId"
+            class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Ingrese el número de documento"
+            autocomplete="off" required pattern="[0-9]{10}" [(ngModel)]="documentId" #documentIdInput="ngModel">
+          <div *ngIf="f.submitted && documentIdInput.invalid && (documentIdInput.dirty || documentIdInput.touched)"
+            class="text-red-500 mt-1">
+            Número de documento es requerido y debe contener solo 10 dígitos numéricos.
+          </div>
+        </div>
+        <div>
+          <label for="firstName" class="block mb-1">Nombre:</label>
+          <input type="text" id="firstName" name="firstName" class="w-full border-gray-300 border p-2 rounded h-10"
+            placeholder="Ingrese el nombre" autocomplete="off" required [(ngModel)]="firstName">
+          <div *ngIf="f.submitted && f.controls.firstName.invalid" class="text-red-500 mt-1">
+            Nombre es requerido.
+          </div>
+        </div>
+        <div>
+          <label for="lastName" class="block mb-1">Apellido:</label>
+          <input type="text" id="lastName" name="lastName" class="w-full border-gray-300 border p-2 rounded h-10"
+            placeholder="Ingrese el apellido" autocomplete="off" required [(ngModel)]="lastName">
+          <div *ngIf="f.submitted && f.controls.lastName.invalid" class="text-red-500 mt-1">
+            Apellido es requerido.
+          </div>
+        </div>
+        <div>
+          <label for="gender" class="block mb-1">Género:</label>
+          <select id="gender" name="gender" class="w-full border-gray-300 border p-2 rounded h-10" [(ngModel)]="gender"
+            required>
+            <option value="MAS">Masculino</option>
+            <option value="FEM">Femenino</option>
+          </select>
+          <div *ngIf="f.submitted && f.controls.gender.invalid" class="text-red-500 mt-1">
+            Género es requerido.
+          </div>
+        </div>
+        <div>
+          <label for="birthDate" class="block mb-1">Fecha de nacimiento:</label>
+          <input type="date" id="birthDate" name="birthDate"
+            class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Seleccione la fecha de nacimiento" required
+            [(ngModel)]="birthDate">
+          <div *ngIf="f.submitted && f.controls.birthDate.invalid" class="text-red-500 mt-1">
+            Fecha de nacimiento es requerida.
+          </div>
+        </div>
+        <div>
+          <label for="emailAddress" class="block mb-1">Correo electrónico:</label>
+          <input type="email" id="emailAddress" name="emailAddress"
+            class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Ingrese el correo electrónico"
+            autocomplete="off" required [(ngModel)]="emailAddress">
+          <div *ngIf="f.submitted && f.controls.emailAddress.invalid" class="text-red-500 mt-1">
+            Correo electrónico es requerido y debe ser una dirección de correo válida.
+          </div>
+        </div>
+        <div>
+          <label for="rol" class="block mb-1">Rol:</label>
+          <select id="rol" name="rol" class="w-full border-gray-300 border p-2 rounded h-10" [(ngModel)]="role" required>
+            <option value="BEN">Beneficiario</option>
+            <option value="DUE">Dueño</option>
+          </select>
+          <div *ngIf="f.submitted && f.controls.rol.invalid" class="text-red-500 mt-1">
+            Rol es requerido.
+          </div>
+        </div>
+        <div>
+          <label for="comments" class="block mb-1">Comentarios:</label>
+          <textarea id="comments" name="comments" class="w-full border-gray-300 border p-2 rounded" rows="3"
+            placeholder="Ingrese los comentarios" [(ngModel)]="comments"></textarea>
+          <div *ngIf="f.submitted && f.controls.comments.invalid" class="text-red-500 mt-1">
+            Comentarios son requeridos.
+          </div>
+        </div>
       </div>
+      <button class="bg-green-500 text-white w-full py-2 rounded mt-3" [disabled]="!f.valid">
+        <i class="fas fa-plus-circle"></i> Crear
+      </button>
+      <button class="bg-blue-500 text-white w-full py-2 rounded mt-3" routerLink="../">
+        <i class="fas fa-arrow-alt-circle-left"></i> Volver
+      </button>
+    </form>
+    <div *ngIf="isSaved !== null" class="text-center mt-3">
+      <p [ngClass]="{'text-green-500': isSaved, 'text-red-500': !isSaved}">
+        {{ isSaved ? 'Usuario guardado con éxito' : 'Error al guardar el usuario' }}
+      </p>
     </div>
   </div>
-  
+</div>
