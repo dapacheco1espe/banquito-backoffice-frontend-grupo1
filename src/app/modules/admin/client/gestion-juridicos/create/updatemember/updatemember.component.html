@@ -37,7 +37,6 @@
       <table class="border-collapse w-full table-auto mt-4">
         <thead>
           <tr>
-            <th class="px-4 py-2">Tipo Documento</th>
             <th class="px-4 py-2">N° Documento</th>
             <th class="px-4 py-2">Nombre</th>
             <th class="px-4 py-2">Apellido</th>
@@ -52,7 +51,6 @@
         <tbody>
           <tr *ngIf="cliente"
             class="cursor-pointer hover:bg-blue-300 text-sm">
-            <td class="border px-4 py-2 text-center">{{ cliente.uniqueKey }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.documentId }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.firstName }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.lastName }}</td>
