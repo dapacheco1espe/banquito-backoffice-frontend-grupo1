@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClienteService } from 'app/services/clienteService';
-import { Cliente, clientePhone } from '../model/cliente';
+import { Cliente, clienteAddress, clientePhone } from '../model/cliente';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -26,6 +26,7 @@ export class CreateComponent implements OnInit {
   closedDate!: Date;
   comments!: String;
   phoneNumbers: clientePhone;
+  addresses : clienteAddress;
 
   isSaved: boolean | null = null;
   errorMessage: string | null = null;
@@ -82,7 +83,7 @@ export class CreateComponent implements OnInit {
 
     // Si todos los campos son válidos, procedemos a crear el cliente
     const cliente = new Cliente(this.branchId, this.typeDocumentId, this.documentId, this.firstName, this.lastName,
-      this.gender, this.birthDate, this.emailAddress, this.role, this.comments, this.phoneNumbers);
+      this.gender, this.birthDate, this.emailAddress, this.role, this.comments, this.phoneNumbers, this.addresses);
 
     this.clienteService.create(cliente).subscribe(
       data => {

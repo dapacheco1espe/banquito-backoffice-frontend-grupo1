@@ -4,20 +4,53 @@
     <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
       <div class="grid grid-cols-2 gap-4">
         <div>
-          <label for="branchId" class="block mb-1">Branch ID:</label>
-          <input type="text" id="branchId" name="branchId" class="w-full border-gray-300 border p-2 rounded h-10"
-            placeholder="Ingrese el Branch ID" autocomplete="off" required [(ngModel)]="branchId">
-          <div *ngIf="f.submitted && f.controls.branchId.invalid" class="text-red-500 mt-1">
-            Branch ID es requerido.
-          </div>
+          <label for="branchId" class="block mb-1">Sucursal:</label>
+          <select id="branchId" name="branchId" class="w-full border-gray-300 border p-2 rounded h-10"
+            [(ngModel)]="branchId" required>
+            <option value="">Seleccione Sucursal</option>
+            <option value="PICHIXXBQ1002">Banquito Norte II</option>
+            <option value="PICHIXXBQ1003">Banquito Norte KENEDY</option>
+            <option value="PICHIXXBQ1004">Banquito Comite del Pueblo</option>
+            <option value="PICHIXXBQ1005">Banquito Centro</option>
+            <option value="GUAYXXBQ1001">Banquito Olmedo</option>
+            <option value="GUAYXXBQ1002">Banquito Samborondon</option>
+            <option value="PICHIXXBQ1006">Banquito Sangolqui</option>
+            <option value="CUENXXBQ1001">Banquito Bellavista</option>
+            <option value="BOLIXXBQ1001">Banquito Guaranda</option>
+            <option value="SAELXXBQ1001">Banquito Salinas</option>
+          </select>
         </div>
         <div>
-          <label for="locationId" class="block mb-1">Location ID:</label>
-          <input type="text" id="locationId" name="locationId" class="w-full border-gray-300 border p-2 rounded h-10"
-            placeholder="Ingrese el Location ID" autocomplete="off" required [(ngModel)]="locationId">
-          <div *ngIf="f.submitted && f.controls.locationId.invalid" class="text-red-500 mt-1">
-            Location ID es requerido.
-          </div>
+          <label for="locationId" class="block mb-1">Branch:</label>
+          <select id="locationId" name="locationId" class="w-full border-gray-300 border p-2 rounded h-10"
+            [(ngModel)]="locationId" required>
+            <option value="">Seleccione Localización: </option>
+            <option value="64bb7c52f4ad76655495e695">BOLIVAR</option>
+            <option value="64bb7c86f4ad76655495e696">AZUAY</option>
+            <option value="64bc1f1eea87d477becbd134">CAÑAR</option>
+            <option value="64bc1f3aea87d477becbd135">CARCHI</option>
+            <option value="64bc1f68ea87d477becbd136">COTOPAXI</option>
+            <option value="64bc1f70ea87d477becbd137">CHIMBORAZO</option>
+            <option value="64bc1fb2ea87d477becbd138">IMBABURA</option>
+            <option value="64bc1fc3ea87d477becbd139">EL ORO</option>
+            <option value="64bc1fceea87d477becbd13a">ESMERALDAS</option>
+            <option value="64bc1fdaea87d477becbd13b">GUAYAS</option>
+            <option value="64bc2004ea87d477becbd13c">LOJA</option>
+            <option value="64bc200eea87d477becbd13d">LOS RIOS</option>
+            <option value="64bc201fea87d477becbd13e">MANABI</option>
+            <option value="64bc203dea87d477becbd13f">MORONA SANTIAGO</option>
+            <option value="64bc2068ea87d477becbd140">NAPO</option>
+            <option value="64bc206eea87d477becbd141">PASTAZA</option>
+            <option value="64bc2081ea87d477becbd142">PICHINCHA</option>
+            <option value="64bc208bea87d477becbd143">TUNGURAHUA</option>
+            <option value="64bc20b4ea87d477becbd144">ZAMORA CHINCHIPE</option>
+            <option value="64bc215bea87d477becbd145">GALAPAGOS</option>
+            <option value="64bc216fea87d477becbd146">SUCUMBIOS</option>
+            <option value="64bc2177ea87d477becbd147">ORELLANA</option>
+            <option value="64bc21e7ea87d477becbd148">STO DOMINGO DE LOS TSACHILAS</option>
+            <option value="64bc21f1ea87d477becbd149">SANTA ELENA</option>
+          </select>
+          
         </div>
         <div>
           <label for="groupName" class="block mb-1">Nombre del grupo:</label>

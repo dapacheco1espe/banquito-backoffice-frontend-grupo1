@@ -53,20 +53,22 @@
             <th class="px-4 py-2">Fecha Nacimiento</th>
             <th class="px-4 py-2">Género</th>
             <th class="px-4 py-2">Email</th>
-            <th class="px-4 py-2">Creacion</th>
-            <th class="px-4 py-2">Modificacion</th>
+            <th class="px-4 py-2">Dirección</th>
+            <th class="px-4 py-2">Creación</th>
+            <th class="px-4 py-2">Modificación</th>
             <th class="px-4 py-2">Acciones</th> <!-- Columna para los botones de acciones -->
           </tr>
         </thead>
         <tbody>
           <tr *ngIf="cliente"
             class="cursor-pointer hover:bg-blue-300 text-sm">
-            <td class="border px-4 py-2 text-center">{{ cliente.documentId }}</td>
+            <td class="border px-4 py-2 text-center">{{ cliente.documentId}}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.firstName + ' ' + cliente.lastName }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.phoneNumbers[0].phoneNumber }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.birthDate | date:'yyyy/MM/dd' }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.gender }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.emailAddress }}</td>
+            <td class="border px-4 py-2 text-center">{{ cliente.addresses[0].line1 + ' y ' + cliente.addresses[0].line2 }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.creationDate | date:'short' }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.lastModifiedDate | date:'short' }}</td>
             <td class="border px-4 py-2 text-center">

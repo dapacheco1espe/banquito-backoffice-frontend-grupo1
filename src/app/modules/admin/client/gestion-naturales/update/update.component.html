@@ -22,6 +22,10 @@
         <input type="email" class="form-input mt-1 block w-full" id="email" name="email" placeholder="Ingrese el correo electrónico" autocomplete="off"  [(ngModel)]="cliente.emailAddress">
       </div>
       <div class="mb-3">
+        <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Teléfono:</label>
+        <input type="phoneNumber" class="form-input mt-1 block w-full" id="phoneNumber" name="phoneNumber" placeholder="Ingrese el telefono" autocomplete="off"  [(ngModel)]="cliente.phoneNumbers[0].phoneNumber">
+      </div>
+      <div class="mb-3">
         <label for="role" class="block text-sm font-medium text-gray-700">Rol:</label>
         <select id="role" name="role" class="form-select mt-1 block w-full" [(ngModel)]="cliente.role">
           <option value="BEN">Beneficiario</option>
