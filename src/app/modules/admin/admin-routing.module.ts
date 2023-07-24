@@ -35,6 +35,22 @@ const routes: Routes = [
                 (m) => m.AgencyModule
             ),
     },
+    // Location Module
+    {
+        path: 'location',
+        loadChildren: () =>
+            import('app/modules/admin/location/location.module').then(
+                (m) => m.LocationModule
+            ),
+    },
+    // Gestion Module
+    // {
+    //     path: 'gestion',
+    //     loadChildren: () =>
+    //         import('app/modules/admin/gestion/gestion.module').then(
+    //             (m) => m.GestionModule
+    //         ),
+    // },
 ];
 
 @NgModule({

@@ -16,6 +16,13 @@ export class GeostructureService {
             this.baseURL + '/geoCountry/findCountriesList'
         );
     }
+
+    public getGeostructureByCode(code: any): Observable<Geostructure> {
+        return this.http.get<Geostructure>(
+            this.baseURL + '/geoCountry/findByCountryCode/' + code
+        );
+    }
+
     public getGeoById(uuid: string): Observable<Geolocation> {
         return this.http.get<Geolocation>(
             this.baseURL + '/geoLocation/findByUuid/' + uuid
