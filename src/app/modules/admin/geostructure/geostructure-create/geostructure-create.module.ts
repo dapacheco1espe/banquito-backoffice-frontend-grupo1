@@ -9,4 +9,4 @@ import { FormsModule } from '@angular/forms';
     declarations: [],
     imports: [CommonModule, FormsModule, GeostructureCreateRoutingModule],
 })
-export class AgencyCreateModule {}
+export class GeostructureCreateModule {}

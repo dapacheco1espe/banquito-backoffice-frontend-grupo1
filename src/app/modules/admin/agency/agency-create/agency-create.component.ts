@@ -4,6 +4,8 @@ import { AgencyService } from 'app/services/agency.service';
 import { Agency } from '../agency-model/agency';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
+import { Geolocation } from '../../geostructure/geostructure-model/geolocation';
+import { GeolocationService } from 'app/services/geolocation.service';
 
 @Component({
     selector: 'app-agency-create',
@@ -27,9 +29,25 @@ export class AgencyCreateComponent implements OnInit {
     isSaved: boolean | null = null;
     errorMessage: string | null = null;
 
+    provincias: Geolocation[] = [];
+    cantones: Geolocation[] = [];
+    parroquias: Geolocation[] = [];
+
+    aux: any;
+
+    selectedProvincia: string = '';
+    selectedCanton: string = '';
+    selectedParroquia: string = '';
+
+    handledProv: string = '';
+    handledCant: string = '';
+    handledParr: string = '';
+
     constructor(private agencyService: AgencyService, private router: Router) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.getProvincias();
+    }
 
     onCreate(): void {
         if (!this.validateForm()) {
@@ -41,21 +59,20 @@ export class AgencyCreateComponent implements OnInit {
             return;
         }
 
-        const agency = new Agency(
-            this.ubication,
-            this.code,
-            this.name,
-            this.uniqueKey,
-            this.state,
-            this.emailAddress,
-            this.phoneNumber,
-            this.line1,
-            this.line2,
-            this.creationDate,
-            this.latitude,
-            this.longitude
-        );
-        this.agencyService.create(agency).subscribe(
+        const anyArr = {
+            code: this.code,
+            bankEntityId: '64b09cc56666b939a406a823',
+            locationId: this.selectedParroquia,
+            name: this.name,
+            emailAddress: this.emailAddress,
+            phoneNumber: this.phoneNumber,
+            line1: this.line1,
+            line2: this.line2,
+            latitude: this.latitude,
+            longitude: this.longitude,
+        };
+
+        this.agencyService.create(anyArr).subscribe(
             (data) => {
                 console.log('Hola');
                 Swal.fire({
@@ -83,33 +100,25 @@ export class AgencyCreateComponent implements OnInit {
     }
 
     validateForm(): boolean {
-        let dateNow = new Date();
-
-        this.uniqueKey = uuidv4();
-        this.state = 'ACTIVO';
-        this.creationDate = dateNow.toISOString();
-
         if (
-            !this.ubication ||
             !this.code ||
             !this.name ||
-            !this.uniqueKey ||
-            !this.state ||
             !this.emailAddress ||
             !this.phoneNumber ||
             !this.line1 ||
             !this.line2 ||
-            !this.creationDate ||
             !this.latitude ||
             !this.longitude
         ) {
             this.errorMessage = 'Por favor, completa todos los campos.';
+            console.log('if');
             return false;
         }
 
         // Validar el formato de los campos
         // Codigo SWIFT
         if (!/^BAQECEQ\d{3}$/.test(this.code)) {
+            console.log('baqeceq');
             this.errorMessage =
                 'El codigo SWIFT debe seguir el formato estandar';
             return false;
@@ -120,26 +129,61 @@ export class AgencyCreateComponent implements OnInit {
                 this.emailAddress
             )
         ) {
+            console.log('email');
             this.errorMessage = 'El email debe tener un estructura estándar';
             return false;
         }
         // Telefono
-        if (!/[0-9]{3}-[0-9]{4}$/.test(this.phoneNumber)) {
-            this.errorMessage = 'El email debe tener un estructura estándar';
+        if (!/^[\d\s()]+$/.test(this.phoneNumber)) {
+            console.log('telf');
+            this.errorMessage = 'El número debe contener el formato estándar';
             return false;
         }
-        // // Latitud
-        // if (!/^-?([0-8]?[0-9]\.\d+|90\.0+)$/.test()) {
-        //     this.errorMessage = 'El email debe tener un estructura estándar';
-        //     return false;
-        // }
-        // // Longitud
-        // if (!/[0-9]{3}-[0-9]{4}$/.test(this.phoneNumber)) {
-        //     this.errorMessage = 'El email debe tener un estructura estándar';
-        //     return false;
-        // }
-        // Si todas las validaciones pasan, se considera el formulario válido
         this.errorMessage = null;
         return true;
+    }
+
+    onSelectProvincia(provincia: string) {
+        console.log(provincia);
+        this.selectedProvincia = provincia;
+        this.selectedCanton = '';
+        this.selectedParroquia = '';
+        this.parroquias = [];
+        this.getCantonesPorProvincia(provincia);
+    }
+
+    onSelectCanton(canton: string) {
+        this.selectedCanton = canton;
+        this.selectedParroquia = '';
+        this.getParroquiasPorCanton(canton);
+    }
+
+    onSelectParroquia(parroquia: any) {
+        this.selectedParroquia = parroquia;
+        console.log(parroquia);
+    }
+
+    getProvincias(): void {
+        this.agencyService.listProv().subscribe((data) => {
+            console.log(data);
+            this.provincias = data;
+            console.log(this.provincias);
+        });
+    }
+
+    getCantonesPorProvincia(provincia: string): void {
+        this.agencyService.listCant(provincia).subscribe((data) => {
+            console.log(data);
+            this.cantones = data;
+            console.log(this.cantones);
+        });
+    }
+
+    getParroquiasPorCanton(canton: string): void {
+        this.agencyService.listParr(canton).subscribe((data) => {
+            console.log(data);
+            this.parroquias = data;
+            console.log(this.parroquias);
+        });
     }
 }

@@ -4,6 +4,7 @@ import { fuseAnimations } from '@fuse/animations';
 import Swal from 'sweetalert2';
 import { Agency } from './agency-model/agency';
 import { Geolocation } from '../geostructure/geostructure-model/geolocation';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-agency',
@@ -29,10 +30,7 @@ export class AgencyComponent implements OnInit {
     selectedCanton: string = '';
     selectedParroquia: string = '';
 
-    constructor(
-        private service: AgencyService,
-        private agencyService: AgencyService
-    ) {}
+    constructor(private agencyService: AgencyService, private router: Router) {}
 
     ngOnInit(): void {
         //this.getAgencies();
@@ -40,8 +38,8 @@ export class AgencyComponent implements OnInit {
     }
 
     // Traer agencias existentes
-    getAgencies(): void {
-        this.agencyService.list().subscribe((data) => {
+    getAgencies(parroquia: any): void {
+        this.agencyService.list(parroquia).subscribe((data) => {
             console.log(data);
             this.agencies = data;
             console.log(this.agencies);
@@ -140,10 +138,10 @@ export class AgencyComponent implements OnInit {
     onSelectParroquia(parroquia: any) {
         this.selectedParroquia = parroquia;
         console.log(parroquia);
-        
+        this.getAgencies(parroquia);
     }
 
-    getProvincias(): void{
+    getProvincias(): void {
         this.agencyService.listProv().subscribe((data) => {
             console.log(data);
             this.provincias = data;
@@ -164,6 +162,39 @@ export class AgencyComponent implements OnInit {
             console.log(data);
             this.parroquias = data;
             console.log(this.parroquias);
+        });
+    }
+
+    mostrarAdvertencia(code: any) {
+        // Utilizamos SweetAlert para mostrar la alerta
+        Swal.fire({
+            title: 'Advertencia',
+            text: 'Esta acción inactivará el registro. ¿Estás seguro?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, borrar',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.agencyService.delete(code).subscribe(
+                    (data) => {
+                        Swal.fire(
+                            'Listo',
+                            'El registro ha sido deshabilitado',
+                            'success'
+                        ).then(() => {});
+                    },
+                    (err) => {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Hubo un error al ejecutra la transacción',
+                            icon: 'error',
+                        });
+                    }
+                );
+            }
         });
     }
 }

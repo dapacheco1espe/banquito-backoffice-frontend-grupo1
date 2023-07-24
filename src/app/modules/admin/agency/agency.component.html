@@ -103,6 +103,9 @@
         Por favor, selecciona una provincia, un cantón y una parroquia para ver
         los resultados.
     </div>
+    <div class="bg-blue-200 text-blue-800 p-4 mt-4" *ngIf="agencies.length < 1">
+        Parece que no hay nada aquí.
+    </div>
     <div
         class="overflow-x-auto"
         *ngIf="selectedProvincia && selectedCanton && selectedParroquia"
@@ -124,19 +127,21 @@
                 <tr
                     *ngFor="let item of displayedData; let i = index"
                     [ngClass]="{ 'selected-row': selectedRowIndex === item.id }"
-                    (click)="rowClick(item.id)"
                     class="hover:bg-blue-100 text-sm"
                 >
                     <!-- <tr class="cursor-pointer hover:bg-blue-300 text-sm"> -->
-                    <td class="border px-4 py-2 text-center">{{ item.id }}</td>
+                    <td class="border px-4 py-2 text-center">{{ i + 1 }}</td>
                     <td class="border px-4 py-2 text-center">
-                        {{ i + 1 }}
+                        {{ item.locationName }}
                     </td>
                     <td class="border px-4 py-2 text-center">
                         {{ item.name }}
                     </td>
                     <td class="border px-4 py-2 text-center">
-                        {{ item.state }}
+                        <span
+                            class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300"
+                            >ACTIVO</span
+                        >
                     </td>
                     <td class="border px-4 py-2 text-center">
                         {{ item.emailAddress }}
@@ -151,7 +156,7 @@
                         <div class="flex justify-center items-center">
                             <a
                                 class="text-blue-500 hover:text-blue-700 p-1 cursor-pointer"
-                                routerLink="./detail/{{ item.id }}"
+                                routerLink="./detail/{{ item.code }}"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +175,9 @@
                             </a>
                             <a
                                 class="text-yellow-500 hover:text-yellow-700 p-1 cursor-pointer"
-                                routerLink="./update/{{ item.id }}"
+                                routerLink="./update/{{ item.code }}/{{
+                                    selectedProvincia
+                                }}/{{ selectedCanton }}"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -189,6 +196,7 @@
                             </a>
                             <a
                                 class="text-red-500 hover:text-red-700 p-1 cursor-pointer"
+                                (click)="mostrarAdvertencia(item.code)"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"

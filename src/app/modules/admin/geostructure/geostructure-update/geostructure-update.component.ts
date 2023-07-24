@@ -1,40 +1,74 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import {
-    GeostructureLevel,
-    Geostructure,
-} from '../geostructure-model/geostructure';
-import { GeostructureService } from 'app/services/geostructure.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Geolocation } from '../../geostructure/geostructure-model/geolocation';
 import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
+import {
+    Geostructure,
+    GeostructureLevel,
+} from '../geostructure-model/geostructure';
+import { GeostructureService } from 'app/services/geostructure.service';
+import { GeolocationService } from 'app/services/geolocation.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { forEach } from 'lodash';
 
 @Component({
-    selector: 'app-geostructure-create',
-    templateUrl: './geostructure-create.component.html',
-    styleUrls: ['./geostructure-create.component.scss'],
+    selector: 'app-geostructure-update',
+    templateUrl: './geostructure-update.component.html',
+    styleUrls: ['./geostructure-update.component.scss'],
 })
-export class GeostructureCreateComponent implements OnInit {
+export class GeostructureUpdateComponent implements OnInit {
+    dataUrl: any = {};
+
     countryCode!: string;
     phoneCode!: string;
     name!: string;
+    geoStructures!: GeostructureLevel[];
     geostructureLevels = [];
-    items = ['Provincia', 'Cantón', 'Parroquia'];
-    newElement!: string;
+    items = [];
 
+    newElement!: string;
     level: any;
 
     isSaved: boolean | null = null;
     errorMessage: string | null = null;
 
     constructor(
-        private geostructureService: GeostructureService,
-        private router: Router
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
+        private geostructureService: GeostructureService
     ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.getDetail();
+    }
 
-    onCreate(): void {
+    getDetail(): void {
+        const id = this.activatedRoute.snapshot.params.id;
+        const prov = this.activatedRoute.snapshot.params.prov;
+        const cant = this.activatedRoute.snapshot.params.cant;
+        this.geostructureService.detail(id).subscribe(
+            (data) => {
+                this.dataUrl = data;
+                console.log('getDetail update', this.dataUrl);
+                this.countryCode = this.dataUrl.countryCode;
+                this.name = this.dataUrl.name;
+                this.phoneCode = this.dataUrl.phoneCode;
+                this.geoStructures = this.dataUrl.geoStructures;
+                this.geoStructures.forEach((element) => {
+                    console.log('element', element);
+                    this.items.push(element.name);
+                });
+                console.log(this.items);
+            },
+            (err) => {
+                console.log('No encuentra NADA');
+                this.router.navigate(['']);
+            }
+        );
+    }
+
+    onUpdate(): void {
         let index = 1;
         if (!this.validateForm()) {
             Swal.fire({
@@ -56,27 +90,24 @@ export class GeostructureCreateComponent implements OnInit {
             index++;
         });
 
-        console.log(this.geostructureLevels);
+        const id = this.activatedRoute.snapshot.params.id;
 
-        const geostructure = new Geostructure(
-            this.countryCode,
-            this.phoneCode,
-            this.name,
-            this.geostructureLevels
-        );
+        const anyArr = {
+            name: this.name,
+            phoneCode: this.phoneCode,
+            geoStructures: this.geoStructures,
+        };
 
-        console.log('enviar a back', geostructure);
+        console.log('enviar a back', anyArr);
 
-        this.geostructureService.create(geostructure).subscribe(
+        this.geostructureService.update(id, anyArr).subscribe(
             (data) => {
                 console.log('Hola');
                 Swal.fire({
                     title: '¡Éxito!',
-                    text: 'La nueva estructura se ha guardado correctamente.',
+                    text: 'La agencia se ha actualizado correctamente.',
                     icon: 'success',
                 }).then(() => {
-                    this.isSaved = true;
-                    this.errorMessage = null;
                     // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
                     this.router.navigate(['/admin/geostructure']);
                 });
@@ -84,22 +115,18 @@ export class GeostructureCreateComponent implements OnInit {
             (err) => {
                 Swal.fire({
                     title: 'Error',
-                    text: 'Error al guardar estructura. Por favor, inténtalo nuevamente.',
+                    text: 'Error al guardar agencia. Por favor, inténtalo nuevamente.',
                     icon: 'error',
                 });
-                this.isSaved = false;
-                this.errorMessage =
-                    'Error al guardar la agencia. Por favor, inténtalo nuevamente.';
             }
         );
     }
-
     validateForm(): boolean {
         if (
             !this.countryCode ||
             !this.phoneCode ||
             !this.name ||
-            !this.geostructureLevels
+            !this.geoStructures
         ) {
             console.log('if');
             this.errorMessage = 'Por favor, completa todos los campos.';

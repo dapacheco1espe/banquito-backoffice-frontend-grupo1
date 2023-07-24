@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
 import { GeostructureService } from 'app/services/geostructure.service';
 import { Geostructure } from './geostructure-model/geostructure';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-geostructure',
@@ -28,14 +29,17 @@ export class GeostructureComponent implements OnInit {
     // Traer agencias existentes
     getGeostructures(): void {
         this.geostructureService.list().subscribe((data) => {
+            console.log(data);
             this.geostructures = data;
+            console.log(this.geostructures);
+            console.log(this.geostructures.length);
         });
     }
 
     filterData() {
         this.filteredGeostructure = this.geostructures.filter(
             (item) =>
-                item.countryId
+                item.countryCode
                     .toLowerCase()
                     .includes(this.searchTerm.toLowerCase()) ||
                 item.name
@@ -54,7 +58,7 @@ export class GeostructureComponent implements OnInit {
         return this.geostructures
             .filter(
                 (item) =>
-                    item.countryId
+                    item.countryCode
                         .toLowerCase()
                         .includes(this.searchTerm.toLowerCase()) ||
                     item.name
@@ -92,5 +96,38 @@ export class GeostructureComponent implements OnInit {
     resetSelection() {
         this.selectedRowIndex = -1;
         this.showButtons = false;
+    }
+
+    mostrarAdvertencia(code: any) {
+        // Utilizamos SweetAlert para mostrar la alerta
+        Swal.fire({
+            title: 'Advertencia',
+            text: 'Esta acción inactivará el registro. ¿Estás seguro?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, borrar',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.geostructureService.delete(code).subscribe(
+                    (data) => {
+                        Swal.fire(
+                            'Listo',
+                            'El registro ha sido deshabilitado',
+                            'success'
+                        ).then(() => {});
+                    },
+                    (err) => {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Hubo un error al ejecutar la transacción',
+                            icon: 'error',
+                        });
+                    }
+                );
+            }
+        });
     }
 }

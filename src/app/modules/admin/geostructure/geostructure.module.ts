@@ -9,9 +9,11 @@ import { GeostructureComponent } from './geostructure.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GeostructureCreateComponent } from './geostructure-create/geostructure-create.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { GeostructureDetailComponent } from './geostructure-detail/geostructure-detail.component';
+import { GeostructureUpdateComponent } from './geostructure-update/geostructure-update.component';
 
 @NgModule({
-    declarations: [GeostructureComponent, GeostructureCreateComponent],
+    declarations: [GeostructureComponent, GeostructureCreateComponent, GeostructureDetailComponent, GeostructureUpdateComponent],
     imports: [
         SharedModule,
         GeostructureRoutingModule,

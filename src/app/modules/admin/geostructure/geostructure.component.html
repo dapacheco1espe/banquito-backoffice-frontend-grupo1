@@ -62,7 +62,7 @@
         <table class="border-collapse w-full table-auto mt-4">
             <thead>
                 <tr>
-                    <th class="px-4 py-2">ID País</th>
+                    <th class="px-4 py-2">Nro.</th>
                     <th class="px-4 py-2">Nombre</th>
                     <th class="px-4 py-2">Niveles</th>
                     <th class="px-4 py-2">Codigo Telefónico</th>
@@ -77,13 +77,13 @@
                     class="cursor-pointer hover:bg-blue-300 text-sm"
                 >
                     <td class="border px-4 py-2 text-center">
-                        {{ item.countryId }}
+                        {{ i + 1 }}
                     </td>
                     <td class="border px-4 py-2 text-center">
                         {{ item.name }}
                     </td>
                     <td class="border px-4 py-2 text-center">
-                        {{ item.geostructure.length }}
+                        {{ item.geoStructures.length }}
                     </td>
                     <td class="border px-4 py-2 text-center">
                         {{ item.phoneCode }}
@@ -92,7 +92,7 @@
                         <div class="flex justify-center items-center">
                             <a
                                 class="text-blue-500 hover:text-blue-700 p-1 cursor-pointer"
-                                routerLink="./detail/{{ item.countryId }}"
+                                routerLink="./detail/{{ item.countryCode }}"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +111,7 @@
                             </a>
                             <a
                                 class="text-yellow-500 hover:text-yellow-700 p-1 cursor-pointer"
-                                routerLink="./update/{{ item.countryId }}"
+                                routerLink="./update/{{ item.countryCode }}"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -130,6 +130,7 @@
                             </a>
                             <a
                                 class="text-red-500 hover:text-red-700 p-1 cursor-pointer"
+                                (click)="mostrarAdvertencia(item.countryCode)"
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"

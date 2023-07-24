@@ -1,23 +1,23 @@
 export class Geostructure {
-    countryId: string;
+    countryCode: string;
     phoneCode: string;
     name: string;
-    geostructure: GeostructureLevel[];
+    geoStructures: GeostructureLevel[];
 
     constructor(
-        countryId: string,
+        countryCode: string,
         phoneCode: string,
         name: string,
-        geostructure: GeostructureLevel[]
+        geoStructures: GeostructureLevel[]
     ) {
-        this.countryId = countryId;
+        this.countryCode = countryCode;
         this.phoneCode = phoneCode;
         this.name = name;
-        this.geostructure = geostructure;
+        this.geoStructures = geoStructures;
     }
 }
 
 export class GeostructureLevel {
-    level_code: number;
+    levelCode: number;
     name: string;
 }

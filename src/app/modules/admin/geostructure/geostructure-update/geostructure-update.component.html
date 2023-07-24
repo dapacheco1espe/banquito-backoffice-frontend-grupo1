@@ -3,11 +3,11 @@
         <h5
             class="mb-5 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
         >
-            Crear Estructura Geográfica
+            Modificar Estructura Geográfica
         </h5>
     </div>
     <form
-        (ngSubmit)="onCreate()"
+        (ngSubmit)="onUpdate()"
         novalidate
         #f="ngForm"
         class="w-full max-w-xl"
@@ -30,6 +30,7 @@
                     required
                     pattern="^[A-Z]{3}$"
                     [(ngModel)]="countryCode"
+                    disabled
                 />
                 <div
                     *ngIf="f.submitted && f.controls.code.invalid"
@@ -124,15 +125,10 @@
             </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
-            <div
-                cdkDropList
-                class="example-list"
-                (cdkDropListDropped)="dropItem($event)"
-            >
+            <div cdkDropList class="example-list">
                 <div
                     class="example-box"
                     *ngFor="let item of items; let i = index"
-                    cdkDrag
                 >
                     <span class="mr-5">{{ i + 1 }}</span>
                     <span class="mr-5">{{ item }}</span>
@@ -168,15 +164,16 @@
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
                             stroke="currentColor"
-                            class="w-6 h-6 mr-1"
+                            class="w-6 h-6"
                         >
                             <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
                             />
                         </svg>
-                        <span> Crear </span>
+
+                        <span> Actualizar </span>
                     </div>
                 </button>
                 <a

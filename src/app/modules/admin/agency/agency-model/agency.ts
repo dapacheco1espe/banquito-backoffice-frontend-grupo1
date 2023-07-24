@@ -1,5 +1,6 @@
 export class Agency {
     id!: number;
+    bankEntityId: String;
     locationId: String;
     code: String;
     name: String;
@@ -14,6 +15,7 @@ export class Agency {
     longitude: number;
 
     constructor(
+        bankEntityId: String,
         locationId: String,
         code: String,
         name: String,
@@ -27,6 +29,7 @@ export class Agency {
         latitude: number,
         longitude: number
     ) {
+        this.bankEntityId = bankEntityId;
         this.locationId = locationId;
         this.code = code;
         this.name = name;
