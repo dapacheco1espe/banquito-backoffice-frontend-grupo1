@@ -19,17 +19,17 @@ export class CompanyService {
   public list(): Observable<Company[]> {
     return this.httpClient.get<Company[]>(this.companyURL);
   }
-
+  public detail(groupName: String,): Observable<Company> {
+    return this.httpClient.get<Company>(this.companyURL+`/${groupName}`);
+  }
   public create(company: Company): Observable<any> {
     return this.httpClient.post<any>(this.companyURL, company);
   }
-  public detail(uniqueKey: number): Observable<Company> {
-    return this.httpClient.get<Company>(this.companyURL + `/${uniqueKey}`);
+  
+  public update(uniqueKey: String, company: Company): Observable<any> {
+    return this.httpClient.put<any>(`${this.companyURL}/${'updateCompany'}/${uniqueKey}`, company);
   }
-  public update(uniqueKey: number, company: Company): Observable<any> {
-    return this.httpClient.put<any>(this.companyURL + `/${uniqueKey}`, company);
-  }
-  public delete(uniqueKey: number): Observable<any> {
+  public delete(uniqueKey: String): Observable<any> {
     return this.httpClient.delete<any>(this.companyURL + `/${uniqueKey}`);
   }
 }

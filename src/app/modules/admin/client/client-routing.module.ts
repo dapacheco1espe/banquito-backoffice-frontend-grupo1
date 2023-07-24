@@ -43,6 +43,10 @@ component: GestionComponent
     loadChildren: () => import('app/modules/admin/client/gestion-juridicos/create/create.module') .then(m => m.CreateModule),
   },
   {
+    path: 'update-juridicos',
+    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/update/update.module') .then(m => m.UpdateModule),
+  },
+  {
     path: 'create-phone',
     loadChildren: () => import('app/modules/admin/client/gestion-naturales/create/phone/phone.module') .then(m => m.PhoneModule),
   },

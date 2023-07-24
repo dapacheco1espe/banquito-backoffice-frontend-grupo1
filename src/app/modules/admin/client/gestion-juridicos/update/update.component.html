@@ -1,0 +1,41 @@
+<div class="container mx-auto mt-5 bg-white w-full">
+  <div class="max-w-md mx-auto">
+    <h4 class="text-center text-lg font-bold">Actualizar Cliente</h4>
+    <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+      <div class="mb-3">
+        <label for="groupName" class="block text-sm font-medium text-gray-700">Nombre del Grupo:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="groupName" name="groupName" placeholder="Ingrese el nombre del grupo" autocomplete="off" [(ngModel)]="company.groupName" required>
+      </div>
+      <div class="mb-3">
+        <label for="emailAddress" class="block text-sm font-medium text-gray-700">Correo electrónico:</label>
+        <input type="email" class="form-input mt-1 block w-full" id="emailAddress" name="emailAddress" placeholder="Ingrese el correo electrónico" autocomplete="off" [(ngModel)]="company.emailAddress" required>
+      </div>
+      <div class="mb-3">
+        <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Número de Teléfono:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="phoneNumber" name="phoneNumber" placeholder="Ingrese el número de teléfono" autocomplete="off" [(ngModel)]="company.phoneNumber" required>
+      </div>
+      <div class="mb-3">
+        <label for="line1" class="block text-sm font-medium text-gray-700">Dirección Línea 1:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="line1" name="line1" placeholder="Ingrese la dirección línea 1" autocomplete="off" [(ngModel)]="company.line1" required>
+      </div>
+      <div class="mb-3">
+        <label for="line2" class="block text-sm font-medium text-gray-700">Dirección Línea 2:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="line2" name="line2" placeholder="Ingrese la dirección línea 2" autocomplete="off" [(ngModel)]="company.line2">
+      </div>
+      <div class="mb-3">
+        <label for="latitude" class="block text-sm font-medium text-gray-700">Latitud:</label>
+        <input type="number" class="form-input mt-1 block w-full" id="latitude" name="latitude" placeholder="Ingrese la latitud" autocomplete="off" [(ngModel)]="company.latitude" required>
+      </div>
+      <div class="mb-3">
+        <label for="longitude" class="block text-sm font-medium text-gray-700">Longitud:</label>
+        <input type="number" class="form-input mt-1 block w-full" id="longitude" name="longitude" placeholder="Ingrese la longitud" autocomplete="off" [(ngModel)]="company.longitude" required>
+      </div>
+      <button class="bg-green-500 text-white font-bold py-2 px-4 w-full mb-3" [disabled]="!f.valid">
+        <i class="far fa-edit"></i> Actualizar
+      </button>
+      <button class="bg-blue-500 text-white font-bold py-2 px-4 w-full" routerLink="../../">
+        <i class="fas fa-arrow-alt-circle-left"></i> Regresar
+      </button>
+    </form>
+  </div>
+</div>

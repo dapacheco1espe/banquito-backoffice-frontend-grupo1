@@ -1,5 +1,5 @@
 export class Company {
-    uniqueKey!: String;
+    uniqueKey: String;
     branchId: String;
     locationId: String;
     groupName: String;
