@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
 import { Company } from 'app/modules/admin/client/gestion-juridicos/model/company';
+import { CompanyMember } from 'app/modules/admin/client/gestion-juridicos/model/companyMember';
 
 
 
@@ -29,7 +30,15 @@ export class CompanyService {
   public update(uniqueKey: String, company: Company): Observable<any> {
     return this.httpClient.put<any>(`${this.companyURL}/${'updateCompany'}/${uniqueKey}`, company);
   }
-  public delete(uniqueKey: String): Observable<any> {
-    return this.httpClient.delete<any>(this.companyURL + `/${uniqueKey}`);
+  public delete(uniqueKey: String, company: Company): Observable<any> {
+    return this.httpClient.put<any>(`${this.companyURL}/${'deleteCompany'}/${uniqueKey}`, company);
   }
+  public createMember(
+    groupName: String,
+    //aqui adjuntas en body request le adjuntas un array de telefonos
+    memberList:CompanyMember[]
+
+): Observable<Company> {
+  return this.httpClient.put<Company>(`${this.companyURL}/${'addMember'}/${groupName}`, memberList);
+}
 }

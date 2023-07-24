@@ -47,14 +47,12 @@
       <table class="border-collapse w-full table-auto mt-4">
         <thead>
           <tr>
-            <th class="px-4 py-2">Tipo Documento</th>
             <th class="px-4 py-2">N° Documento</th>
             <th class="px-4 py-2">Nombre</th>
-            <th class="px-4 py-2">Apellido</th>
-            <th class="px-4 py-2">Genero</th>
+            <th class="px-4 py-2">Telefono</th>
             <th class="px-4 py-2">Fecha Nacimiento</th>
+            <th class="px-4 py-2">Género</th>
             <th class="px-4 py-2">Email</th>
-            <th class="px-4 py-2">Estado</th>
             <th class="px-4 py-2">Creacion</th>
             <th class="px-4 py-2">Modificacion</th>
             <th class="px-4 py-2">Acciones</th> <!-- Columna para los botones de acciones -->
@@ -63,14 +61,12 @@
         <tbody>
           <tr *ngIf="cliente"
             class="cursor-pointer hover:bg-blue-300 text-sm">
-            <td class="border px-4 py-2 text-center">{{ cliente.typeDocumentId }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.documentId }}</td>
-            <td class="border px-4 py-2 text-center">{{ cliente.firstName }}</td>
-            <td class="border px-4 py-2 text-center">{{ cliente.lastName }}</td>
+            <td class="border px-4 py-2 text-center">{{ cliente.firstName + ' ' + cliente.lastName }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.phoneNumbers[0].phoneNumber }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.birthDate | date:'yyyy/MM/dd' }}</td>
+            <td class="border px-4 py-2 text-center">{{ cliente.gender }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.emailAddress }}</td>
-            <td class="border px-4 py-2 text-center">{{ cliente.state }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.creationDate | date:'short' }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.lastModifiedDate | date:'short' }}</td>
             <td class="border px-4 py-2 text-center">
