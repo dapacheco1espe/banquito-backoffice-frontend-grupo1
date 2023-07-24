@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
 import { Cliente } from '../modules/admin/client/gestion-naturales/model/cliente';
-import {clientePhone} from "../modules/admin/client/gestion-naturales/model/clientePhone";
-
+import {ClientePhone} from "../modules/admin/client/gestion-naturales/model/clientePhone";
+import {ClienteAddress} from "../modules/admin/client/gestion-naturales/model/clienteAddress";
 
 @Injectable({
   providedIn: 'root'
@@ -36,9 +36,18 @@ export class ClienteService {
       typeDocumentId: String,
       documentId: String,
       //aqui adjuntas en body request le adjuntas un array de telefonos
-      phoneList:clientePhone[]
+      phoneList:ClientePhone[]
 
   ): Observable<Cliente> {
     return this.httpClient.put<Cliente>(`${this.clienteURL}/${'phones'}/${typeDocumentId}/${documentId}`, phoneList);
   }
+  public createAddress(
+    typeDocumentId: String,
+    documentId: String,
+    //aqui adjuntas en body request le adjuntas un array de telefonos
+    addressList:ClienteAddress[]
+
+): Observable<Cliente> {
+  return this.httpClient.put<Cliente>(`${this.clienteURL}/${'addresses'}/${typeDocumentId}/${documentId}`, addressList);
+}
 }

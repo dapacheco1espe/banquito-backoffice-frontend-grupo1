@@ -5,6 +5,7 @@ import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { DeleteComponent } from './delete/delete.component';
 import { PhoneComponent } from './create/phone/phone.component';
+import { AddressComponent } from './create/address/address.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
 {path: 'update/:typeDocumentId/:documentId', component: UpdateComponent},
 {path: 'delete/:typeDocumentId/:documentId', component: DeleteComponent},
 {path: 'createPhone/:typeDocumentId/:documentId', component: PhoneComponent},
+{path: 'createAddress/:typeDocumentId/:documentId', component: AddressComponent},
 
 
 ];

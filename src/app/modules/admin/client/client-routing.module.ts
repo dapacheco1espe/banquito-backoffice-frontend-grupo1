@@ -45,6 +45,10 @@ component: GestionComponent
   {
     path: 'create-phone',
     loadChildren: () => import('app/modules/admin/client/gestion-naturales/create/phone/phone.module') .then(m => m.PhoneModule),
+  },
+  {
+    path: 'create-address',
+    loadChildren: () => import('app/modules/admin/client/gestion-naturales/create/address/address.module') .then(m => m.AddressModule),
   }
  
   

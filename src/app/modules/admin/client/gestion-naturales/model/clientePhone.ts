@@ -1,4 +1,4 @@
-export class clientePhone{
+export class ClientePhone{
     phoneType: String;
     phoneNumber: String;
     isDefault: boolean;

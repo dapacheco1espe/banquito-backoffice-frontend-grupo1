@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteService } from 'app/services/clienteService';
 import { Cliente } from '../../model/cliente';
 import Swal from 'sweetalert2';
-import { clientePhone } from '../../model/clientePhone';
+import { ClientePhone } from '../../model/clientePhone';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class PhoneComponent implements OnInit {
   typeDocumentId: string = this.activatedRoute.snapshot.params['typeDocumentId'];
   documentId: string = this.activatedRoute.snapshot.params['documentId'];
   isSaved: boolean | null = null;
-  phoneArray: clientePhone[]=[];
+  phoneArray: ClientePhone[]=[];
   phoneType!: string;
   phoneNumber!: string;
 
@@ -36,7 +36,7 @@ export class PhoneComponent implements OnInit {
     }
 
     onUpdate(): void {
-        const phoneObject: clientePhone=new clientePhone(this.phoneType,this.phoneNumber,true);
+        const phoneObject: ClientePhone=new ClientePhone(this.phoneType,this.phoneNumber,true);
         this.phoneArray.push(phoneObject);
         this.clienteService.createPhone(this.typeDocumentId,this.documentId, this.phoneArray).subscribe(
         (data) => {
@@ -50,7 +50,7 @@ export class PhoneComponent implements OnInit {
             this.isSaved = true;
             this.errorMessage = null;
             // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
-            this.router.navigate(['/gestion/gestion-naturales/createAddress']);
+            this.router.navigate(['/gestion/gestion-naturales/createAddress/'+this.typeDocumentId+'/'+this.documentId])
           });
         },
         (err) => {
