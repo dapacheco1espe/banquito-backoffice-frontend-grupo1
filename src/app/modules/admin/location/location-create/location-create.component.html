@@ -1,0 +1,126 @@
+<div class="w-full rounded-md bg-white p-5 h-screen flex flex-col items-center">
+    <div>
+        <h5
+            class="mb-5 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+        >
+            Crear Locación
+        </h5>
+    </div>
+    <form
+        (ngSubmit)="onCreate()"
+        novalidate
+        #f="ngForm"
+        class="w-full max-w-xl"
+    >
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="pais"
+                >
+                    Escoge el país al que pertenece
+                </label>
+                <div class="relative mr-2 mb-2">
+                    <select
+                        id="pais"
+                        name="pais"
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        [(ngModel)]="selectedPais"
+                        (ngModelChange)="onSelectPais($event)"
+                    >
+                        <option value="">Pais</option>
+                        <option
+                            *ngFor="let pais of paises"
+                            [value]="pais.countryCode"
+                        >
+                            {{ pais.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="nivel"
+                >
+                    Escoge el nivel superior
+                </label>
+                <div class="relative mr-2 mb-2">
+                    <select
+                        id="nivel"
+                        name="nivel"
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        [(ngModel)]="selectedLevel"
+                        (ngModelChange)="onSelectLevel($event)"
+                    >
+                        <option value="">Nivel</option>
+                        <option
+                            *ngFor="let level of levels"
+                            [value]="level.levelCode"
+                        >
+                            {{ level.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="w-full px-1 mb-6 md:mb-0">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="nivel"
+                >
+                    Escoge un elemento del nivel superior
+                </label>
+                <div class="relative mr-2 mb-2">
+                    <select
+                        id="nivel"
+                        name="nivel"
+                        class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        [(ngModel)]="selectedLevel"
+                        (ngModelChange)="onSelectLevel($event)"
+                    >
+                        <option value="">Elemento</option>
+                        <option
+                            *ngFor="let element of elements"
+                            [value]="element.name"
+                        >
+                            {{ element.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <!-- Buttons -->
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="flex items-center">
+                <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-3"
+                    [disabled]="!f.valid"
+                >
+                    <div class="flex items-center">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 h-6 mr-1"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                        </svg>
+                        <span> Crear </span>
+                    </div>
+                </button>
+                <a
+                    class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                    href="/admin/agency"
+                >
+                    Regresar
+                </a>
+            </div>
+        </div>
+    </form>
+</div>
