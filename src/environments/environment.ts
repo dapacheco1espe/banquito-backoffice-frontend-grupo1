@@ -4,7 +4,8 @@
 
 export const environment = {
     production: false,
-    apiResrURL: 'http://localhost:9090'
+    //apiResrURL: 'https://64b1a828062767bc4826815a.mockapi.io/api/v1',
+    apiResrURL: 'http://localhost:8080/api/v1',
 };
 
 /*

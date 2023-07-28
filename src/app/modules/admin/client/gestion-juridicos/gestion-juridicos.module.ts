@@ -5,18 +5,8 @@ import { GestionJuridicosRoutingModule } from './gestion-juridicos-routing.modul
 import { FormsModule } from '@angular/forms';
 import { GestionJuridicosComponent } from './gestion-juridicos.component';
 
-
-
 @NgModule({
-  declarations: [
-    GestionJuridicosComponent
-   
-
-  ],
-  imports: [
-    CommonModule,
-    GestionJuridicosRoutingModule,
-    FormsModule
-  ]
+    declarations: [GestionJuridicosComponent],
+    imports: [CommonModule, GestionJuridicosRoutingModule, FormsModule],
 })
-export class GestionJuridicosModule { }
+export class GestionJuridicosModule {}
