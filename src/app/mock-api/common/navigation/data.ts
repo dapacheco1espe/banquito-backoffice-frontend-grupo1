@@ -20,46 +20,47 @@ export const compactNavigation: FuseNavigationItem[] = [
         link    : '/gestion'
     },
     {
-        id      : 'gestion',
-        title   : 'Gestion',
-        tooltip : 'Gestion',
-        type    : 'aside',
-        icon    : 'heroicons_outline:identification',
-        children: [
-            {
-                id      : 'clientes',
-                title   : 'Clientes',
-                tooltip : 'Clientes',
-                type    : 'basic',
-                icon    : 'heroicons_outline:users',
-                link    : '/gestion/clientes'
-            },
-            {
-                id      : 'payments',
-                title   : 'Cuentas Clientes Juridicos',
-                tooltip : 'Cuenta',
-                type    : 'basic',
-                icon    : 'heroicons_outline:currency-dollar',
-                link    : '/gestion/gestion-juridicos/accounts'
-            },
-            // {
-            //     id      : 'history',
-            //     title   : 'Historial de transancciones',
-            //     tooltip : 'Historial de transacciones',
-            //     type    : 'basic',
-            //     icon    : 'heroicons_outline:document-text',
-            //     //link    : '/account-history'
-            // }
-        ]
+        id      : 'Gestion geostructure',
+        title   : 'Gestion Geostructure',
+        tooltip : 'Gestion geostructure',
+        type    : 'basic',
+        icon    : 'heroicons_outline:globe',
+        link    : '/gestion/geostructure'
     },
     {
-        id      : 'pages',
-        title   : 'Pages',
-        tooltip : 'Pages',
-        type    : 'aside',
-        icon    : 'heroicons_outline:document-duplicate',
-        children: [] // This will be filled from defaultNavigation so we don't have to manage multiple sets of the same navigation
+        id      : 'Gestion Clientes',
+        title   : 'Gestion Clientes',
+        tooltip : 'Gestion Clientes',
+        type    : 'basic',
+        icon    : 'heroicons_outline:users',
+        link    : '/gestion/clientes'
     },
+    {
+        id      : 'Gestion Agencias',
+        title   : 'Gestion Agencias',
+        tooltip : 'Gestion Agencias',
+        type    : 'basic',
+        icon    : 'heroicons_outline:office-building',
+        link    : '/gestion/agency'
+    },
+    {
+        id      : 'Gestion Locaciones',
+        title   : 'Gestion Locaciones',
+        tooltip : 'Gestion Locaciones',
+        type    : 'basic',
+        icon    : 'heroicons_outline:location-marker',
+        link    : '/gestion/location'
+    },
+    {
+        id      : 'Gestion Feriados',
+        title   : 'Gestion Feriados',
+        tooltip : 'Gestion Feriados',
+        type    : 'basic',
+        icon    : 'heroicons_outline:clipboard-list',
+        link    : '/gestion/location'
+    },
+  
+    
     {
         id      : 'user-interface',
         title   : 'UI',
