@@ -27,7 +27,11 @@ export class LocationCreateComponent implements OnInit {
     elements: any[] = [];
 
     selectedPais: string = '';
-    selectedLevel: string = '';
+    selectedLevel: number = 0;
+    selectedElement: string = '';
+
+    isSaved: boolean | null = null;
+    errorMessage: string | null = null;
 
     constructor(
         private geostructureService: GeostructureService,
@@ -49,26 +53,56 @@ export class LocationCreateComponent implements OnInit {
 
     onCreate() {
         console.log('onCreate()');
+        if (!this.validateForm()) {
+            Swal.fire({
+                title: 'Error',
+                text: 'Error, datos incorrectos. Por favor, revise e intente nuevamente.',
+                icon: 'error',
+            });
+            return;
+        }
+
+        const anyLocation = {
+            countryCode: this.selectedPais,
+            levelParentId: this.selectedLevel,
+            levelParentName: this.selectedElement,
+            levelCode: this.selectedLevel,
+            levelName: 'parroquia',
+            name: this.name,
+            areaPhoneCode: this.areaPhoneCode,
+            zipCode: this.zipCode,
+        };
+
+        console.log(anyLocation);
     }
 
     onSelectPais(pais: string) {
         console.log(pais);
         this.selectedPais = pais;
-        this.selectedLevel = '';
+        this.countryCode = this.selectedPais;
         this.getLevelsPorPais(pais);
     }
 
     onSelectLevel(level: any) {
+        this.selectedLevel = null;
+        this.elements = [];
         console.log('level', level);
-        this.selectedLevel = level;
+        this.selectedLevel = level - 1;
         console.log('selectedLevel', this.selectedLevel);
-        this.locationService
-            .list(this.selectedPais, this.selectedLevel)
-            .subscribe((data) => {
-                console.log('pronz', data);
-                this.elements = data;
-                console.log(this.elements);
-            });
+        if (this.selectedLevel > 0) {
+            this.locationService
+                .list(this.selectedPais, this.selectedLevel)
+                .subscribe((data) => {
+                    console.log('pronz', data);
+                    this.elements = data;
+                    console.log(this.elements);
+                });
+        }
+    }
+
+    onSelectElement(element: any) {
+        console.log('element', element);
+        this.getElementProperties(element);
     }
 
     getLevelsPorPais(pais: string): void {
@@ -79,5 +113,45 @@ export class LocationCreateComponent implements OnInit {
                 this.levels = data.geoStructures;
                 console.log('this.levels', this.levels);
             });
+    }
+
+    getElementProperties(elementUuid: any) {
+        this.geostructureService.getGeoById(elementUuid).subscribe((data) => {
+            console.log('data getGeoById', data);
+        });
+    }
+
+    validateForm(): boolean {
+        if (
+            !this.countryCode ||
+            !this.levelParentId ||
+            !this.levelParentName ||
+            !this.levelCode ||
+            !this.levelName ||
+            !this.name ||
+            !this.areaPhoneCode ||
+            !this.zipCode
+        ) {
+            console.log('if');
+            this.errorMessage = 'Por favor, completa todos los campos.';
+            return false;
+        }
+
+        // Validar el formato de los campos
+        // Codigo de Pais segun
+        // if (!/^[A-Z]{3}$/.test(this.countryCode)) {
+        //     this.errorMessage =
+        //         'El codigo SWIFT debe seguir el formato estandar';
+        //     console.log('ECU Alfa');
+        //     return false;
+        // }
+        // Codigo Telefónico
+        // if (!/^\d{1,2}$/.test(this.areaPhoneCode)) {
+        //     this.errorMessage = 'El email debe tener un estructura estándar';
+        //     console.log('Codigo');
+        //     return false;
+        // }
+        // this.errorMessage = null;
+        return true;
     }
 }

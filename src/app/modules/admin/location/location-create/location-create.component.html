@@ -43,7 +43,7 @@
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                     for="nivel"
                 >
-                    Escoge el nivel superior
+                    Escoge el nivel
                 </label>
                 <div class="relative mr-2 mb-2">
                     <select
@@ -53,7 +53,6 @@
                         [(ngModel)]="selectedLevel"
                         (ngModelChange)="onSelectLevel($event)"
                     >
-                        <option value="">Nivel</option>
                         <option
                             *ngFor="let level of levels"
                             [value]="level.levelCode"
@@ -68,24 +67,100 @@
                     class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                     for="nivel"
                 >
-                    Escoge un elemento del nivel superior
+                    Escoge a donde pertenece
                 </label>
                 <div class="relative mr-2 mb-2">
                     <select
                         id="nivel"
                         name="nivel"
                         class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        [(ngModel)]="selectedLevel"
-                        (ngModelChange)="onSelectLevel($event)"
+                        [(ngModel)]="selectedElement"
+                        (ngModelChange)="onSelectElement($event)"
                     >
                         <option value="">Elemento</option>
                         <option
                             *ngFor="let element of elements"
-                            [value]="element.name"
+                            [value]="element.uuid"
                         >
                             {{ element.name }}
                         </option>
                     </select>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="line1"
+                >
+                    Nombre de Locación
+                </label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    placeholder="Quito"
+                    autocomplete="off"
+                    required
+                    [(ngModel)]="name"
+                />
+                <div
+                    *ngIf="f.submitted && f.controls.code.invalid"
+                    class="text-red-500 text-xs italic"
+                >
+                    Campo Obligatorio*
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="line2"
+                >
+                    Codigo de Teléfono de Área
+                </label>
+                <input
+                    type="text"
+                    id="areaPhoneCode"
+                    name="areaPhoneCode"
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    placeholder="02"
+                    autocomplete="off"
+                    required
+                    [(ngModel)]="areaPhoneCode"
+                />
+                <div
+                    *ngIf="f.submitted && f.controls.code.invalid"
+                    class="text-red-500 text-xs italic"
+                >
+                    Campo Obligatorio*
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="line1"
+                >
+                    Codigo Postal
+                </label>
+                <input
+                    type="text"
+                    id="zipCode"
+                    name="zipCode"
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    placeholder="170130"
+                    autocomplete="off"
+                    required
+                    [(ngModel)]="zipCode"
+                />
+                <div
+                    *ngIf="f.submitted && f.controls.code.invalid"
+                    class="text-red-500 text-xs italic"
+                >
+                    Campo Obligatorio*
                 </div>
             </div>
         </div>

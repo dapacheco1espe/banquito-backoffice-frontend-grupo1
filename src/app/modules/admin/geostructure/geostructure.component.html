@@ -74,7 +74,7 @@
                     *ngFor="let item of displayedData; let i = index"
                     [ngClass]="{ 'selected-row': selectedRowIndex === item.id }"
                     (click)="rowClick(item.id)"
-                    class="cursor-pointer hover:bg-blue-300 text-sm"
+                    class="cursor-pointer hover:bg-blue-100 text-sm"
                 >
                     <td class="border px-4 py-2 text-center">
                         {{ i + 1 }}

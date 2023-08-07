@@ -12,6 +12,13 @@ export class LocationService {
     constructor(private http: HttpClient) {}
 
     public list(countryCode: any, level: any): Observable<Location[]> {
+        console.log(
+            this.baseURL +
+                '/geoLocation/countryCode-levelCode/' +
+                countryCode +
+                '/' +
+                level
+        );
         return this.http.get<Location[]>(
             this.baseURL +
                 '/geoLocation/countryCode-levelCode/' +
