@@ -19,6 +19,7 @@
           <span class="ml-2">Agregar</span>
         </div>
       </button>
+     
     </div>
     <div class="flex items-end">
       <div class="relative flex-grow:3 focus-within:z-10">
@@ -46,32 +47,28 @@
       <table class="border-collapse w-full table-auto mt-4">
         <thead>
           <tr>
-            <th class="px-4 py-2">Tipo Documento</th>
             <th class="px-4 py-2">N° Documento</th>
             <th class="px-4 py-2">Nombre</th>
-            <th class="px-4 py-2">Apellido</th>
-            <th class="px-4 py-2">Genero</th>
+            <th class="px-4 py-2">Telefono</th>
             <th class="px-4 py-2">Fecha Nacimiento</th>
+            <th class="px-4 py-2">Género</th>
             <th class="px-4 py-2">Email</th>
-            <th class="px-4 py-2">Rol</th>
-            <th class="px-4 py-2">Estado</th>
-            <th class="px-4 py-2">Creacion</th>
-            <th class="px-4 py-2">Modificacion</th>
+            <th class="px-4 py-2">Dirección</th>
+            <th class="px-4 py-2">Creación</th>
+            <th class="px-4 py-2">Modificación</th>
             <th class="px-4 py-2">Acciones</th> <!-- Columna para los botones de acciones -->
           </tr>
         </thead>
         <tbody>
           <tr *ngIf="cliente"
             class="cursor-pointer hover:bg-blue-300 text-sm">
-            <td class="border px-4 py-2 text-center">{{ cliente.typeDocumentId }}</td>
-            <td class="border px-4 py-2 text-center">{{ cliente.documentId }}</td>
-            <td class="border px-4 py-2 text-center">{{ cliente.firstName }}</td>
-            <td class="border px-4 py-2 text-center">{{ cliente.lastName }}</td>
-            <td class="border px-4 py-2 text-center">{{ cliente.gender }}</td>
+            <td class="border px-4 py-2 text-center">{{ cliente.documentId}}</td>
+            <td class="border px-4 py-2 text-center">{{ cliente.firstName + ' ' + cliente.lastName }}</td>
+            <td class="border px-4 py-2 text-center">{{ cliente.phoneNumbers[0].phoneNumber }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.birthDate | date:'yyyy/MM/dd' }}</td>
+            <td class="border px-4 py-2 text-center">{{ cliente.gender }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.emailAddress }}</td>
-            <td class="border px-4 py-2 text-center">{{ cliente.role }}</td>
-            <td class="border px-4 py-2 text-center">{{ cliente.state }}</td>
+            <td class="border px-4 py-2 text-center">{{ cliente.addresses[0].line1 + ' y ' + cliente.addresses[0].line2 }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.creationDate | date:'short' }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.lastModifiedDate | date:'short' }}</td>
             <td class="border px-4 py-2 text-center">
@@ -92,7 +89,9 @@
                       d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                   </svg>
                 </button>
+                
               </div>
+                
             </td>
           </tr>
         </tbody>

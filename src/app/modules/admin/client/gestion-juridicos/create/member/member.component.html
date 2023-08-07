@@ -1,0 +1,24 @@
+<div class="container mx-auto mt-5 bg-white w-full">
+    <div class="max-w-md mx-auto">
+      <h4 class="text-center text-lg font-bold">Crear Telefonos</h4>
+      <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+        <!-- Agregar campo oculto isDefault siempre con valor true -->
+
+
+
+        <div class="mb-3">
+          <label for="groupRole" class="block text-sm font-medium text-gray-700">Añadir Miembro:</label>
+          <input type="text" class="form-input mt-1 block w-full" id="groupRole"
+                 name="groupRole" placeholder="Ingrese el rol del miembro seleccionado " autocomplete="off"
+                 [(ngModel)]="groupRole">
+        </div>
+        <button class="bg-green-500 text-white font-bold py-2 px-4 w-full mb-3" [disabled]="!f.valid">
+          <i class="far fa-edit"></i> Guardar
+        </button>
+        <button class="bg-blue-500 text-white font-bold py-2 px-4 w-full" routerLink="../../">
+          <i class="fas fa-arrow-alt-circle-left"></i> Regresar
+        </button>
+      </form>
+    </div>
+  </div>
+

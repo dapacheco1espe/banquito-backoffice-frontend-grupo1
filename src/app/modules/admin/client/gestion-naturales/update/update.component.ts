@@ -22,12 +22,12 @@ export class UpdateComponent implements OnInit {
       private router: Router,
       private activatedRoute: ActivatedRoute
     ) { }
-  
+
     ngOnInit(): void {
       this.getCliente();
-     
+
     }
-  
+
     onUpdate(): void {
       this.clienteService.update(this.typeDocumentId,this.documentId, this.cliente).subscribe(
         data => {
@@ -35,9 +35,9 @@ export class UpdateComponent implements OnInit {
             title: '¡Éxito!',
             text: 'El usuario se ha actualizado correctamente.',
             icon: 'success',
-            
+
           }).then(() => {
-            
+
             this.isSaved = true;
             this.errorMessage = null;
             // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
@@ -50,7 +50,7 @@ export class UpdateComponent implements OnInit {
             text: 'Error al guardar el usuario. Por favor, inténtalo nuevamente.',
             icon: 'error'
           });
-          
+
           this.isSaved = false;
           this.errorMessage = 'Error al guardar el usuario. Por favor, inténtalo nuevamente.';
         }
@@ -72,7 +72,7 @@ export class UpdateComponent implements OnInit {
       );
     }
 
-  
+
   }
 
 

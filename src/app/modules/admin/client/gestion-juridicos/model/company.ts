@@ -1,5 +1,7 @@
+import { CompanyMember } from "./companyMember";
+
 export class Company {
-    uniqueKey!: String;
+    uniqueKey: String;
     branchId: String;
     locationId: String;
     groupName: String;
@@ -13,6 +15,7 @@ export class Company {
     comments: String;
     creationDate: String;
     lastModifiedDate: String;
+    companyMembers : CompanyMember
 
   
     constructor(
@@ -30,6 +33,7 @@ export class Company {
       comments: String,
       creationDate: String,
       lastModifiedDate: String,
+      companyMembers : CompanyMember
     ) {
       this.branchId = branchId;
       this.locationId = locationId;
@@ -45,6 +49,7 @@ export class Company {
       this.comments = comments;
       this.creationDate = creationDate;
       this.lastModifiedDate = lastModifiedDate;
+      this.companyMembers = companyMembers;
 
     }
   }

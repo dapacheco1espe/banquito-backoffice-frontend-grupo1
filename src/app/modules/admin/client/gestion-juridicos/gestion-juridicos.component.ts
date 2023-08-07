@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, FormsModule } from "@angular/forms";
 import {Company} from "./model/company";
 import {CompanyService} from "app/services/companyService";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-gestion-juridicos',
@@ -15,105 +15,55 @@ import { Router } from "@angular/router";
   animations: fuseAnimations
 })
 export class GestionJuridicosComponent implements OnInit {
-  title = 'data-table';
-  searchTerm: string = '';
-  filteredData: any[] = [];
-  selectedRowIndex: number = -1;
-  showButtons: boolean = false;
-  showNav: boolean = false;
-  currentPage: number = 1;
-  pageSize: number = 10;
-  dataUrl: any[] = [];
-  company: Company[] = [];
-  filteredCompany: Company[] = [];
-  searchForm: FormGroup;
- 
-  isSaved: boolean | null = null;
-  errorMessage: string | null = null;
-  constructor(private clienteService: CompanyService
-    ) {
-    this.clienteService.list().subscribe(
-      (data: Company[]) => {
-        console.log(data);
-        this.company = data;
-      },
-      (err: any) => {
-        // Manejar errores si es necesario
-      }
-    );
-    
-  }
+  company: Company | undefined;
+  groupName!: String;
+  constructor(
+    private companyService: CompanyService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
- 
-  
+    this.getCompany();
   }
 
-  getCliente(): void {
-    this.clienteService.list().subscribe(
-      data => {
+  getCompany(): void {
+    this.companyService.detail(this.groupName).subscribe(
+      (data) => {
         this.company = data;
+        console.log(this.company);
       },
-      err => {
-        
+      (err) => {
+        // Mostrar mensaje de error con SweetAlert
       }
     );
   }
-
-  filterData() {
-    console.log(this.filteredData);
-    this.filteredData = this.company.filter(
-      (item) =>
-        item.uniqueKey.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.groupName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.emailAddress.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.phoneNumber.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.line1.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.line2.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.latitude.toFixed().toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.longitude.toFixed().toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.state.toLowerCase().includes(this.searchTerm.toLowerCase())
+  buscarCliente(): void {
+    this.companyService.detail(this.groupName).subscribe(
+      (data) => {
+        this.company = data;
+        console.log(this.company);
+  
+        // Mostrar mensaje de éxito con SweetAlert
+        Swal.fire({
+          icon: 'success',
+          title: 'Compañia encontrada',
+          text: 'La información de la compañia ha sido cargada correctamente.',
+          confirmButtonText: 'Aceptar',
+        });
+      },
+      (err) => {
+        // Mostrar mensaje de error con SweetAlert
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'La compañia no pudo ser encontrado.',
+          confirmButtonText: 'Aceptar',
+        });
+  
+        this.router.navigate(['/gestion/gestion-juridicos']);
+      }
     );
-    this.showButtons = false;
-  }
-
-  rowClick(index: number) {
-    this.selectedRowIndex = index;
-    this.showButtons = true;
-    console.log(this.selectedRowIndex);
-  }
-
-  get displayedData(): any[] {
-    const startIndex = (this.currentPage - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    return this.company.filter(
-      (item) =>
-        item.groupName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.emailAddress.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.phoneNumber.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.line1.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.line2.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.latitude.toFixed().toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.longitude.toFixed().toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        item.state.toLowerCase().includes(this.searchTerm.toLowerCase())
-    )
-      .slice(startIndex, endIndex);
-  }
-
-  get totalPages(): number[] {
-    console.log(
-      Array(Math.ceil(this.company.length / this.pageSize))
-        .fill(0)
-        .map((_, i) => i + 1)
-    );
-
-    return Array(Math.ceil(this.company.length / this.pageSize))
-      .fill(0)
-      .map((_, i) => i + 1);
-  }
-
-  setCurrentPage(page: number) {
-    this.currentPage = page;
   }
   
 

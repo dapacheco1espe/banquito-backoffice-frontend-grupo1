@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { CreateRoutingModule } from './create-routing.module';
 import { CreateComponent } from './create.component';
 import { FormsModule } from '@angular/forms';
+import { UpdatememberComponent } from './updatemember/updatemember.component';
 
 
 @NgModule({
   declarations: [
-    CreateComponent
+    CreateComponent,
+    UpdatememberComponent
   ],
   imports: [
     CommonModule, FormsModule,

@@ -41,8 +41,31 @@ component: GestionComponent
   {
     path: 'create-juridicos',
     loadChildren: () => import('app/modules/admin/client/gestion-juridicos/create/create.module') .then(m => m.CreateModule),
-  }
- 
+  },
+  {
+    path: 'update-juridicos',
+    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/update/update.module') .then(m => m.UpdateModule),
+  },
+  {
+    path: 'delete-juridicos',
+    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/delete/delete.module') .then(m => m.DeleteModule),
+  },
+  {
+    path: 'create-phone',
+    loadChildren: () => import('app/modules/admin/client/gestion-naturales/create/phone/phone.module') .then(m => m.PhoneModule),
+  },
+  {
+    path: 'create-address',
+    loadChildren: () => import('app/modules/admin/client/gestion-naturales/create/address/address.module') .then(m => m.AddressModule),
+  },
+  {
+    path: 'create-member',
+    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/create/member/member.module') .then(m => m.MemberModule),
+  },
+  {
+    path: 'update-member',
+    loadChildren: () => import('app/modules/admin/client/gestion-juridicos/create/updatemember/updatemember.module') .then(m => m.UpdatememberModule),
+  },
   
   
 ];

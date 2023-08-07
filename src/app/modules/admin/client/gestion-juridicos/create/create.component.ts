@@ -4,6 +4,7 @@ import { CompanyService } from 'app/services/companyService';
 import { Company } from '../model/company';
 
 import Swal from 'sweetalert2';
+import { CompanyMember } from '../model/companyMember';
 
 @Component({
   selector: 'app-create',
@@ -24,6 +25,7 @@ export class CreateComponent implements OnInit {
   comments: String;
   creationDate: String;
   lastModifiedDate: String;
+  companyMembers : CompanyMember;
   state: String;
   isSaved: boolean | null = null;
   errorMessage: string | null = null;
@@ -39,7 +41,7 @@ export class CreateComponent implements OnInit {
   onCreate(): void {
     
 
-  const company = new Company(this.branchId,this.locationId,this.uniqueKey,this.groupName,this.emailAddress,this.phoneNumber,this.line1,this.line2,this.latitude,this.longitude,this.comments,this.creationDate,this.lastModifiedDate,this.state);
+  const company = new Company(this.branchId,this.locationId,this.uniqueKey,this.groupName,this.emailAddress,this.phoneNumber,this.line1,this.line2,this.latitude,this.longitude,this.comments,this.creationDate,this.lastModifiedDate,this.state,this.companyMembers);
 
     this.companyService.create(company).subscribe(
       data => {
@@ -51,7 +53,7 @@ export class CreateComponent implements OnInit {
           this.isSaved = true;
           this.errorMessage = null;
           // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
-          this.router.navigate(['/gestion/gestion-juridicos']);
+          this.router.navigate(['/gestion/gestion-juridicos/createRole/'+this.groupName]);
         });
       },
       err => {
