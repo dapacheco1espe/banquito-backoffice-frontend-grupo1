@@ -44,13 +44,100 @@ const routes: Routes = [
             ),
     },
     // Gestion Module
-    // {
-    //     path: 'gestion',
-    //     loadChildren: () =>
-    //         import('app/modules/admin/gestion/gestion.module').then(
-    //             (m) => m.GestionModule
-    //         ),
-    // },
+    {
+        path: 'gestion',
+        loadChildren: () =>
+            import('app/modules/admin/gestion/gestion.module').then(
+                (m) => m.GestionModule
+            ),
+    },
+
+    {
+        path: 'gestion-naturales',
+        loadChildren: () =>
+            import(
+                'app/modules/admin/client/gestion-naturales/gestion-naturales.module'
+            ).then((m) => m.GestionNaturalesModule),
+    },
+    {
+        path: 'gestion-juridicos',
+        loadChildren: () =>
+            import(
+                'app/modules/admin/client/gestion-juridicos/gestion-juridicos.module'
+            ).then((m) => m.GestionJuridicosModule),
+    },
+
+    {
+        path: 'create-naturales',
+        loadChildren: () =>
+            import(
+                'app/modules/admin/client/gestion-naturales/create/create.module'
+            ).then((m) => m.CreateModule),
+    },
+
+    {
+        path: 'edit-naturales',
+        loadChildren: () =>
+            import(
+                'app/modules/admin/client/gestion-naturales/update/update.module'
+            ).then((m) => m.UpdateModule),
+    },
+    {
+        path: 'delete-naturales',
+        loadChildren: () =>
+            import(
+                'app/modules/admin/client/gestion-naturales/delete/delete.module'
+            ).then((m) => m.DeleteModule),
+    },
+    {
+        path: 'create-juridicos',
+        loadChildren: () =>
+            import(
+                'app/modules/admin/client/gestion-juridicos/create/create.module'
+            ).then((m) => m.CreateModule),
+    },
+    {
+        path: 'update-juridicos',
+        loadChildren: () =>
+            import(
+                'app/modules/admin/client/gestion-juridicos/update/update.module'
+            ).then((m) => m.UpdateModule),
+    },
+    {
+        path: 'delete-juridicos',
+        loadChildren: () =>
+            import(
+                'app/modules/admin/client/gestion-juridicos/delete/delete.module'
+            ).then((m) => m.DeleteModule),
+    },
+    {
+        path: 'create-phone',
+        loadChildren: () =>
+            import(
+                'app/modules/admin/client/gestion-naturales/create/phone/phone.module'
+            ).then((m) => m.PhoneModule),
+    },
+    {
+        path: 'create-address',
+        loadChildren: () =>
+            import(
+                'app/modules/admin/client/gestion-naturales/create/address/address.module'
+            ).then((m) => m.AddressModule),
+    },
+    {
+        path: 'create-member',
+        loadChildren: () =>
+            import(
+                'app/modules/admin/client/gestion-juridicos/create/member/member.module'
+            ).then((m) => m.MemberModule),
+    },
+    {
+        path: 'update-member',
+        loadChildren: () =>
+            import(
+                'app/modules/admin/client/gestion-juridicos/create/updatemember/updatemember.module'
+            ).then((m) => m.UpdatememberModule),
+    },
 ];
 
 @NgModule({

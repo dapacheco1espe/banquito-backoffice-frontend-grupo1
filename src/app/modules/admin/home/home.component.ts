@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    public navigateToPages(page: 'admin-management') {
+    public navigateToPages(page: 'admin-management' | 'gestion') {
         this.router.navigateByUrl(`/admin/${page}`);
     }
 }
