@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
-import { Geostructure } from 'app/modules/admin/geostructure/geostructure-model/geostructure';
+import { Geostructure } from 'app/modules/admin/client/geostructure/geostructure-model/geostructure';
 
 @Injectable({
     providedIn: 'root',
