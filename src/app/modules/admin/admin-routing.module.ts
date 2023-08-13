@@ -43,9 +43,9 @@ const routes: Routes = [
                 (m) => m.LocationModule
             ),
     },
-        // Cuentas
+        // Gestion Cuentas
         {
-            path: 'cuentas',
+            path: 'gestion-cuentas',
             loadChildren: () =>
                 import('app/modules/admin/client/gestion-cuentas/gestion-cuentas.module').then(
                     (m) => m.GestionCuentasModule
