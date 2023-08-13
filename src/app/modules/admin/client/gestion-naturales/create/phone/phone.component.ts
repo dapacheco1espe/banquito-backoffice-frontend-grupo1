@@ -82,7 +82,18 @@ export class PhoneComponent implements OnInit {
     //   );
     //}
 
+    addAnotherPhone(): void {
+      const phoneObject: ClientePhone = new ClientePhone(this.phoneType, this.phoneNumber, true);
+      this.phoneArray.push(phoneObject);
+      this.phoneType = ''; // Limpiar el tipo de teléfono después de agregar
+      this.phoneNumber = ''; // Limpiar el número de teléfono después de agregar
 
+      Swal.fire({
+        title: '¡Éxito!',
+        text: 'Teléfono agregado correctamente.',
+        icon: 'success'
+      });
+    }
 
 
 
