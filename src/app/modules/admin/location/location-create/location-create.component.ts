@@ -6,6 +6,7 @@ import {
 } from '../../geostructure/geostructure-model/geostructure';
 import Swal from 'sweetalert2';
 import { LocationService } from 'app/services/location.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-location-create',
@@ -26,8 +27,11 @@ export class LocationCreateComponent implements OnInit {
     levels: GeostructureLevel[] = [];
     elements: any[] = [];
 
+    highLevel: Boolean;
+
     selectedPais: string = '';
     selectedLevel: number = 0;
+    parentLevel: number = 0;
     selectedElement: string = '';
 
     isSaved: boolean | null = null;
@@ -35,7 +39,8 @@ export class LocationCreateComponent implements OnInit {
 
     constructor(
         private geostructureService: GeostructureService,
-        private locationService: LocationService
+        private locationService: LocationService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -64,16 +69,42 @@ export class LocationCreateComponent implements OnInit {
 
         const anyLocation = {
             countryCode: this.selectedPais,
-            levelParentId: this.selectedLevel,
-            levelParentName: this.selectedElement,
-            levelCode: this.selectedLevel,
-            levelName: 'parroquia',
+            levelParentId: this.levelParentId,
+            levelParentName: this.levelParentName,
+            levelCode: this.levelCode,
+            levelName: this.levelName,
             name: this.name,
             areaPhoneCode: this.areaPhoneCode,
             zipCode: this.zipCode,
         };
 
-        console.log(anyLocation);
+        //console.log(anyLocation);
+
+        this.locationService.create(anyLocation).subscribe(
+            (data) => {
+                console.log('Hola');
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: 'La nueva localización se ha guardado correctamente.',
+                    icon: 'success',
+                }).then(() => {
+                    this.isSaved = true;
+                    this.errorMessage = null;
+                    // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
+                    this.router.navigate(['/admin/location']);
+                });
+            },
+            (err) => {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Error al guardar localización. Por favor, inténtalo nuevamente.',
+                    icon: 'error',
+                });
+                this.isSaved = false;
+                this.errorMessage =
+                    'Error al guardar la localización. Por favor, inténtalo nuevamente.';
+            }
+        );
     }
 
     onSelectPais(pais: string) {
@@ -84,19 +115,24 @@ export class LocationCreateComponent implements OnInit {
     }
 
     onSelectLevel(level: any) {
-        this.selectedLevel = null;
+        //this.selectedLevel = null;
         this.elements = [];
         console.log('level', level);
-        this.selectedLevel = level - 1;
-        console.log('selectedLevel', this.selectedLevel);
-        if (this.selectedLevel > 0) {
+        this.levelCode = level.levelCode;
+        this.levelName = level.name;
+        this.parentLevel = this.levelCode - 1;
+        console.log('parentLevel', this.parentLevel);
+        if (this.parentLevel > 0) {
+            this.highLevel = false;
             this.locationService
-                .list(this.selectedPais, this.selectedLevel)
+                .list(this.selectedPais, this.parentLevel)
                 .subscribe((data) => {
                     console.log('pronz', data);
                     this.elements = data;
                     console.log(this.elements);
                 });
+        } else if (this.parentLevel === 0) {
+            this.highLevel = true;
         }
     }
 
@@ -118,6 +154,8 @@ export class LocationCreateComponent implements OnInit {
     getElementProperties(elementUuid: any) {
         this.geostructureService.getGeoById(elementUuid).subscribe((data) => {
             console.log('data getGeoById', data);
+            this.levelParentId = this.parentLevel;
+            this.levelParentName = data.name;
         });
     }
 
