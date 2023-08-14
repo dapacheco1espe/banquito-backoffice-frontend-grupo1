@@ -8,7 +8,7 @@ import { Location } from 'app/modules/admin/client/location/location-model/locat
     providedIn: 'root',
 })
 export class LocationService {
-    private baseURL = environment.apiResrURL;
+    private baseURL = environment.apiResrURL1;
     constructor(private http: HttpClient) {}
 
     public list(countryCode: any, level: any): Observable<Location[]> {
@@ -20,4 +20,10 @@ export class LocationService {
                 level
         );
     }
+    public listAllLocations(): Observable<Location[]> {
+        return this.http.get<Location[]>(
+            this.baseURL + '/api/v1/geoLocation/countryCode-levelCode/ECU/1'
+        );
+    }
+   
 }
