@@ -43,6 +43,14 @@ const routes: Routes = [
                 (m) => m.LocationModule
             ),
     },
+    //Holiday Module
+    {
+        path: 'holiday',
+        loadChildren: () =>
+            import('app/modules/admin/holiday/holiday.module').then(
+                (m) => m.HolidayModule
+            ),
+    },
     // Gestion Module
     {
         path: 'gestion',
