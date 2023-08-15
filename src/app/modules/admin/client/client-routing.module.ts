@@ -78,6 +78,14 @@ component: GestionComponent
     path: 'location',
     loadChildren: () => import('app/modules/admin/client/location/location.module') .then(m => m.LocationModule),
   },
+  // Gestion Cuentas
+  {
+            path: 'create-cuentas',
+            loadChildren: () =>
+                import('app/modules/admin/client/gestion-cuentas/create/create.module').then(
+                    (m) => m.CreateModule
+                ),
+  },
 
   
   
