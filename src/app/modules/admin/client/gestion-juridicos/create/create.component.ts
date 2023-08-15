@@ -5,6 +5,11 @@ import { Company } from '../model/company';
 
 import Swal from 'sweetalert2';
 import { CompanyMember } from '../model/companyMember';
+import { Agency } from '../../agency/agency-model/agency';
+import { Location } from '../../location/location-model/location';
+import { AgencyService } from 'app/services/agency.service';
+import { LocationService } from 'app/services/location.service';
+
 
 @Component({
   selector: 'app-create',
@@ -27,15 +32,34 @@ export class CreateComponent implements OnInit {
   lastModifiedDate: String;
   companyMembers : CompanyMember;
   state: String;
+  agencias:Agency[]=[];
+  locaciones:Location[]=[];
   isSaved: boolean | null = null;
   errorMessage: string | null = null;
 
   constructor(
     private companyService: CompanyService,
-    private router: Router
+    private router: Router,
+    private agencyService:AgencyService,
+    private locationService:LocationService
+
+
   ) { }
 
   ngOnInit(): void {
+
+    this.agencyService.listAllAgencies().subscribe(
+      (response)=>{
+          this.agencias=response;
+      }
+  );
+
+  this.locationService.listAllLocations().subscribe(
+    (response)=>{
+        this.locaciones=response;
+    }
+);
+
   }
 
   onCreate(): void {

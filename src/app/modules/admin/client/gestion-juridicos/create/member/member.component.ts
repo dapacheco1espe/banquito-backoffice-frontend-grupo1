@@ -45,7 +45,7 @@ export class MemberComponent implements OnInit {
         (data) => {
           Swal.fire({
             title: '¡Éxito!',
-            text: 'La informacion telefonica ha sido guardada correctamente.',
+            text: 'Miembro agregado correctamente.',
             icon: 'success',
 
           }).then(() => {
@@ -59,12 +59,12 @@ export class MemberComponent implements OnInit {
         (err) => {
           Swal.fire({
             title: 'Error',
-            text: 'Error al guardar la informacion telefonica. Por favor, inténtalo nuevamente.',
+            text: 'Error al guardar el miembro. Por favor, inténtalo nuevamente.',
             icon: 'error'
           });
 
           this.isSaved = false;
-          this.errorMessage = 'Error al la informacion telefonica. Por favor, inténtalo nuevamente.';
+          this.errorMessage = 'Error al guardar la informacion. Por favor, inténtalo nuevamente.';
         }
       );
     }
