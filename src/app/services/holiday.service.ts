@@ -20,4 +20,14 @@ export class HolidayService {
     public create(holiday: any): Observable<any> {
         return this.http.post<any>(this.baseURL + '/holiday/create', holiday);
     }
+
+    public detail(uuid: any): Observable<Holiday> {
+        return this.http.get<Holiday>(
+            this.baseURL + '/holiday/findByUuid/' + uuid
+        );
+    }
+
+    public update(uuid: any, holiday: any): Observable<any> {
+        return this.http.put(this.baseURL + '/holiday/update/' + uuid, holiday);
+    }
 }

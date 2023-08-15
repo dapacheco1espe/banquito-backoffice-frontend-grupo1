@@ -14,9 +14,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HolidayCreateComponent } from './holiday-create/holiday-create.component';
+import { HolidayUpdateComponent } from './holiday-update/holiday-update.component';
+import { HolidayDetailComponent } from './holiday-detail/holiday-detail.component';
 
 @NgModule({
-    declarations: [HolidayComponent, HolidayCreateComponent],
+    declarations: [HolidayComponent, HolidayCreateComponent, HolidayUpdateComponent, HolidayDetailComponent],
     imports: [
         SharedModule,
         HolidayRoutingModule,

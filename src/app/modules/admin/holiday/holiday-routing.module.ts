@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HolidayComponent } from './holiday.component';
 import { HolidayCreateComponent } from './holiday-create/holiday-create.component';
+import { HolidayUpdateComponent } from './holiday-update/holiday-update.component';
+import { HolidayDetailComponent } from './holiday-detail/holiday-detail.component';
 
 const routes: Routes = [
     {
@@ -9,8 +11,8 @@ const routes: Routes = [
         component: HolidayComponent,
     },
     { path: 'create', component: HolidayCreateComponent },
-    // { path: 'detail/:id', component: AgencyDetailComponent },
-    // { path: 'update/:id/:prov/:cant', component: AgencyUpdateComponent },
+    { path: 'detail/:uuid', component: HolidayDetailComponent },
+    { path: 'update/:uuid', component: HolidayUpdateComponent },
 ];
 
 @NgModule({
