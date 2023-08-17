@@ -49,7 +49,7 @@
           <tr>
             <th class="px-4 py-2">N° Documento</th>
             <th class="px-4 py-2">Nombre</th>
-            <th class="px-4 py-2">Telefono</th>
+            <th class="px-4 py-2">Telefonos</th>
             <th class="px-4 py-2">Fecha Nacimiento</th>
             <th class="px-4 py-2">Género</th>
             <th class="px-4 py-2">Email</th>
@@ -64,7 +64,7 @@
             class="cursor-pointer hover:bg-blue-300 text-sm">
             <td class="border px-4 py-2 text-center">{{ cliente.documentId}}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.firstName + ' ' + cliente.lastName }}</td>
-            <td class="border px-4 py-2 text-center">{{ cliente.phoneNumbers[0].phoneNumber }}</td>
+            <td class="border px-4 py-2 text-center"><div *ngFor="let item of cliente.phoneNumbers">{{item.phoneNumber}} </div></td>
             <td class="border px-4 py-2 text-center">{{ cliente.birthDate | date:'yyyy/MM/dd' }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.gender }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.emailAddress }}</td>
