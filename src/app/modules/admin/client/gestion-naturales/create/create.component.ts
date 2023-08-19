@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { ClienteService } from 'app/services/clienteService';
 import { Cliente, clienteAddress, clientePhone } from '../model/cliente';
 import Swal from 'sweetalert2';
+import { Agency } from '../../agency/agency-model/agency';
+import { AgencyService } from 'app/services/agency.service';
 
 @Component({
   selector: 'app-create',
@@ -21,22 +23,30 @@ export class CreateComponent implements OnInit {
   creationDate!: Date;
   activationDate!: Date;
   lastModifiedDate!: Date;
-  role!: String;
+  role: String = 'BEN';
   state!: String;
   closedDate!: Date;
   comments!: String;
   phoneNumbers: clientePhone;
   addresses : clienteAddress;
-
+  agencias:Agency[]=[];
   isSaved: boolean | null = null;
   errorMessage: string | null = null;
 
   constructor(
     private clienteService: ClienteService,
-    private router: Router
+    private router: Router,
+    private agencyService:AgencyService
   ) { }
 
   ngOnInit(): void {
+
+    this.agencyService.listAllAgencies().subscribe(
+      (response)=>{
+          this.agencias=response;
+      }
+  );
+  console.log(this.agencias);
   }
 
   onCreate(): void {
@@ -50,7 +60,6 @@ export class CreateComponent implements OnInit {
       !this.gender ||
       !this.birthDate ||
       !this.emailAddress ||
-      !this.role ||
       !this.comments
     ) {
       Swal.fire({
@@ -84,7 +93,7 @@ export class CreateComponent implements OnInit {
     // Si todos los campos son válidos, procedemos a crear el cliente
     const cliente = new Cliente(this.branchId, this.typeDocumentId, this.documentId, this.firstName, this.lastName,
       this.gender, this.birthDate, this.emailAddress, this.role, this.comments, this.phoneNumbers, this.addresses);
-
+      console.log(cliente)
     this.clienteService.create(cliente).subscribe(
       data => {
         Swal.fire({

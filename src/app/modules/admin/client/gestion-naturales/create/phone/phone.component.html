@@ -21,11 +21,14 @@
                  [(ngModel)]="phoneNumber">
         </div>
         <button class="bg-green-500 text-white font-bold py-2 px-4 w-full mb-3" [disabled]="!f.valid">
-          <i class="far fa-edit"></i> Actualizar
+          <i class="far fa-edit"></i> Agregar Dirección
         </button>
         <button class="bg-blue-500 text-white font-bold py-2 px-4 w-full" routerLink="../../">
           <i class="fas fa-arrow-alt-circle-left"></i> Regresar
         </button>
       </form>
+      <button class="bg-indigo-500 text-white font-bold py-2 px-4 w-full mt-3" (click)="addAnotherPhone()">
+        <i class="fas fa-plus-circle"></i> Agregar Otro Teléfono
+      </button>
     </div>
   </div>

@@ -8,7 +8,7 @@ import { Geostructure } from 'app/modules/admin/client/geostructure/geostructure
     providedIn: 'root',
 })
 export class GeostructureService {
-    private baseURL = environment.apiResrURL;
+    private baseURL = environment.apiResrURL + '/api/v1';
     constructor(private http: HttpClient) {}
 
     public list(): Observable<Geostructure[]> {
@@ -23,8 +23,8 @@ export class GeostructureService {
         );
     }
 
-    public getGeoById(uuid: string): Observable<Geolocation> {
-        return this.http.get<Geolocation>(
+    public getGeoById(uuid: string): Observable<any> {
+        return this.http.get<any>(
             this.baseURL + '/geoLocation/findByUuid/' + uuid
         );
     }

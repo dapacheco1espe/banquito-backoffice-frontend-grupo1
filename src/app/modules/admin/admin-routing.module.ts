@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     // Home Module
@@ -41,6 +40,14 @@ const routes: Routes = [
         loadChildren: () =>
             import('app/modules/admin/location/location.module').then(
                 (m) => m.LocationModule
+            ),
+    },
+    //Holiday Module
+    {
+        path: 'holiday',
+        loadChildren: () =>
+            import('app/modules/admin/holiday/holiday.module').then(
+                (m) => m.HolidayModule
             ),
     },
         // Gestion Cuentas
