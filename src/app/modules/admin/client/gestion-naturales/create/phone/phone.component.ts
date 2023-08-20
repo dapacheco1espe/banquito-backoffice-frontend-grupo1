@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteService } from 'app/services/clienteService';
 import { Cliente } from '../../model/cliente';
 import Swal from 'sweetalert2';
 import { ClientePhone } from '../../model/clientePhone';
-
 
 @Component({
   selector: 'app-phone',
@@ -12,89 +12,101 @@ import { ClientePhone } from '../../model/clientePhone';
   styleUrls: ['./phone.component.scss']
 })
 export class PhoneComponent implements OnInit {
-
-  typeDocumentId: string = this.activatedRoute.snapshot.params['typeDocumentId'];
-  documentId: string = this.activatedRoute.snapshot.params['documentId'];
+  phoneForm: FormGroup;
+  typeDocumentId: string;
+  documentId: string;
   isSaved: boolean | null = null;
-  phoneArray: ClientePhone[]=[];
-  phoneType!: string;
-  phoneNumber!: string;
-
-
+  phoneArray: ClientePhone[] = [];
   errorMessage: string | null = null;
   cliente!: Cliente;
-    constructor(
 
-      private clienteService: ClienteService,
-      private router: Router,
-      private activatedRoute: ActivatedRoute
-    ) { }
 
-    ngOnInit(): void {
+  constructor(
+    private fb: FormBuilder,
+    private clienteService: ClienteService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.typeDocumentId = this.activatedRoute.snapshot.params['typeDocumentId'];
+    this.documentId = this.activatedRoute.snapshot.params['documentId'];
 
-     // this.getCliente();
-    }
+    this.phoneForm = this.fb.group({
+      phoneType: ['OFI', Validators.required],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$')]]
+    });
+  }
 
-    onUpdate(): void {
-        const phoneObject: ClientePhone=new ClientePhone(this.phoneType,this.phoneNumber,true);
-        this.phoneArray.push(phoneObject);
-        this.clienteService.createPhone(this.typeDocumentId,this.documentId, this.phoneArray).subscribe(
-        (data) => {
-          Swal.fire({
-            title: '¡Éxito!',
-            text: 'La informacion telefonica ha sido guardada correctamente.',
-            icon: 'success',
+  ngOnInit(): void {
+    this.getCliente();
+  }
 
-          }).then(() => {
+  onUpdate(): void {
+    const phoneObject: ClientePhone = new ClientePhone(
+      this.phoneForm.value.phoneType,
+      this.phoneForm.value.phoneNumber,
+      true
+      
+    );
+    this.phoneArray.push(phoneObject);
+    this.clienteService.createPhone(this.typeDocumentId, this.documentId, this.phoneArray).subscribe(
+      (data) => {
+        Swal.fire({
+          title: '¡Éxito!',
+          text: 'La información telefónica ha sido guardada correctamente.',
+          icon: 'success',
+        }).then(() => {
+          this.isSaved = true;
+          this.errorMessage = null;
+          // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
+          this.router.navigate(['/gestion/gestion-naturales/createAddress/' + this.typeDocumentId + '/' + this.documentId])
+        });
+      },
+      (err) => {
+        Swal.fire({
+          title: 'Error',
+          text: 'Error al guardar la información telefónica. Por favor, inténtalo nuevamente.',
+          icon: 'error',
+        });
 
-            this.isSaved = true;
-            this.errorMessage = null;
-            // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
-            this.router.navigate(['/gestion/gestion-naturales/createAddress/'+this.typeDocumentId+'/'+this.documentId])
-          });
-        },
-        (err) => {
-          Swal.fire({
-            title: 'Error',
-            text: 'Error al guardar la informacion telefonica. Por favor, inténtalo nuevamente.',
-            icon: 'error'
-          });
+        this.isSaved = false;
+        this.errorMessage = 'Error al guardar la información telefónica. Por favor, inténtalo nuevamente.';
+      }
+    );
+  }
 
-          this.isSaved = false;
-          this.errorMessage = 'Error al la informacion telefonica. Por favor, inténtalo nuevamente.';
-        }
+  addAnotherPhone(): void {
+    if (this.phoneForm.valid) {
+      const phoneObject: ClientePhone = new ClientePhone(
+        this.phoneForm.value.phoneType,
+        this.phoneForm.value.phoneNumber,
+        true
       );
-    }
-    // getCliente(): void {
-    //   console.log(this.activatedRoute.snapshot);
-    //   const typeDocumentId = this.activatedRoute.snapshot.params['typeDocumentId'];
-    //   const documentId = this.activatedRoute.snapshot.params['documentId'];
-    //   console.log(this.typeDocumentId, this.documentId);
-    //   this.clienteService.detail(typeDocumentId, documentId).subscribe(
-    //     (data) => {
-    //
-    //       this.cliente = data;
-    //       console.log(this.cliente);
-    //     },
-    //     (err) => {
-    //       this.router.navigate(['']);
-    //     }
-    //   );
-    //}
-
-    addAnotherPhone(): void {
-      const phoneObject: ClientePhone = new ClientePhone(this.phoneType, this.phoneNumber, true);
       this.phoneArray.push(phoneObject);
-      this.phoneType = ''; // Limpiar el tipo de teléfono después de agregar
-      this.phoneNumber = ''; // Limpiar el número de teléfono después de agregar
+      this.phoneForm.reset();
 
       Swal.fire({
         title: '¡Éxito!',
         text: 'Teléfono agregado correctamente.',
         icon: 'success'
       });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos incompletos o inválidos',
+        text: 'Faltan campos por llenar o algunos campos no son válidos.',
+      });
     }
-
-
-
+  }
+  getCliente(): void {
+   
+    this.clienteService.detail(this.typeDocumentId, this.documentId).subscribe(
+      data => {
+        this.cliente = data;
+        console.log(this.cliente);
+      },
+      err => {
+        this.router.navigate(['']);
+      }
+    );
+  }
 }

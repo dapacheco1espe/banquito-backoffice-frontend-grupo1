@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { GeostructureService } from 'app/services/geostructure.service';
+import { LocationService } from 'app/services/location.service';
+import Swal from 'sweetalert2';
 import {
     Geostructure,
     GeostructureLevel,
 } from '../../geostructure/geostructure-model/geostructure';
-import Swal from 'sweetalert2';
-import { LocationService } from 'app/services/location.service';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-location-create',
