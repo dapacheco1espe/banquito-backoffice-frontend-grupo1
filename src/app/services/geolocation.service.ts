@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
     providedIn: 'root',
 })
 export class GeolocationService {
-    private baseURL = environment.apiResrURL + '/api/v1' + '/geoLocation';
+    private baseURL =
+        environment.administrationAPIUrl + '/api/v1' + '/geoLocation';
     constructor(private http: HttpClient) {}
     public getGeoById(uuid: string): Observable<Geolocation> {
         return this.http.get<Geolocation>(this.baseURL + '/findByUuid/' + uuid);

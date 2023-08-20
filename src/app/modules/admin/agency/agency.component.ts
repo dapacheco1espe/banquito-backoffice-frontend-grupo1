@@ -30,6 +30,8 @@ export class AgencyComponent implements OnInit {
     selectedCanton: string = '';
     selectedParroquia: string = '';
 
+    showSearch: boolean = false;
+
     constructor(private agencyService: AgencyService, private router: Router) {}
 
     ngOnInit(): void {
@@ -43,6 +45,7 @@ export class AgencyComponent implements OnInit {
             console.log(data);
             this.agencies = data;
             console.log(this.agencies);
+            this.showSearch = true;
         });
     }
 
@@ -121,6 +124,7 @@ export class AgencyComponent implements OnInit {
     }
 
     onSelectProvincia(provincia: string) {
+        this.showSearch = false;
         console.log(provincia);
         this.selectedProvincia = provincia;
         this.selectedCanton = '';
@@ -130,6 +134,7 @@ export class AgencyComponent implements OnInit {
     }
 
     onSelectCanton(canton: string) {
+        this.showSearch = false;
         this.selectedCanton = canton;
         this.selectedParroquia = '';
         this.getParroquiasPorCanton(canton);

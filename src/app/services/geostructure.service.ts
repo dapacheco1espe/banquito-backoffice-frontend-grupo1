@@ -8,7 +8,7 @@ import { Geostructure } from 'app/modules/admin/client/geostructure/geostructure
     providedIn: 'root',
 })
 export class GeostructureService {
-    private baseURL = environment.apiResrURL + '/api/v1';
+    private baseURL = environment.administrationAPIUrl + '/api/v1';
     constructor(private http: HttpClient) {}
 
     public list(): Observable<Geostructure[]> {

@@ -8,7 +8,7 @@ import { Holiday } from 'app/modules/admin/holiday/holiday-model/holiday';
     providedIn: 'root',
 })
 export class HolidayService {
-    private baseURL = environment.apiResrURL + '/api/v1';
+    private baseURL = environment.administrationAPIUrl + '/api/v1';
     constructor(private http: HttpClient) {}
 
     public list(countryId: any): Observable<Holiday[]> {
