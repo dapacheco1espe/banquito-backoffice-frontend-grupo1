@@ -189,7 +189,9 @@ export class AgencyComponent implements OnInit {
                             'Listo',
                             'El registro ha sido deshabilitado',
                             'success'
-                        ).then(() => {});
+                        ).then(() => {
+                            this.router.navigate(['/admin/agency']);
+                        });
                     },
                     (err) => {
                         Swal.fire({

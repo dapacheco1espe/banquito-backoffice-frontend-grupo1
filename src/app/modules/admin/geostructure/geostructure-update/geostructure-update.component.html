@@ -33,10 +33,20 @@
                     disabled
                 />
                 <div
-                    *ngIf="f.submitted && f.controls.code.invalid"
+                    *ngIf="
+                        (f.submitted && f.controls.countryCode.invalid) ||
+                        (f.controls.countryCode.value &&
+                            f.controls.countryCode.invalid)
+                    "
                     class="text-red-500 text-xs italic"
                 >
                     Revisa el formato*
+                </div>
+                <div
+                    *ngIf="countryCode === ''"
+                    class="text-yellow-500 text-xs italic"
+                >
+                    Campo Obligatorio*
                 </div>
             </div>
             <div class="w-full md:w-1/2 px-1">
@@ -58,10 +68,20 @@
                     [(ngModel)]="phoneCode"
                 />
                 <div
-                    *ngIf="f.submitted && f.controls.code.invalid"
+                    *ngIf="
+                        (f.submitted && f.controls.phoneCode.invalid) ||
+                        (f.controls.phoneCode.value &&
+                            f.controls.phoneCode.invalid)
+                    "
                     class="text-red-500 text-xs italic"
                 >
                     Revisa el formato*
+                </div>
+                <div
+                    *ngIf="phoneCode === ''"
+                    class="text-yellow-500 text-xs italic"
+                >
+                    Campo Obligatorio*
                 </div>
             </div>
         </div>
@@ -75,8 +95,8 @@
                 </label>
                 <input
                     type="text"
-                    id="agencyName"
-                    name="agencyName"
+                    id="countryName"
+                    name="countryName"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     placeholder="Ecuador"
                     autocomplete="off"
@@ -84,9 +104,17 @@
                     [(ngModel)]="name"
                 />
                 <div
-                    *ngIf="f.submitted && f.controls.code.invalid"
+                    *ngIf="
+                        (f.controls.countryName.value &&
+                            f.controls.countryName.invalid) ||
+                        (f.submitted && f.controls.countryName.invalid)
+                    "
                     class="text-red-500 text-xs italic"
                 >
+                    Mínimo 5 caracteres, sin numeros, sin espacios vacios al
+                    final o principio y sin caracteres especiales*
+                </div>
+                <div *ngIf="name === ''" class="text-yellow-500 text-xs italic">
                     Campo Obligatorio*
                 </div>
             </div>

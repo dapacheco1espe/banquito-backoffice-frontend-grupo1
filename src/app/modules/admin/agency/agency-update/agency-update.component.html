@@ -64,7 +64,7 @@
                             </option>
                         </select>
                         <div
-                            *ngIf="f.submitted && f.controls.code.invalid"
+                            *ngIf="f.submitted && !selectedProvincia"
                             class="text-red-500 text-xs italic"
                         >
                             Campo Obligatorio*
@@ -86,7 +86,7 @@
                             </option>
                         </select>
                         <div
-                            *ngIf="f.submitted && f.controls.code.invalid"
+                            *ngIf="f.submitted && !selectedCanton"
                             class="text-red-500 text-xs italic"
                         >
                             Campo Obligatorio*
@@ -108,7 +108,7 @@
                             </option>
                         </select>
                         <div
-                            *ngIf="f.submitted && f.controls.code.invalid"
+                            *ngIf="f.submitted && !selectedParroquia"
                             class="text-red-500 text-xs italic"
                         >
                             Campo Obligatorio*
@@ -136,7 +136,10 @@
                     disabled
                 />
                 <div
-                    *ngIf="f.submitted && f.controls.code.invalid"
+                    *ngIf="
+                        (f.controls.code.value && f.controls.code.invalid) ||
+                        (f.submitted && f.controls.code.invalid)
+                    "
                     class="text-red-500 text-xs italic"
                 >
                     Revisa el formato*
@@ -162,9 +165,17 @@
                     [(ngModel)]="name"
                 />
                 <div
-                    *ngIf="f.submitted && f.controls.code.invalid"
+                    *ngIf="
+                        (f.controls.agencyName.value &&
+                            f.controls.agencyName.invalid) ||
+                        (f.submitted && f.controls.agencyName.invalid)
+                    "
                     class="text-red-500 text-xs italic"
                 >
+                    Mínimo 5 caracteres, sin numeros, sin espacios vacios al
+                    final o principio y sin caracteres especiales*
+                </div>
+                <div *ngIf="name === ''" class="text-yellow-500 text-xs italic">
                     Campo Obligatorio*
                 </div>
             </div>
@@ -189,10 +200,20 @@
                     [(ngModel)]="emailAddress"
                 />
                 <div
-                    *ngIf="f.submitted && f.controls.code.invalid"
+                    *ngIf="
+                        (f.controls.emailAddress.value &&
+                            f.controls.emailAddress.invalid) ||
+                        (f.submitted && f.controls.emailAddress.invalid)
+                    "
                     class="text-red-500 text-xs italic"
                 >
                     Revisa el formato*
+                </div>
+                <div
+                    *ngIf="emailAddress === ''"
+                    class="text-yellow-500 text-xs italic"
+                >
+                    Campo Obligatorio*
                 </div>
             </div>
             <div class="w-full md:w-1/2 px-1">
@@ -214,10 +235,20 @@
                     [(ngModel)]="phoneNumber"
                 />
                 <div
-                    *ngIf="f.submitted && f.controls.code.invalid"
+                    *ngIf="
+                        (f.controls.phoneNumber.value &&
+                            f.controls.phoneNumber.invalid) ||
+                        (f.submitted && f.controls.phoneNumber.invalid)
+                    "
                     class="text-red-500 text-xs italic"
                 >
                     Revisa el formato*
+                </div>
+                <div
+                    *ngIf="phoneNumber === ''"
+                    class="text-yellow-500 text-xs italic"
+                >
+                    Campo Obligatorio*
                 </div>
             </div>
         </div>
@@ -240,8 +271,17 @@
                     [(ngModel)]="line1"
                 />
                 <div
-                    *ngIf="f.submitted && f.controls.code.invalid"
+                    *ngIf="
+                        (f.controls.line1.value && f.controls.line1.invalid) ||
+                        (f.submitted && f.controls.line1.invalid)
+                    "
                     class="text-red-500 text-xs italic"
+                >
+                    Campo Obligatorio*
+                </div>
+                <div
+                    *ngIf="line1 === ''"
+                    class="text-yellow-500 text-xs italic"
                 >
                     Campo Obligatorio*
                 </div>
@@ -264,8 +304,17 @@
                     [(ngModel)]="line2"
                 />
                 <div
-                    *ngIf="f.submitted && f.controls.code.invalid"
+                    *ngIf="
+                        (f.controls.line2.value && f.controls.line2.invalid) ||
+                        (f.submitted && f.controls.line2.invalid)
+                    "
                     class="text-red-500 text-xs italic"
+                >
+                    Campo Obligatorio*
+                </div>
+                <div
+                    *ngIf="line2 === ''"
+                    class="text-yellow-500 text-xs italic"
                 >
                     Campo Obligatorio*
                 </div>
@@ -313,10 +362,20 @@
                     [(ngModel)]="latitude"
                 />
                 <div
-                    *ngIf="f.submitted && f.controls.code.invalid"
+                    *ngIf="
+                        (f.controls.latitude.value &&
+                            f.controls.latitude.invalid) ||
+                        (f.submitted && f.controls.latitude.invalid)
+                    "
                     class="text-red-500 text-xs italic"
                 >
                     Revisa el formato*
+                </div>
+                <div
+                    *ngIf="latitude === null"
+                    class="text-yellow-500 text-xs italic"
+                >
+                    Campo Obligatorio*
                 </div>
             </div>
             <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
@@ -337,10 +396,23 @@
                     [(ngModel)]="longitude"
                 />
                 <div
-                    *ngIf="f.submitted && f.controls.code.invalid"
+                    *ngIf="
+                        (f.controls.longitude.value &&
+                            f.controls.longitude.invalid) ||
+                        (f.submitted && f.controls.longitude.invalid)
+                    "
                     class="text-red-500 text-xs italic"
                 >
                     Revisa el formato*
+                </div>
+                <div
+                    *ngIf="
+                        longitude === null ||
+                        (longitude === null && f.submitted)
+                    "
+                    class="text-yellow-500 text-xs italic"
+                >
+                    Campo Obligatorio*
                 </div>
             </div>
         </div>
@@ -348,7 +420,6 @@
             <div class="flex items-center">
                 <button
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-3"
-                    [disabled]="!f.valid"
                 >
                     <div class="flex items-center">
                         <svg

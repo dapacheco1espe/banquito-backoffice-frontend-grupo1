@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
 import { GeostructureService } from 'app/services/geostructure.service';
 import { Geostructure } from './geostructure-model/geostructure';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,7 +21,10 @@ export class GeostructureComponent implements OnInit {
     currentPage: number = 1;
     pageSize: number = 5;
 
-    constructor(private geostructureService: GeostructureService) {}
+    constructor(
+        private geostructureService: GeostructureService,
+        private router: Router
+    ) {}
 
     ngOnInit(): void {
         this.getGeostructures();
@@ -117,7 +121,9 @@ export class GeostructureComponent implements OnInit {
                             'Listo',
                             'El registro ha sido deshabilitado',
                             'success'
-                        ).then(() => {});
+                        ).then(() => {
+                            this.router.navigate(['/admin/geostructure']);
+                        });
                     },
                     (err) => {
                         Swal.fire({
