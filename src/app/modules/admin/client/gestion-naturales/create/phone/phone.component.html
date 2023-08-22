@@ -8,6 +8,14 @@
         <input type="text" class="form-input mt-1 block w-full" id="firstName" name="name" [value]="cliente.firstName" placeholder="Ingrese el nombre" autocomplete="off"  formControlName="firstName" disabled>
       </div>
       <div class="mb-3">
+        <label for="name" class="block text-sm font-medium text-gray-700">Apellido:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="firstName" name="name" [value]="cliente.lastName" placeholder="Ingrese el nombre" autocomplete="off"  formControlName="firstName" disabled>
+      </div>
+      <div class="mb-3">
+        <label for="name" class="block text-sm font-medium text-gray-700">Cedula:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="firstName" name="name" [value]="cliente.documentId" placeholder="Ingrese el nombre" autocomplete="off"  formControlName="firstName" disabled>
+      </div>
+      <div class="mb-3">
         <label for="phoneType" class="block text-sm font-medium text-gray-700">Tipo Telefono:</label>
         <select id="phoneType" formControlName="phoneType" class="form-select mt-1 block w-full">
           <option value="OFI">Oficina</option>
