@@ -1,88 +1,101 @@
 <div class="flex w-full justify-center items-center h-screen bg-white">
   <div class="w-full max-w-md p-4 justify-center">
     <h4 class="text-center">Crear Compañia</h4>
-    <form (ngSubmit)="onCreate()" novalidate #f="ngForm">
+    <form [formGroup]="createForm" (ngSubmit)="onCreate()">
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label for="branchId" class="block mb-1">Sucursal:</label>
-          <select id="branchId" name="branchId" class="w-full border-gray-300 border p-2 rounded h-10"
-            [(ngModel)]="branchId" required>
+          <select formControlName="branchId" class="w-full border-gray-300 border p-2 rounded h-10" required>
             <option value="">Seleccione Sucursal</option>
-              <option *ngFor="let agencia of agencias"
-                      [value]="agencia.code"> {{agencia.name}}</option>
+            <option *ngFor="let agencia of agencias" [value]="agencia.code">{{agencia.name}}</option>
           </select>
+          <div *ngIf="createForm.get('branchId').invalid && (createForm.get('branchId').dirty || createForm.get('branchId').touched)"
+            class="text-red-500 mt-1">
+            Sucursal es requerida.
+          </div>
         </div>
         <div>
           <label for="locationId" class="block mb-1">Localización:</label>
-          <select id="locationId" name="locationId" class="w-full border-gray-300 border p-2 rounded h-10"
-            [(ngModel)]="locationId" required>
+          <select formControlName="locationId" class="w-full border-gray-300 border p-2 rounded h-10" required>
             <option value="">Seleccione Localización: </option>
-            <option *ngFor="let localizacion of locaciones"
-                      [value]="localizacion.uuid"> {{localizacion.name}}</option>
+            <option *ngFor="let localizacion of locaciones" [value]="localizacion.uuid">{{localizacion.name}}</option>
           </select>
-          
+          <div *ngIf="createForm.get('locationId').invalid && (createForm.get('locationId').dirty || createForm.get('locationId').touched)"
+            class="text-red-500 mt-1">
+            Localización es requerida.
+          </div>
         </div>
         <div>
           <label for="groupName" class="block mb-1">Nombre del grupo:</label>
-          <input type="text" id="groupName" name="groupName" class="w-full border-gray-300 border p-2 rounded h-10"
-            placeholder="Ingrese el nombre del grupo" autocomplete="off" required [(ngModel)]="groupName">
-          <div *ngIf="f.submitted && f.controls.groupName.invalid" class="text-red-500 mt-1">
+          <input type="text" formControlName="groupName"
+            class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Ingrese el nombre del grupo">
+          <div *ngIf="createForm.get('groupName').invalid && (createForm.get('groupName').dirty || createForm.get('groupName').touched)"
+            class="text-red-500 mt-1">
             Nombre del grupo es requerido.
           </div>
         </div>
         <div>
           <label for="emailAddress" class="block mb-1">Correo electrónico:</label>
-          <input type="email" id="emailAddress" name="emailAddress"
-            class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Ingrese el correo electrónico"
-            autocomplete="off" required [(ngModel)]="emailAddress">
-          <div *ngIf="f.submitted && f.controls.emailAddress.invalid" class="text-red-500 mt-1">
-            Correo electrónico es requerido y debe ser una dirección de correo válida.
+          <input type="email" formControlName="emailAddress"
+            class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Ingrese el correo electrónico">
+          <div *ngIf="createForm.get('emailAddress').invalid && (createForm.get('emailAddress').dirty || createForm.get('emailAddress').touched)"
+            class="text-red-500 mt-1">
+            <div *ngIf="createForm.get('emailAddress').hasError('required')">Correo electrónico es requerido.</div>
+            <div *ngIf="createForm.get('emailAddress').hasError('email')">Debe ser una dirección de correo válida.</div>
           </div>
         </div>
         <div>
           <label for="phoneNumber" class="block mb-1">Número de teléfono:</label>
-          <input type="text" id="phoneNumber" name="phoneNumber" class="w-full border-gray-300 border p-2 rounded h-10"
-            placeholder="Ingrese el número de teléfono" autocomplete="off" required [(ngModel)]="phoneNumber">
-          <div *ngIf="f.submitted && f.controls.phoneNumber.invalid" class="text-red-500 mt-1">
-            Número de teléfono es requerido.
+          <input type="text" formControlName="phoneNumber"
+            class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Ingrese el número de teléfono">
+          <div *ngIf="createForm.get('phoneNumber').invalid && (createForm.get('phoneNumber').dirty || createForm.get('phoneNumber').touched)"
+            class="text-red-500 mt-1">
+            Debe ser solo numeros.
           </div>
         </div>
         <div>
-          <label for="line1" class="block mb-1">Dirección línea 1:</label>
-          <input type="text" id="line1" name="line1" class="w-full border-gray-300 border p-2 rounded h-10"
-            placeholder="Ingrese la dirección línea 1" autocomplete="off" required [(ngModel)]="line1">
-          <div *ngIf="f.submitted && f.controls.line1.invalid" class="text-red-500 mt-1">
-            Dirección línea 1 es requerida.
+          <label for="line1" class="block mb-1">Calle Principal:</label>
+          <input type="text" formControlName="line1"
+            class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Ingrese Calle Principal">
+          <div *ngIf="createForm.get('line1').invalid && (createForm.get('line1').dirty || createForm.get('line1').touched)"
+            class="text-red-500 mt-1">
+            Calle Principal es requerida.
           </div>
         </div>
         <div>
-          <label for="line2" class="block mb-1">Dirección línea 2:</label>
-          <input type="text" id="line2" name="line2" class="w-full border-gray-300 border p-2 rounded h-10"
-            placeholder="Ingrese la dirección línea 2" autocomplete="off" [(ngModel)]="line2">
-        </div>
+          <label for="line2" class="block mb-1">Calle Secundaria:</label>
+          <input type="text" formControlName="line2"
+            class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Ingrese la Calle Secundaria">
+            <div *ngIf="createForm.get('line2').invalid && (createForm.get('line2').dirty || createForm.get('line2').touched)"
+            class="text-red-500 mt-1">
+            Calle Secundaria es requerida.
+          </div>
+          </div>
         <div>
           <label for="latitude" class="block mb-1">Latitud:</label>
-          <input type="text" id="latitude" name="latitude" class="w-full border-gray-300 border p-2 rounded h-10"
-            placeholder="Ingrese la latitud" autocomplete="off" required [(ngModel)]="latitude">
-          <div *ngIf="f.submitted && f.controls.latitude.invalid" class="text-red-500 mt-1">
+          <input type="number" formControlName="latitude"
+            class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Ingrese la latitud">
+          <div *ngIf="createForm.get('latitude').invalid && (createForm.get('latitude').dirty || createForm.get('latitude').touched)"
+            class="text-red-500 mt-1">
             Latitud es requerida.
           </div>
         </div>
         <div>
           <label for="longitude" class="block mb-1">Longitud:</label>
-          <input type="text" id="longitude" name="longitude" class="w-full border-gray-300 border p-2 rounded h-10"
-            placeholder="Ingrese la longitud" autocomplete="off" required [(ngModel)]="longitude">
-          <div *ngIf="f.submitted && f.controls.longitude.invalid" class="text-red-500 mt-1">
+          <input type="number" formControlName="longitude"
+            class="w-full border-gray-300 border p-2 rounded h-10" placeholder="Ingrese la longitud">
+          <div *ngIf="createForm.get('longitude').invalid && (createForm.get('longitude').dirty || createForm.get('longitude').touched)"
+            class="text-red-500 mt-1">
             Longitud es requerida.
           </div>
         </div>
         <div>
           <label for="comments" class="block mb-1">Comentarios:</label>
-          <textarea id="comments" name="comments" class="w-full border-gray-300 border p-2 rounded" rows="3"
-            placeholder="Ingrese los comentarios" [(ngModel)]="comments"></textarea>
+          <textarea formControlName="comments" class="w-full border-gray-300 border p-2 rounded" rows="3"
+            placeholder="Ingrese los comentarios"></textarea>
         </div>
       </div>
-      <button class="bg-green-500 text-white w-full py-2 rounded mt-3" [disabled]="!f.valid">
+      <button class="bg-green-500 text-white w-full py-2 rounded mt-3" [disabled]="!createForm.valid">
         <i class="fas fa-plus-circle"></i> Crear
       </button>
       <button class="bg-blue-500 text-white w-full py-2 rounded mt-3" routerLink="../">
