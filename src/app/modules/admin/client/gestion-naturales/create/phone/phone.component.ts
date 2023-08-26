@@ -69,7 +69,7 @@ export class PhoneComponent implements OnInit {
         });
 
         this.isSaved = false;
-        this.errorMessage = 'Error al guardar la información telefónica. Por favor, inténtalo nuevamente.';
+        this.errorMessage = 'Error al guardar la información . Por favor, inténtalo nuevamente.';
       }
     );
   }
