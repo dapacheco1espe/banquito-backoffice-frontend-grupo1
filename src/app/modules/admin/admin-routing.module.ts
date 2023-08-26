@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     // Home Module
@@ -50,14 +51,6 @@ const routes: Routes = [
                 (m) => m.HolidayModule
             ),
     },
-        // Gestion Cuentas
-        {
-            path: 'gestion-cuentas',
-            loadChildren: () =>
-                import('app/modules/admin/client/gestion-cuentas/gestion-cuentas.module').then(
-                    (m) => m.GestionCuentasModule
-                ),
-        },
     // Gestion Module
     {
         path: 'gestion',
