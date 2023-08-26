@@ -13,7 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   animations: fuseAnimations,
 })
 export class GestionNaturalesComponent implements OnInit {
- 
+  showNumberErrorMessage: boolean = false;
   cliente: Cliente | undefined;
   typeDocumentId!: String;
   documentId!: String;
@@ -64,5 +64,14 @@ export class GestionNaturalesComponent implements OnInit {
         this.router.navigate(['/gestion/gestion-naturales']);
       }
     );
+  }
+  onDocumentIdInput(event: any) {
+    const inputValue = event.target.value;
+
+    // Filtrar los caracteres no numéricos
+    this.documentId = inputValue.replace(/[^0-9]/g, '');
+
+    // Actualizar el estado para mostrar u ocultar el mensaje
+    this.showNumberErrorMessage = inputValue !== this.documentId;
   }
 }

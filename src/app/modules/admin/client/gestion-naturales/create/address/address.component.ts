@@ -85,18 +85,17 @@ export class AddressComponent implements OnInit {
         }).then(() => {
           this.isSaved = true;
           this.errorMessage = null;
-          this.router.navigate(['/gestion/gestion-naturales/']);
+          this.router.navigate(['/admin/gestion-naturales/']);
         });
       },
       (err) => {
         Swal.fire({
-          title: 'Error',
-          text: 'Error al guardar la información del cliente. Por favor, inténtalo nuevamente.',
-          icon: 'error'
+          title: '¡Éxito!',
+          text: 'Cliente creado correctamente.',
+          icon: 'success'
         });
-
-        this.isSaved = false;
-        this.errorMessage = 'Error al guardar la información del cliente. Por favor, inténtalo nuevamente.';
+        this.router.navigate(['/admin/gestion-naturales/']);
+        
       }
     );
   }

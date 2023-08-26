@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 import { ClienteService } from 'app/services/clienteService';
 import { Cliente, clienteAddress, clientePhone } from '../model/cliente';
 import Swal from 'sweetalert2';
-import { Agency } from '../../agency/agency-model/agency';
+
 import { AgencyService } from 'app/services/agency.service';
+import { Agency } from 'app/modules/admin/agency/agency-model/agency';
 
 @Component({
   selector: 'app-create',
@@ -23,7 +24,7 @@ export class CreateComponent implements OnInit {
   creationDate!: Date;
   activationDate!: Date;
   lastModifiedDate!: Date;
-  role: String = 'BEN';
+  role: String = 'Titular';
   state!: String;
   closedDate!: Date;
   comments!: String;
@@ -104,7 +105,7 @@ export class CreateComponent implements OnInit {
           this.isSaved = true;
           this.errorMessage = null;
           // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
-          this.router.navigate(['/gestion/gestion-naturales/createPhone/'+this.typeDocumentId+'/'+this.documentId]
+          this.router.navigate(['/admin/gestion-naturales/createPhone/'+this.typeDocumentId+'/'+this.documentId]
           );
       },
       err => {
