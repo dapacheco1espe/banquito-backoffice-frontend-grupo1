@@ -1,0 +1,219 @@
+<div class="w-full rounded-md bg-white p-5 h-screen flex flex-col items-center">
+    <div>
+        <h5
+            class="mb-5 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+        >
+            Crear Estructura Geográfica
+        </h5>
+    </div>
+    <form
+        (ngSubmit)="onCreate()"
+        novalidate
+        #f="ngForm"
+        class="w-full max-w-xl"
+    >
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="countryCode"
+                >
+                    Código de País (ISO 3166-1 alfa-3)
+                </label>
+                <input
+                    type="text"
+                    id="countryCode"
+                    name="countryCode"
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    placeholder="ECU"
+                    autocomplete="off"
+                    required
+                    pattern="^[A-Z]{3}$"
+                    [(ngModel)]="countryCode"
+                />
+                <div
+                    *ngIf="
+                        (f.submitted && f.controls.countryCode.invalid) ||
+                        (f.controls.countryCode.value &&
+                            f.controls.countryCode.invalid)
+                    "
+                    class="text-red-500 text-xs italic"
+                >
+                    Revisa el formato*
+                </div>
+                <div
+                    *ngIf="countryCode === ''"
+                    class="text-yellow-500 text-xs italic"
+                >
+                    Campo Obligatorio*
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 px-1">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="phoneCode"
+                >
+                    Código Telefónico
+                </label>
+                <input
+                    type="text"
+                    id="phoneCode"
+                    name="phoneCode"
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    placeholder="+593"
+                    autocomplete="off"
+                    required
+                    pattern="^\+\d{1,3}$"
+                    [(ngModel)]="phoneCode"
+                />
+                <div
+                    *ngIf="
+                        (f.submitted && f.controls.phoneCode.invalid) ||
+                        (f.controls.phoneCode.value &&
+                            f.controls.phoneCode.invalid)
+                    "
+                    class="text-red-500 text-xs italic"
+                >
+                    Revisa el formato*
+                </div>
+                <div
+                    *ngIf="phoneCode === ''"
+                    class="text-yellow-500 text-xs italic"
+                >
+                    Campo Obligatorio*
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-1">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="agencyName"
+                >
+                    Nombre del País
+                </label>
+                <input
+                    type="text"
+                    id="countryName"
+                    name="countryName"
+                    class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    placeholder="Ecuador"
+                    autocomplete="off"
+                    required
+                    pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]{5,}(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$"
+                    [(ngModel)]="name"
+                />
+                <div
+                    *ngIf="
+                        (f.controls.countryName.value &&
+                            f.controls.countryName.invalid) ||
+                        (f.submitted && f.controls.countryName.invalid)
+                    "
+                    class="text-red-500 text-xs italic"
+                >
+                    Mínimo 5 caracteres, sin numeros, sin espacios vacios al
+                    final o principio y sin caracteres especiales*
+                </div>
+                <div *ngIf="name === ''" class="text-yellow-500 text-xs italic">
+                    Campo Obligatorio*
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-1 mb-6 md:mb-0">
+                <label
+                    class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                    for="element"
+                >
+                    División Administrativa (Provincias, Departamentos,
+                    Cantones, etc.)
+                </label>
+                <div class="flex items-center">
+                    <div class="flex-grow">
+                        <input
+                            type="text"
+                            id="element"
+                            name="element"
+                            [(ngModel)]="newElement"
+                            placeholder="Nuevo elemento"
+                            autocomplete="off"
+                            class="appearance-none block flex-grow bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
+                        />
+                    </div>
+                    <div class="px-1">
+                        <button
+                            type="button"
+                            (click)="newElementFoo()"
+                            class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                        >
+                            Agregar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div
+                cdkDropList
+                class="example-list"
+                (cdkDropListDropped)="dropItem($event)"
+            >
+                <div
+                    class="example-box"
+                    *ngFor="let item of items; let i = index"
+                    cdkDrag
+                >
+                    <span class="mr-5">{{ i + 1 }}</span>
+                    <span class="mr-5">{{ item }}</span>
+                    <button *ngIf="i !== 0" (click)="deleteElement(i)">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 h-6"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="flex items-center">
+                <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-3"
+                >
+                    <div class="flex items-center">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 h-6 mr-1"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                        </svg>
+                        <span> Crear </span>
+                    </div>
+                </button>
+                <a
+                    class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                    href="/admin/geostructure"
+                >
+                    Regresar
+                </a>
+            </div>
+        </div>
+    </form>
+</div>

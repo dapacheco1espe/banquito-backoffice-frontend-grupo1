@@ -1,11 +1,16 @@
-<div class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0">
-    <div class="md:flex md:items-center md:justify-end w-full sm:w-auto md:h-full md:w-1/2 py-8 px-4 sm:p-12 md:p-16 sm:rounded-2xl md:rounded-none sm:shadow md:shadow-none sm:bg-card">
+<div
+    class="flex flex-col sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto min-w-0"
+>
+    <div
+        class="md:flex md:items-center md:justify-end w-full sm:w-auto md:h-full md:w-1/2 py-8 px-4 sm:p-12 md:p-16 sm:rounded-2xl md:rounded-none sm:shadow md:shadow-none sm:bg-card"
+    >
         <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
-            
-
             <!-- Title -->
-            <div class="mt-7 text-2xl font-extrabold tracking-tight leading-tight text-primary-500">BIENVENIDO BACK OFFICE</div>
-            
+            <div
+                class="mt-7 text-2xl font-extrabold tracking-tight leading-tight text-red-700"
+            >
+                BIENVENIDO AL BACKOFFICE
+            </div>
 
             <!-- Alert -->
             <fuse-alert
@@ -14,27 +19,25 @@
                 [appearance]="'outline'"
                 [showIcon]="false"
                 [type]="alert.type"
-                [@shake]="alert.type === 'error'">
-                {{alert.message}}
+                [@shake]="alert.type === 'error'"
+            >
+                {{ alert.message }}
             </fuse-alert>
 
             <!-- Sign in form -->
-            <form
-                class="mt-8"
-                [formGroup]="signInForm"
-                #signInNgForm="ngForm">
-
+            <form class="mt-8" [formGroup]="signInForm" #signInNgForm="ngForm">
                 <!-- Email field -->
                 <mat-form-field class="w-full">
                     <mat-label>Usuario</mat-label>
-                    <input
-                        id="email"
-                        matInput
-                        [formControlName]="'email'">
-                    <mat-error *ngIf="signInForm.get('email').hasError('required')">
+                    <input id="email" matInput [formControlName]="'email'" />
+                    <mat-error
+                        *ngIf="signInForm.get('email').hasError('required')"
+                    >
                         Email address is required
                     </mat-error>
-                    <mat-error *ngIf="signInForm.get('email').hasError('email')">
+                    <mat-error
+                        *ngIf="signInForm.get('email').hasError('email')"
+                    >
                         Please enter a valid email address
                     </mat-error>
                 </mat-form-field>
@@ -47,79 +50,88 @@
                         matInput
                         type="password"
                         [formControlName]="'password'"
-                        #passwordField>
+                        #passwordField
+                    />
                     <button
                         mat-icon-button
                         type="button"
-                        (click)="passwordField.type === 'password' ? passwordField.type = 'text' : passwordField.type = 'password'"
-                        matSuffix>
+                        (click)="
+                            passwordField.type === 'password'
+                                ? (passwordField.type = 'text')
+                                : (passwordField.type = 'password')
+                        "
+                        matSuffix
+                    >
                         <mat-icon
                             class="icon-size-5"
                             *ngIf="passwordField.type === 'password'"
-                            [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+                            [svgIcon]="'heroicons_solid:eye'"
+                        ></mat-icon>
                         <mat-icon
                             class="icon-size-5"
                             *ngIf="passwordField.type === 'text'"
-                            [svgIcon]="'heroicons_solid:eye-off'"></mat-icon>
+                            [svgIcon]="'heroicons_solid:eye-off'"
+                        ></mat-icon>
                     </button>
-                    <mat-error>
-                        Password is required
-                    </mat-error>
+                    <mat-error> Password is required </mat-error>
                 </mat-form-field>
 
-               <!-- Submit button -->
+                <!-- Submit button -->
                 <button
                     class="fuse-mat-button-large w-full mt-6"
                     mat-flat-button
-                    [color]="'primary'"
+                    [color]="'accent'"
                     [disabled]="signInForm.disabled"
-                    (click)="signIn()">
-                    <span *ngIf="!signInForm.disabled">
-                        Ingresar
-                    </span>
+                    (click)="signIn()"
+                >
+                    <span *ngIf="!signInForm.disabled"> Ingresar </span>
                     <mat-progress-spinner
                         *ngIf="signInForm.disabled"
                         [diameter]="24"
-                        [mode]="'indeterminate'"></mat-progress-spinner>
+                        [mode]="'indeterminate'"
+                    ></mat-progress-spinner>
                 </button>
 
                 <!-- Separator -->
-                <div class="flex items-baseline mt-0.1 text-md font-medium ">
-                    
-                    <p>¿Aún no eres cliente? Se parte de nuestra familia.</p>
-                    
+                <div class="flex items-baseline mt-0.1 text-md font-medium">
+                    <p>¿Olvidaste tu contraseña? Recupera tu cuenta.</p>
                 </div>
-                <div class="flex items-baseline mt-0.1 text-md font-medium justify-center" >
-                    
-                <a
-                        class="ml-0.5 text-primary-500 hover:underline "
-                        [routerLink]="['/sign-up']">Crea tu cuenta aquí
-                </a>
+                <div
+                    class="flex items-baseline mt-0.1 text-md font-medium justify-center"
+                >
+                    <a
+                        class="ml-0.5 text-primary-500 hover:underline"
+                        [routerLink]="['/sign-up']"
+                        >Aquí
+                    </a>
                 </div>
             </form>
         </div>
     </div>
-    <div class="relative hidden md:flex flex-auto items-center justify-center w-1/2 h-full p-16 lg:px-28 overflow-hidden bg-white  dark:border-l">
+    <div
+        class="relative hidden md:flex flex-auto items-center justify-center w-1/2 h-full p-16 lg:px-28 overflow-hidden bg-white dark:border-l"
+    >
         <!-- Background - @formatter:off -->
         <!-- Rings -->
-       
+
         <!-- Dots -->
-       
+
         <!-- @formatter:on -->
         <!-- Content -->
         <div class="z-10 relative w-full max-w-2xl">
             <!-- Logo -->
-            <div class="w-60 justify-center" >
-                <img src="assets/images/logo/logo_banquito.png">
+            <div class="w-60 justify-center">
+                <img src="assets/images/logo/logo_banquito.png" />
             </div>
             <div class="w-80 justify-center">
-                <img src="assets/images/logo/Inicio_banquito.png">
+                <img src="assets/images/logo/Inicio_banquito.png" />
             </div>
             <div class="flex items-baseline mt-0.1 text-xs text-primary-500">
-                <div>Términos de uso © 2023 Banco Banquito. Todos los derechos reservados</div>
-             
+                <div>
+                    Términos de uso © 2023 Banco Banquito. Todos los derechos
+                    reservados
+                </div>
             </div>
-            
         </div>
     </div>
 </div>

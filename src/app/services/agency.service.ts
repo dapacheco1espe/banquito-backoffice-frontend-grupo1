@@ -9,7 +9,7 @@ import { Geolocation } from 'app/modules/admin/client/geostructure/geostructure-
     providedIn: 'root',
 })
 export class AgencyService {
-    private baseURL = environment.apiResrURL1 + '/api/v1';
+    private baseURL = environment.administrationAPIUrl + '/api/v1';
     constructor(private http: HttpClient) {}
 
     public list(uuid: any): Observable<Agency[]> {
@@ -29,7 +29,7 @@ export class AgencyService {
 
     public listAllAgencies(): Observable<Agency[]> {
         return this.http.get<Agency[]>(
-            this.baseURL +'/bankEntity/findAllBranches/ACT'
+            this.baseURL + '/bankEntity/findAllBranches/ACT'
         );
     }
 

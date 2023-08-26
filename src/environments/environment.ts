@@ -4,8 +4,10 @@
 
 export const environment = {
     production: false,
-    apiResrURL: 'http://localhost:6868',
-    apiResrURL1: 'http://localhost:6869'
+    apiResrURL: 'http://localhost:9090',
+    apiResrURL1: 'http://localhost:9090',
+    administrationAPIUrl:
+        'https://banquito-ws-administration-production-6806.up.railway.app',
 };
 
 /*
