@@ -1,1 +1,158 @@
-<p>location-detail works!</p>
+<div class="w-full rounded-md bg-white p-5 h-screen flex flex-col items-center">
+    <div>
+        <h5
+            class="mb-5 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+        >
+            Detalle de Locación
+        </h5>
+    </div>
+    <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+            <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="pais"
+            >
+                País al que pertenece
+            </label>
+            <div class="relative mr-2 mb-2">
+                <select
+                    id="pais"
+                    name="pais"
+                    class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    [(ngModel)]="selectedPais"
+                >
+                    <option value="">Pais</option>
+                    <option
+                        *ngFor="let pais of paises"
+                        [value]="pais.countryCode"
+                    >
+                        {{ pais.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+            <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="nivel"
+            >
+                Escoge el nivel
+            </label>
+            <div class="relative mr-2 mb-2">
+                <select
+                    id="nivel"
+                    name="nivel"
+                    class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    [(ngModel)]="selectedLevel"
+                >
+                    <option *ngFor="let level of levels" [ngValue]="level">
+                        {{ level.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="w-full px-1 mb-6 md:mb-0" *ngIf="!highLevel">
+            <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="nivel"
+            >
+                Escoge a donde pertenece
+            </label>
+            <div class="relative mr-2 mb-2">
+                <select
+                    id="nivel"
+                    name="nivel"
+                    class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                    [(ngModel)]="selectedElement"
+                    (ngModelChange)="onSelectElement($event)"
+                >
+                    <option value="">Elemento</option>
+                    <option
+                        *ngFor="let element of elements"
+                        [value]="element.uuid"
+                    >
+                        {{ element.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+            <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="line1"
+            >
+                Nombre de Locación
+            </label>
+            <input
+                type="text"
+                id="name"
+                name="name"
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                placeholder="Quito"
+                autocomplete="off"
+                pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]{1,}(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$"
+                required
+                [(ngModel)]="name"
+            />
+        </div>
+        <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+            <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="line2"
+            >
+                Codigo de Teléfono de Área
+            </label>
+            <input
+                type="text"
+                id="areaPhoneCode"
+                name="areaPhoneCode"
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                placeholder="02"
+                autocomplete="off"
+                required
+                pattern="^[0-9]+$"
+                [(ngModel)]="areaPhoneCode"
+            />
+            <div
+                *ngIf="areaPhoneCode === ''"
+                class="text-yellow-500 text-xs italic"
+            >
+                Campo Obligatorio*
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full md:w-1/2 px-1 mb-6 md:mb-0">
+            <label
+                class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                for="line1"
+            >
+                Codigo Postal
+            </label>
+            <input
+                type="text"
+                id="zipCode"
+                name="zipCode"
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                placeholder="170130"
+                autocomplete="off"
+                required
+                pattern="^[0-9]+$"
+                [(ngModel)]="zipCode"
+            />
+        </div>
+    </div>
+    <!-- Buttons -->
+    <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="flex items-center">
+            <a
+                class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                href="/admin/location"
+            >
+                Regresar
+            </a>
+        </div>
+    </div>
+</div>
