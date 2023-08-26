@@ -1,53 +1,72 @@
 <div class="container mx-auto mt-5 bg-white w-full">
-    <div class="max-w-md mx-auto">
-      <h4 class="text-center text-lg font-bold">Crear Dirección</h4>
-      <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
-       
-  
-        <div class="mb-3">
-          <label for="typeAddress" class="block text-sm font-medium text-gray-700">Tipo de Dirección:</label>
-          <select id="typeAddress" name="typeAddress" class="form-select mt-1 block w-full" [(ngModel)]="typeAddress">
-            <option value="HOM">Casa</option>
-            <option value="OFI">Oficina</option>
-          </select>
-        </div>
-  
-        <div class="mb-3">
-          <label for="line1" class="block text-sm font-medium text-gray-700">Dirección Línea 1:</label>
-          <input type="text" class="form-input mt-1 block w-full" id="line1"
-                 name="line1" placeholder="Ingrese la dirección línea 1" autocomplete="off"
-                 [(ngModel)]="line1">
-        </div>
-  
-        <div class="mb-3">
-          <label for="line2" class="block text-sm font-medium text-gray-700">Dirección Línea 2:</label>
-          <input type="text" class="form-input mt-1 block w-full" id="line2"
-                 name="line2" placeholder="Ingrese la dirección línea 2" autocomplete="off"
-                 [(ngModel)]="line2">
-        </div>
-  
-        <div class="mb-3">
-          <label for="latitude" class="block text-sm font-medium text-gray-700">Latitud:</label>
-          <input type="number" class="form-input mt-1 block w-full" id="latitude"
-                 name="latitude" placeholder="Ingrese la latitud" autocomplete="off"
-                 [(ngModel)]="latitude">
-        </div>
-  
-        <div class="mb-3">
-          <label for="longitude" class="block text-sm font-medium text-gray-700">Longitud:</label>
-          <input type="number" class="form-input mt-1 block w-full" id="longitude"
-                 name="longitude" placeholder="Ingrese la longitud" autocomplete="off"
-                 [(ngModel)]="longitude">
-        </div>
-  
-        <button class="bg-green-500 text-white font-bold py-2 px-4 w-full mb-3" [disabled]="!f.valid">
-          <i class="far fa-edit"></i> Actualizar
-        </button>
-  
-        <button class="bg-blue-500 text-white font-bold py-2 px-4 w-full" routerLink="../../">
-          <i class="fas fa-arrow-alt-circle-left"></i> Regresar
-        </button>
-      </form>
-    </div>
+  <div class="max-w-md mx-auto">
+    <h4 class="text-center text-lg font-bold">Crear Dirección</h4>
+    <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+      <div class="mb-3">
+        <label for="name" class="block text-sm font-medium text-gray-700">Nombre:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="name"
+               name="name" autocomplete="off"
+               [(ngModel)]="cliente.firstName" disabled>
+      </div>
+      <div class="mb-3">
+        <label for="lastname" class="block text-sm font-medium text-gray-700">Apellido:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="lastname"
+               name="lastname" autocomplete="off"
+               [(ngModel)]="cliente.lastName" disabled>
+      </div>
+      <div class="mb-3">
+        <label for="documentId" class="block text-sm font-medium text-gray-700">N° Documento:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="documentId"
+               name="documentId" autocomplete="off"
+               [(ngModel)]="cliente.documentId" disabled>
+      </div>
+      <div class="mb-3">
+        <label for="typeAddress" class="block text-sm font-medium text-gray-700">Tipo de Dirección:</label>
+        <select id="typeAddress" name="typeAddress" class="form-select mt-1 block w-full" [(ngModel)]="typeAddress">
+          <option value="HOM">Casa</option>
+          <option value="OFI">Oficina</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="line1" class="block text-sm font-medium text-gray-700">Calle Principal:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="line1"
+               name="line1" placeholder="Calle Principal" autocomplete="off"
+               [(ngModel)]="line1">
+      </div>
+
+      <div class="mb-3">
+        <label for="line2" class="block text-sm font-medium text-gray-700">Calle Secundaria:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="line2"
+               name="line2" placeholder="Calle Secundaria" autocomplete="off"
+               [(ngModel)]="line2">
+      </div>
+
+      <div class="mb-3">
+        <label for="latitude" class="block text-sm font-medium text-gray-700">Latitud:</label>
+        <input type="number" class="form-input mt-1 block w-full" id="latitude"
+               name="latitude" placeholder="Ingrese la latitud" autocomplete="off"
+               [(ngModel)]="latitude">
+      </div>
+
+      <div class="mb-3">
+        <label for="longitude" class="block text-sm font-medium text-gray-700">Longitud:</label>
+        <input type="number" class="form-input mt-1 block w-full" id="longitude"
+               name="longitude" placeholder="Ingrese la longitud" autocomplete="off"
+               [(ngModel)]="longitude">
+      </div>
+
+      <button class="bg-green-500 text-white font-bold py-2 px-4 w-full mb-3" [disabled]="!f.valid">
+        <i class="far fa-edit"></i> Guardar Cliente
+      </button>
+
+      <button type="button" class="bg-blue-500 text-white font-bold py-2 px-4 w-full" (click)="addAnotherAddress()">
+        <i class="fas fa-plus"></i> Agregar Otra Dirección
+      </button>
+
+      <button class="bg-indigo-500 text-white font-bold py-2 px-4 w-full mt-3" routerLink="../../">
+        <i class="fas fa-arrow-alt-circle-left"></i> Regresar
+      </button>
+    </form>
   </div>
-  
+</div>

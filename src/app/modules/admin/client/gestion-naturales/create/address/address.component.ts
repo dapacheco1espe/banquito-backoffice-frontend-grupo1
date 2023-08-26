@@ -24,47 +24,92 @@ export class AddressComponent implements OnInit {
   longitude!: number;
   errorMessage: string | null = null;
   cliente!: Cliente;
-    constructor(
+  
+  constructor(
+    private clienteService: ClienteService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
-      private clienteService: ClienteService,
-      private router: Router,
-      private activatedRoute: ActivatedRoute
-    ) { }
+  ngOnInit(): void {
+    this.getCliente();
+  }
 
-    ngOnInit(): void {
+  addAnotherAddress(): void {
+    const addressObject: ClienteAddress = new ClienteAddress(
+      this.locationId, 
+      this.typeAddress, 
+      this.line1, 
+      this.line2, 
+      this.latitude, 
+      this.longitude, 
+      true
+    );
 
-     // this.getCliente();
-    }
+    this.addressArray.push(addressObject);
+    this.clearAddressForm();
 
-    onUpdate(): void {
-        const addressObject: ClienteAddress=new ClienteAddress(this.locationId,this.typeAddress,this.line1,this.line2,this.latitude,this.longitude,true);
-        this.addressArray.push(addressObject);
-        this.clienteService.createAddress(this.typeDocumentId,this.documentId, this.addressArray).subscribe(
-        (data) => {
-          Swal.fire({
-            title: '¡Éxito!',
-            text: 'Cliente creado correctamente.',
-            icon: 'success',
+    Swal.fire({
+      title: '¡Éxito!',
+      text: 'Dirección agregada correctamente.',
+      icon: 'success'
+    });
+  }
 
-          }).then(() => {
+  clearAddressForm(): void {
+    this.locationId = '';
+    this.typeAddress = '';
+    this.line1 = '';
+    this.line2 = '';
+    this.latitude = 0;
+    this.longitude = 0;
+  }
 
-            this.isSaved = true;
-            this.errorMessage = null;
-            // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
-            this.router.navigate(['/gestion/gestion-naturales/']);
-          });
-        },
-        (err) => {
-          Swal.fire({
-            title: 'Error',
-            text: 'Error al guardar la informacion del cliente. Por favor, inténtalo nuevamente.',
-            icon: 'error'
-          });
+  onUpdate(): void {
+    this.addressArray.push(new ClienteAddress(
+      this.locationId, 
+      this.typeAddress, 
+      this.line1, 
+      this.line2, 
+      this.latitude, 
+      this.longitude, 
+      true
+    ));
 
-          this.isSaved = false;
-          this.errorMessage = 'Error al guardar la informacion del cliente. Por favor, inténtalo nuevamente.';
-        }
-      );
-    }
+    this.clienteService.createAddress(this.typeDocumentId, this.documentId, this.addressArray).subscribe(
+      (data) => {
+        Swal.fire({
+          title: '¡Éxito!',
+          text: 'Cliente creado correctamente.',
+          icon: 'success'
+        }).then(() => {
+          this.isSaved = true;
+          this.errorMessage = null;
+          this.router.navigate(['/gestion/gestion-naturales/']);
+        });
+      },
+      (err) => {
+        Swal.fire({
+          title: 'Error',
+          text: 'Error al guardar la información del cliente. Por favor, inténtalo nuevamente.',
+          icon: 'error'
+        });
 
+        this.isSaved = false;
+        this.errorMessage = 'Error al guardar la información del cliente. Por favor, inténtalo nuevamente.';
+      }
+    );
+  }
+  getCliente(): void {
+   
+    this.clienteService.detail(this.typeDocumentId, this.documentId).subscribe(
+      data => {
+        this.cliente = data;
+        console.log(this.cliente);
+      },
+      err => {
+        this.router.navigate(['']);
+      }
+    );
+  }
 }

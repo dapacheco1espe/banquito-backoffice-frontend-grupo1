@@ -6,6 +6,7 @@
         <label for="name" class="block text-sm font-medium text-gray-700">Nombre:</label>
         <input type="text" class="form-input mt-1 block w-full" id="name" name="name" placeholder="Ingrese el nombre" autocomplete="off"  [(ngModel)]="cliente.firstName">
       </div>
+      
       <div class="mb-3">
         <label for="lastname" class="block text-sm font-medium text-gray-700">Apellido:</label>
         <input type="text" class="form-input mt-1 block w-full" id="lastname" name="lastname" placeholder="Ingrese el apellido" autocomplete="off"[(ngModel)]="cliente.lastName">
@@ -24,6 +25,14 @@
       <div class="mb-3">
         <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Teléfono:</label>
         <input type="phoneNumber" class="form-input mt-1 block w-full" id="phoneNumber" name="phoneNumber" placeholder="Ingrese el telefono" autocomplete="off"  [(ngModel)]="cliente.phoneNumbers[0].phoneNumber">
+      </div>
+      <div class="mb-3">
+        <label for="addresses" class="block text-sm font-medium text-gray-700"> Calle Principal</label>
+        <input type="addresses" class="form-input mt-1 block w-full" id="addresses" name="addresses" placeholder="Calle Principal" autocomplete="off"  [(ngModel)]="cliente.addresses[0].line1">
+      </div>
+      <div class="mb-3">
+        <label for="addresses1" class="block text-sm font-medium text-gray-700">Calle Secundaria</label>
+        <input type="addresses1" class="form-input mt-1 block w-full" id="addresses1" name="addresses1" placeholder="Calle Secundaria" autocomplete="off"  [(ngModel)]="cliente.addresses[0].line2">
       </div>
       <div class="mb-3">
         <label for="role" class="block text-sm font-medium text-gray-700">Rol:</label>

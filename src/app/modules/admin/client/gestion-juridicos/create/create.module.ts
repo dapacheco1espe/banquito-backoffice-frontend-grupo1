@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CreateRoutingModule } from './create-routing.module';
 import { CreateComponent } from './create.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UpdatememberComponent } from './updatemember/updatemember.component';
 
 
@@ -14,7 +14,8 @@ import { UpdatememberComponent } from './updatemember/updatemember.component';
   ],
   imports: [
     CommonModule, FormsModule,
-    CreateRoutingModule
+    CreateRoutingModule,
+    ReactiveFormsModule
 
   ]
 })
