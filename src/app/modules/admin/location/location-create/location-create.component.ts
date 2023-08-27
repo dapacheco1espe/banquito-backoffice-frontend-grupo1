@@ -133,6 +133,9 @@ export class LocationCreateComponent implements OnInit {
                 });
         } else if (this.parentLevel === 0) {
             this.highLevel = true;
+            this.levelParentId = null;
+            this.levelParentName = '';
+            this.parentLevel = null;
         }
     }
 

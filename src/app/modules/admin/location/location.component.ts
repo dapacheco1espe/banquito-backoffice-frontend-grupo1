@@ -48,6 +48,7 @@ export class LocationComponent implements OnInit {
     }
 
     onSelectPais(pais: string) {
+        this.locations = [];
         console.log(pais);
         this.selectedPais = pais;
         this.selectedLevel = '';

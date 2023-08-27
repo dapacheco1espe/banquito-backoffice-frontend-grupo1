@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LocationComponent } from './location.component';
 import { LocationCreateComponent } from './location-create/location-create.component';
 import { LocationDetailComponent } from './location-detail/location-detail.component';
+import { LocationUpdateComponent } from './location-update/location-update.component';
 
 const routes: Routes = [
     {
@@ -11,7 +12,7 @@ const routes: Routes = [
     },
     { path: 'create', component: LocationCreateComponent },
     { path: 'detail/:uuid', component: LocationDetailComponent },
-    // { path: 'update/:id/:prov/:cant', component: AgencyUpdateComponent },
+    { path: 'update/:uuid', component: LocationUpdateComponent },
 ];
 
 @NgModule({

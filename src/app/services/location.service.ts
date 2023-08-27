@@ -38,4 +38,11 @@ export class LocationService {
             this.baseURL + '/api/v1/geoLocation/findByUuid/' + uuid
         );
     }
+
+    public update(code: any, location: any): Observable<any> {
+        return this.http.put(
+            this.baseURL + '/geoLocation/update' + code,
+            location
+        );
+    }
 }
