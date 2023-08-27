@@ -11,12 +11,13 @@ import { Cliente } from '../../gestion-naturales/model/cliente';
   styleUrls: ['./update.component.scss']
 })
 export class UpdateComponent implements OnInit {
-  groupName: String ;
+  groupName: String = this.activatedRoute.snapshot.params['groupName'] ;
   uniqueKey: String = this.activatedRoute.snapshot.params['uniqueKey'];
   isSaved: boolean | null = null;
   errorMessage: string | null = null;
   company!: Company
   cliente!: Cliente
+  roles!: Company
     constructor(
       private companyService: CompanyService,
       private router: Router,
@@ -25,7 +26,7 @@ export class UpdateComponent implements OnInit {
 
     ngOnInit(): void {
       this.getCompany();
-    
+     
     }
     
     onUpdate(): void {
@@ -67,6 +68,23 @@ export class UpdateComponent implements OnInit {
           // Mostrar mensaje de error con SweetAlert
         }
       );
+      
+    }
+
+    getClientByCompany(): void {
+      this.companyService.detailClient(this.groupName).subscribe(
+        (data) => {
+          this.roles = data; // Asigna los roles a la propiedad company.roles
+          
+        },
+        (err) => {
+          // Mostrar mensaje de error con SweetAlert
+        }
+      );
+    }
+  
+    getClientRoles(): void {
+      this.getClientByCompany();
     }
 
   }

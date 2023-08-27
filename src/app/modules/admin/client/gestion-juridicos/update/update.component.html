@@ -4,7 +4,7 @@
     <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
       <div class="mb-3">
         <label for="groupName" class="block text-sm font-medium text-gray-700">Nombre del Grupo:</label>
-        <input type="text" class="form-input mt-1 block w-full" id="groupName" name="groupName" placeholder="Ingrese el nombre del grupo" autocomplete="off" [(ngModel)]="company.groupName" required>
+        <input type="text" class="form-input mt-1 block w-full" id="groupName" name="groupName" placeholder="Ingrese el nombre del grupo" autocomplete="off" [(ngModel)]="company.groupName" disabled>
       </div>
       <div class="mb-3">
         <label for="emailAddress" class="block text-sm font-medium text-gray-700">Correo electrónico:</label>
@@ -36,6 +36,37 @@
       <button class="bg-blue-500 text-white font-bold py-2 px-4 w-full" routerLink="../../">
         <i class="fas fa-arrow-alt-circle-left"></i> Regresar
       </button>
+     
     </form>
+    <button class="bg-indigo-500 text-white font-bold py-2 px-4 w-full mt-3" (click)="getClientRoles()">
+      <i class="fas fa-plus-circle"></i> Roles
+    </button>
+    <!-- Tabla de Roles -->
+    <div *ngIf="roles">
+      <h4 class="text-center text-lg font-bold">Roles</h4>
+      <table>
+        <thead>
+          <tr>
+            <th class="px-4 py-2">Empresa</th>
+            <th class="px-4 py-2">Rol</th>
+            <th class="px-4 py-2">Nombre</th>
+            <th class="px-4 py-2">Apellido</th>
+            <th class="px-4 py-2">N° Documento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let role of roles; let i = index">
+            <tr>
+              <td class="border px-4 py-2 text-center">{{ company.groupName }}</td>
+              <td class="border px-4 py-2 text-center">{{ company.members[i]?.groupRole }}</td>
+              <td class="border px-4 py-2 text-center">{{ role.firstName }}</td>
+              <td class="border px-4 py-2 text-center">{{ role.lastName }}</td>
+              <td class="border px-4 py-2 text-center">{{ role.documentId }}</td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+  </div>
+

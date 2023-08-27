@@ -40,7 +40,6 @@ export class MemberComponent implements OnInit {
     }
 
     onUpdate(): void {
-        console.log(this.firstName)
         const memberObject: CompanyMember=new CompanyMember(this.groupRole,this.uniqueKey,this.state);
         this.memberArray.push(memberObject);
         this.companyService.createMember(this.groupName, this.memberArray).subscribe(

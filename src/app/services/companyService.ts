@@ -41,4 +41,8 @@ export class CompanyService {
 ): Observable<Company> {
   return this.httpClient.put<Company>(`${this.companyURL}/${'addMember'}/${groupName}`, memberList);
 }
+ 
+public detailClient(groupName: String,): Observable<Company> {
+    return this.httpClient.get<Company>(`${this.companyURL}/${'membersById'}/${groupName}`);
+  }
 }
