@@ -32,4 +32,10 @@ export class LocationService {
             location
         );
     }
+
+    public detail(uuid: any): Observable<Location> {
+        return this.http.get<Location>(
+            this.baseURL + '/api/v1/geoLocation/findByUuid/' + uuid
+        );
+    }
 }

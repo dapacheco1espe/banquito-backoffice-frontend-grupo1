@@ -1,0 +1,7 @@
+.custom-select {
+    -webkit-appearance: none; /* Elimina la apariencia predeterminada de selección */
+    -moz-appearance: none;
+    appearance: none;
+    padding: 8px 16px; /* Define relleno */
+    cursor: not-allowed; /* Cambia el cursor cuando está deshabilitado */
+}
