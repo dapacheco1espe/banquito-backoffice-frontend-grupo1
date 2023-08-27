@@ -31,11 +31,16 @@
           <!-- Agrega aquí tus opciones para seleccionar el tipo de documento -->
         </select>
       </div>
-      <div class="relative flex-grow:3 focus-within:z-10">
+      <div class="relative flex-grow-3 focus-within z-10">
         <label>N° Documento*</label>
         <input [(ngModel)]="documentId"
-          class="block w-36 sm:w-40 pl-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm transition duration-150 ease-in-out mr-2"
-           />
+               (input)="onDocumentIdInput($event)"
+               type="text"
+               class="block w-36 sm:w-40 pl-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-blue-500 focus:border-blue-500 text-sm transition duration-150 ease-in-out mr-2"
+        />
+        <p *ngIf="showNumberErrorMessage" class="text-red-500 text-xs mt-1">
+          Solo se permiten números.
+        </p>
       </div>
       <button (click)="buscarCliente()"
         class="ml-2 focus:outline-none px-4 py-2 rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
@@ -49,11 +54,11 @@
           <tr>
             <th class="px-4 py-2">N° Documento</th>
             <th class="px-4 py-2">Nombre</th>
-            <th class="px-4 py-2">Telefonos</th>
+            <th class="px-4 py-2">Teléfonos</th>
             <th class="px-4 py-2">Fecha Nacimiento</th>
             <th class="px-4 py-2">Género</th>
             <th class="px-4 py-2">Email</th>
-            <th class="px-4 py-2">Dirección</th>
+            <th class="px-4 py-2">Direcciones</th>
             <th class="px-4 py-2">Creación</th>
             <th class="px-4 py-2">Modificación</th>
             <th class="px-4 py-2">Acciones</th> <!-- Columna para los botones de acciones -->
@@ -68,7 +73,7 @@
             <td class="border px-4 py-2 text-center">{{ cliente.birthDate | date:'yyyy/MM/dd' }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.gender }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.emailAddress }}</td>
-            <td class="border px-4 py-2 text-center">{{ cliente.addresses[0].line1 + ' y ' + cliente.addresses[0].line2 }}</td>
+            <td class="border px-4 py-2 text-center"><div *ngFor="let item of cliente.addresses">{{item.line1 +' '+ item.line2}} </div></td>
             <td class="border px-4 py-2 text-center">{{ cliente.creationDate | date:'short' }}</td>
             <td class="border px-4 py-2 text-center">{{ cliente.lastModifiedDate | date:'short' }}</td>
             <td class="border px-4 py-2 text-center">

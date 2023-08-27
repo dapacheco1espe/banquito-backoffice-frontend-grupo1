@@ -2,23 +2,43 @@
   <h1 class="font-bold text-3xl text-blue-600">Gestion de Clientes</h1>
   <p class="text-gray-400">Elige una de las operaciones de gestion.</p>
   <div class="border-b w-full pt-4"></div>
-  <div class="flex flex-col justify-center sm:flex-row gap-5 m-auto">
-    <section (click)="goToDefinedOperation('naturales');" class="w-full sm:w-1/2 cursor-pointer bg-white rounded-md flex flex-col justify-center p-4 h-52 shadow-md">
-      <h1 class="flex flex-col gap-2 text-center font-bold text-blue-500 text-3xl">
-        <span class="text-5xl">👨‍💼</span>
-        Gestion Clientes Naturales
-      </h1>
-      <p class="text-center text-blue-500">Realiza la gestión de clientes naturales</p>
+  <div class="flex flex-col justify-center sm:flex-row gap-5 m-auto hover:animate-spin">
+    <section (click)="goToDefinedOperation('naturales');" class="cursor-pointer block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 h-full w-full">
+      <h5
+      class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+  >
+  <span class="text-5xl">👩‍💼</span>
+  <br>
+      Gestión Clientes 
+      <br>
+      Naturales
+  </h5>
+  <p
+  class="mb-2 text-base tracking-tight text-gray-900 dark:text-white"
+>
+  Realiza la gestion a los clientes naturales.
+</p>
     </section> 
-    <section (click)="goToDefinedOperation('juridicos');" class="w-full sm:w-1/2 cursor-pointer bg-white rounded-md flex flex-col justify-center p-4 h-52 shadow-md">
-      <h1 class="flex flex-col gap-2 text-center font-bold text-blue-500 text-3xl">
+    <section (click)="goToDefinedOperation('juridicos');" class="cursor-pointer block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 h-full w-full">
+      <h5
+      class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+  >
         <span class="text-5xl">🏢</span>
+        <br>
         Gestion Clientes 
         <br>
         Juridicos
-      </h1>
-      <p class="text-center text-blue-500">Realiza la gestión de clientes jurídicos</p>
-    </section>  
+      </h5>
+      <p
+  class="mb-2 text-base tracking-tight text-gray-900 dark:text-white"
+>
+  Realiza la gestion a los clientes juridicos.
+</p>
+    </section> 
+    <div>
+     
+      
+  </div> 
     
   </div>
 </div>

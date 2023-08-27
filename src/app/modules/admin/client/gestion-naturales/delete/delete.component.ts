@@ -40,7 +40,7 @@ export class DeleteComponent implements OnInit {
             this.isSaved = true;
             this.errorMessage = null;
             // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
-            this.router.navigate(['/gestion/gestion-naturales']);
+            this.router.navigate(['/admin/gestion-naturales']);
           });
         },
         err => {

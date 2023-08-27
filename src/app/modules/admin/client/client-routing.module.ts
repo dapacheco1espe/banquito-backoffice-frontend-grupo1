@@ -66,26 +66,7 @@ component: GestionComponent
     path: 'update-member',
     loadChildren: () => import('app/modules/admin/client/gestion-juridicos/create/updatemember/updatemember.module') .then(m => m.UpdatememberModule),
   },
-   {
-    path: 'geostructure',
-    loadChildren: () => import('app/modules/admin/client/geostructure/geostructure.module') .then(m => m.GeostructureModule),
-  },
-  {
-    path: 'agency',
-    loadChildren: () => import('app/modules/admin/client/agency/agency.module') .then(m => m.AgencyModule),
-  },
-  {
-    path: 'location',
-    loadChildren: () => import('app/modules/admin/client/location/location.module') .then(m => m.LocationModule),
-  },
-  // Gestion Cuentas
-  {
-            path: 'create-cuentas',
-            loadChildren: () =>
-                import('app/modules/admin/client/gestion-cuentas/create/create.module').then(
-                    (m) => m.CreateModule
-                ),
-  },
+  
 
   
   

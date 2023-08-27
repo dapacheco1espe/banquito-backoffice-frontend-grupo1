@@ -15,6 +15,7 @@ import Swal from 'sweetalert2';
 export class MemberComponent implements OnInit {
 
   uniqueKey: string = this.activatedRoute.snapshot.params['uniqueKey'];
+  firstName: String = this.activatedRoute.snapshot.params['firstName']
   groupName: string = this.activatedRoute.snapshot.params['groupName'];
   groupRole!: string;
   state!: String;
@@ -39,6 +40,7 @@ export class MemberComponent implements OnInit {
     }
 
     onUpdate(): void {
+        console.log(this.firstName)
         const memberObject: CompanyMember=new CompanyMember(this.groupRole,this.uniqueKey,this.state);
         this.memberArray.push(memberObject);
         this.companyService.createMember(this.groupName, this.memberArray).subscribe(
@@ -53,7 +55,7 @@ export class MemberComponent implements OnInit {
             this.isSaved = true;
             this.errorMessage = null;
             // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
-            this.router.navigate(['/gestion/gestion-juridicos'])
+            this.router.navigate(['/admin/gestion-juridicos'])
           });
         },
         (err) => {

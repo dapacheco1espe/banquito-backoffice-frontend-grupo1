@@ -41,18 +41,12 @@ export class UpdateComponent implements OnInit {
             this.isSaved = true;
             this.errorMessage = null;
             // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
-            this.router.navigate(['/gestion/gestion-naturales']);
+            this.router.navigate(['/admin/gestion-naturales']);
           });
         },
         err => {
-          Swal.fire({
-            title: 'Error',
-            text: 'Error al guardar el usuario. Por favor, inténtalo nuevamente.',
-            icon: 'error'
-          });
 
-          this.isSaved = false;
-          this.errorMessage = 'Error al guardar el usuario. Por favor, inténtalo nuevamente.';
+          this.router.navigate(['/admin/gestion-naturales']);
         }
       );
     }

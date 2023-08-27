@@ -61,7 +61,7 @@ export class GestionJuridicosComponent implements OnInit {
           confirmButtonText: 'Aceptar',
         });
   
-        this.router.navigate(['/gestion/gestion-juridicos']);
+        this.router.navigate(['/admin/gestion-juridicos']);
       }
     );
   }
