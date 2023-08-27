@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    apiResrURL: 'https://banquito-ws-client-production.up.railway.app',
+    apiResrURL: 'https://prueba-lhnfqyqejq-uc.a.run.app',
     administrationAPIUrl:
         'https://banquito-ws-administration-production-6806.up.railway.app',
 };
