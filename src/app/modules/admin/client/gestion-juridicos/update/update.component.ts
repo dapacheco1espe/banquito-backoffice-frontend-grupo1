@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Company } from '../model/company';
 import { CompanyService } from 'app/services/companyService';
+import { Cliente } from '../../gestion-naturales/model/cliente';
 
 @Component({
   selector: 'app-update',
@@ -15,6 +16,7 @@ export class UpdateComponent implements OnInit {
   isSaved: boolean | null = null;
   errorMessage: string | null = null;
   company!: Company
+  cliente!: Cliente
     constructor(
       private companyService: CompanyService,
       private router: Router,
@@ -39,7 +41,7 @@ export class UpdateComponent implements OnInit {
             this.isSaved = true;
             this.errorMessage = null;
             // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
-            this.router.navigate(['/gestion/gestion-juridicos']);
+            this.router.navigate(['/admin/gestion-juridicos']);
           });
         },
         err => {

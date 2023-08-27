@@ -111,7 +111,7 @@ export class CreateComponent implements OnInit {
             this.isSaved = true;
             this.errorMessage = null;
             // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
-            this.router.navigate(['/gestion/gestion-juridicos/createRole/' + this.createForm.value.groupName]);
+            this.router.navigate(['/admin/gestion-juridicos/createRole/' + this.createForm.value.groupName]);
           });
         },
         err => {

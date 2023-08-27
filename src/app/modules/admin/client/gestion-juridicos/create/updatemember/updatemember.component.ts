@@ -56,7 +56,7 @@ export class UpdatememberComponent implements OnInit {
         }).then(() => {
         
           // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
-          this.router.navigate(['/gestion/gestion-juridicos/createMember/'+this.groupName+'/'+this.uniqueKey]);
+          this.router.navigate(['/admin/gestion-juridicos/createMember/'+this.groupName+'/'+this.uniqueKey]);
         });
       },
       (err) => {
