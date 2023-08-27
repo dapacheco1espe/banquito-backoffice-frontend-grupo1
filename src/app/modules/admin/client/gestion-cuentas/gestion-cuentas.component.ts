@@ -13,8 +13,8 @@ export class GestionCuentasComponent implements OnInit {
   constructor(private router: Router) { }
   ngOnInit(): void {
   }
-  public navigateToPages(page: 'create') {
-    this.router.navigateByUrl(`/admin/client/gestion-cuentas/${page}`);
+  public navigateToPages(page: 'management') {
+    this.router.navigateByUrl(`/admin/gestion-cuentas/${page}`);
 }
 
 }
