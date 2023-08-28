@@ -18,6 +18,7 @@ export class HolidayDetailComponent implements OnInit {
     dataUrl: any = {};
 
     holidayDate: Date;
+    holidayDateString: String;
     countryCode: string;
     geoLocationId: string;
     name: string;
@@ -107,7 +108,11 @@ export class HolidayDetailComponent implements OnInit {
             (data) => {
                 console.log('getDetail update', data);
                 this.dataUrl = data;
-                this.holidayDate = this.dataUrl.holidayDate;
+                this.holidayDate = new Date(this.dataUrl.holidayDate);
+                const formattedDate = `${this.holidayDate.getFullYear()}/${
+                    this.holidayDate.getMonth() + 1
+                }/${this.holidayDate.getDate()}`;
+                this.holidayDateString = formattedDate;
                 this.countryCode = this.dataUrl.countryCode;
                 this.geoLocationId = this.dataUrl.geoLocationId;
                 this.name = this.dataUrl.name;
