@@ -70,7 +70,9 @@ export class LocationUpdateComponent implements OnInit {
                 this.levels = data.geoStructures;
                 console.log('this.levels', this.levels);
                 const selectedLevelObj = this.levels.find(
-                    (level) => level.name === this.dataUrl.levelName
+                    (level) =>
+                        level.name.toLowerCase() ===
+                        this.dataUrl.levelName.toLowerCase()
                 );
                 this.selectedLevelObj = selectedLevelObj;
                 this.levelCode = this.selectedLevelObj.levelCode;
@@ -183,6 +185,13 @@ export class LocationUpdateComponent implements OnInit {
             },
             (err) => {
                 console.log('No encuentra NADA');
+                Swal.fire(
+                    'Advertencia',
+                    'El registro no existe',
+                    'warning'
+                ).then(() => {
+                    this.router.navigate(['/admin/location']);
+                });
             }
         );
     }
@@ -196,7 +205,7 @@ export class LocationUpdateComponent implements OnInit {
             });
             return;
         }
-        const id = this.activatedRoute.snapshot.params.id;
+        const uuid = this.activatedRoute.snapshot.params.uuid;
 
         if (this.parentLevel < 1) {
             this.parentLevel = null;
@@ -215,7 +224,7 @@ export class LocationUpdateComponent implements OnInit {
 
         console.log('const location', newLocation);
 
-        this.locationService.update(id, newLocation).subscribe(
+        this.locationService.update(uuid, newLocation).subscribe(
             (data) => {
                 console.log('Hola');
                 Swal.fire({
@@ -282,7 +291,7 @@ export class LocationUpdateComponent implements OnInit {
                 !this.levelName ||
                 !this.name
             ) {
-                console.log('if');
+                console.log('if 1');
                 this.errorMessage = 'Por favor, completa todos los campos.';
                 return false;
             }
@@ -295,7 +304,7 @@ export class LocationUpdateComponent implements OnInit {
                 !this.levelName ||
                 !this.name
             ) {
-                console.log('if');
+                console.log('if 2');
                 this.errorMessage = 'Por favor, completa todos los campos.';
                 return false;
             }

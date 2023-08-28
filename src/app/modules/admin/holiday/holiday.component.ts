@@ -15,6 +15,7 @@ import {
 } from '../geostructure/geostructure-model/geostructure';
 import { Holiday } from './holiday-model/holiday';
 import { HolidayService } from '../../../services/holiday.service';
+import { ActivatedRoute, Router, Resolve } from '@angular/router';
 
 @Component({
     selector: 'app-holiday',
@@ -26,6 +27,7 @@ export class HolidayComponent implements OnInit {
     holidays: Holiday[] = [];
     searchTerm: string = '';
     selectedPais: string = '';
+    selectedPaisWeekend: string = '';
     filteredHolidays: Holiday[] = [];
     selectedRowIndex: number = -1;
     showButtons: boolean = false;
@@ -37,12 +39,23 @@ export class HolidayComponent implements OnInit {
 
     paises: Geostructure[] = [];
 
+    isModalOpen: boolean = false;
+    yearOptions: number[] = [];
+    selectedYear: number;
+    monthOptions: { name: string; value: number }[] = [];
+    selectedMonth: number;
+    saturday: boolean = false;
+    sunday: boolean = false;
+
     constructor(
         private geostructureService: GeostructureService,
-        private HolidayService: HolidayService
+        private HolidayService: HolidayService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
+        this.generateYearOptions();
+        this.generateMonthOptions();
         this.getGeostructures();
 
         this.range.controls.start.valueChanges.subscribe((startDate) => {
@@ -61,6 +74,52 @@ export class HolidayComponent implements OnInit {
         });
     }
 
+    generateYearOptions() {
+        const currentYear = new Date().getFullYear();
+        const startYear = 2000; // Puedes ajustar este valor según tus necesidades
+
+        for (let year = currentYear; year >= startYear; year--) {
+            this.yearOptions.push(year);
+        }
+
+        this.selectedYear = currentYear; // Opcional: Establece un valor predeterminado
+    }
+
+    generateMonthOptions() {
+        const monthNames = [
+            'Enero',
+            'Febrero',
+            'Marzo',
+            'Abril',
+            'Mayo',
+            'Junio',
+            'Julio',
+            'Agosto',
+            'Septiembre',
+            'Octubre',
+            'Noviembre',
+            'Diciembre',
+        ];
+
+        for (let month = 1; month <= 12; month++) {
+            this.monthOptions.push({
+                name: monthNames[month - 1],
+                value: month,
+            });
+        }
+
+        const currentMonth = new Date().getMonth() + 1; // +1 porque los meses comienzan en 0
+        this.selectedMonth = currentMonth; // Opcional: Establece un valor predeterminado
+    }
+
+    openModal() {
+        this.isModalOpen = true;
+    }
+
+    closeModal() {
+        this.isModalOpen = false;
+    }
+
     getGeostructures(): void {
         this.geostructureService.list().subscribe((data) => {
             console.log(data);
@@ -74,6 +133,11 @@ export class HolidayComponent implements OnInit {
         console.log(pais);
         this.selectedPais = pais;
         this.getHolidays(pais);
+    }
+
+    onSelectMonth(month: number) {
+        console.log(month);
+        this.selectedMonth = month;
     }
 
     range = new FormGroup({
@@ -102,6 +166,82 @@ export class HolidayComponent implements OnInit {
             return isDateInRange && isNameMatch;
         });
         this.showButtons = false;
+    }
+
+    onCreate() {
+        console.log('onCreate');
+
+        const monthVal = this.monthOptions.find(
+            (month) => month.value === Number(this.selectedMonth)
+        );
+
+        console.log('month', monthVal);
+
+        Swal.fire({
+            title: 'Advertencia',
+            text:
+                'Se crearán los feriados de ' +
+                monthVal.name +
+                ' del año ' +
+                this.selectedYear,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#16a34a',
+            cancelButtonColor: '#dc2626',
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (
+                    (!this.saturday && !this.sunday) ||
+                    !this.selectedPaisWeekend
+                ) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Datos incorrectos, vuele a intentarlo',
+                        icon: 'error',
+                    });
+                } else {
+                    const weekendaArr = {
+                        selectedPaisWeekend: this.selectedPaisWeekend,
+                        selectedYear: this.selectedYear,
+                        selectedMonth: this.selectedMonth,
+                        saturday: '' + this.saturday,
+                        sunday: '' + this.sunday,
+                    };
+
+                    console.log('weekendaArr', weekendaArr);
+
+                    this.HolidayService.generateWeekends(
+                        this.selectedPaisWeekend,
+                        this.selectedYear,
+                        this.selectedMonth,
+                        this.saturday,
+                        this.sunday
+                    ).subscribe(
+                        (data) => {
+                            Swal.fire(
+                                'Listo',
+                                'Se han creado los registros de fin de semana del mes ' +
+                                    monthVal.name +
+                                    ' del año ' +
+                                    this.selectedYear,
+                                'success'
+                            ).then(() => {
+                                window.location.reload();
+                            });
+                        },
+                        (err) => {
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'Hubo un error al ejecutra la transacción',
+                                icon: 'error',
+                            });
+                        }
+                    );
+                }
+            }
+        });
     }
 
     //Datos desplegados

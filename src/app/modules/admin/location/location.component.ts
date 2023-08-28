@@ -130,8 +130,9 @@ export class LocationComponent implements OnInit {
             cancelButtonText: 'Cancelar',
         }).then((result) => {
             if (result.isConfirmed) {
-                this.geostructureService.delete(code).subscribe(
-                    (data) => {
+                this.locationService.delete(code).subscribe(
+                    (response) => {
+                        console.log('Respuesta exitosa:', response);
                         Swal.fire(
                             'Listo',
                             'El registro ha sido deshabilitado',
@@ -139,6 +140,7 @@ export class LocationComponent implements OnInit {
                         ).then(() => {});
                     },
                     (err) => {
+                        console.error('Error en la solicitud:', err);
                         Swal.fire({
                             title: 'Error',
                             text: 'Hubo un error al ejecutar la transacción',

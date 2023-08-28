@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GeostructureService } from 'app/services/geostructure.service';
 import { LocationService } from 'app/services/location.service';
 import Swal from 'sweetalert2';
+import { toLower } from 'lodash';
 import {
     Geostructure,
     GeostructureLevel,
@@ -69,7 +70,9 @@ export class LocationDetailComponent implements OnInit {
                 this.levels = data.geoStructures;
                 console.log('this.levels', this.levels);
                 const selectedLevelObj = this.levels.find(
-                    (level) => level.name === this.dataUrl.levelName
+                    (level) =>
+                        level.name.toLowerCase() ===
+                        this.dataUrl.levelName.toLowerCase()
                 );
                 this.selectedLevelObj = selectedLevelObj;
                 this.levelCode = this.selectedLevelObj.levelCode;
@@ -88,7 +91,8 @@ export class LocationDetailComponent implements OnInit {
                             console.log('thisParentName', this.levelParentName);
                             const selectedElementObj = this.elements.find(
                                 (element) =>
-                                    element.name === this.levelParentName
+                                    element.name.toLowerCase() ===
+                                    this.levelParentName.toLowerCase()
                             );
                             console.log(
                                 'selectedElementObj',
@@ -117,6 +121,13 @@ export class LocationDetailComponent implements OnInit {
             },
             (err) => {
                 console.log('No encuentra NADA');
+                Swal.fire(
+                    'Advertencia',
+                    'El registro no existe',
+                    'warning'
+                ).then(() => {
+                    this.router.navigate(['/admin/location']);
+                });
             }
         );
     }

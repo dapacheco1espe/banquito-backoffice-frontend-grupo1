@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import { Agency } from '../model/agency';
 import { AgencyService } from 'app/services/agency.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-agency-detail',
@@ -30,7 +31,13 @@ export class AgencyDetailComponent implements OnInit {
             },
             (err) => {
                 console.log('No encuentra NADA');
-                this.router.navigate(['']);
+                Swal.fire(
+                    'Advertencia',
+                    'El registro no existe',
+                    'warning'
+                ).then(() => {
+                    this.router.navigate(['/admin/agency']);
+                });
             }
         );
     }

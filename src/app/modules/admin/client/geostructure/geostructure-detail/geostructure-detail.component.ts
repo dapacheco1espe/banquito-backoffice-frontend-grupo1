@@ -37,7 +37,13 @@ export class GeostructureDetailComponent implements OnInit {
             },
             (err) => {
                 console.log('No encuentra NADA');
-                this.router.navigate(['']);
+                Swal.fire(
+                    'Advertencia',
+                    'El registro no existe',
+                    'warning'
+                ).then(() => {
+                    this.router.navigate(['/admin/geostructure']);
+                });
             }
         );
     }
