@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     // Home Module
@@ -74,7 +73,14 @@ const routes: Routes = [
                 'app/modules/admin/client/gestion-juridicos/gestion-juridicos.module'
             ).then((m) => m.GestionJuridicosModule),
     },
-
+    // Gestion Cuentas
+    {
+        path: 'gestion-cuentas',
+        loadChildren: () =>
+            import(
+                'app/modules/admin/client/gestion-cuentas/gestion-cuentas.module'
+            ).then((m) => m.GestionCuentasModule),
+    },
     {
         path: 'create-naturales',
         loadChildren: () =>
