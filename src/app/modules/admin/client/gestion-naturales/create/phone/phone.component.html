@@ -1,0 +1,47 @@
+<div class="container mx-auto mt-5 bg-white w-full">
+  <div class="max-w-md mx-auto">
+    <h4 class="text-center text-lg font-bold">Crear Telefonos</h4>
+    <form [formGroup]="phoneForm" (ngSubmit)="onUpdate()">
+      <!-- Agregar campo oculto isDefault siempre con valor true -->
+      <div class="mb-3">
+        <label for="name" class="block text-sm font-medium text-gray-700">Nombre:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="firstName" name="name" [value]="cliente.firstName" placeholder="Ingrese el nombre" autocomplete="off"  formControlName="firstName" disabled>
+      </div>
+      <div class="mb-3">
+        <label for="name" class="block text-sm font-medium text-gray-700">Apellido:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="firstName" name="name" [value]="cliente.lastName" placeholder="Ingrese el nombre" autocomplete="off"  formControlName="firstName" disabled>
+      </div>
+      <div class="mb-3">
+        <label for="name" class="block text-sm font-medium text-gray-700">Cedula:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="firstName" name="name" [value]="cliente.documentId" placeholder="Ingrese el nombre" autocomplete="off"  formControlName="firstName" disabled>
+      </div>
+      <div class="mb-3">
+        <label for="phoneType" class="block text-sm font-medium text-gray-700">Tipo Telefono:</label>
+        <select id="phoneType" formControlName="phoneType" class="form-select mt-1 block w-full">
+          <option value="OFI">Oficina</option>
+          <option value="HOM">Casa</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Numero Telefono:</label>
+        <input type="text" class="form-input mt-1 block w-full"
+               id="phoneNumber" formControlName="phoneNumber" placeholder="Ingrese el numero de telefono"
+               autocomplete="off">
+        <div *ngIf="phoneForm.get('phoneNumber').invalid && (phoneForm.get('phoneNumber').dirty || phoneForm.get('phoneNumber').touched)"
+             class="text-red-500 mt-1">
+          Número de teléfono es requerido y debe contener solo números.
+        </div>
+      </div>
+      <button class="bg-green-500 text-white font-bold py-2 px-4 w-full mb-3" (click)="onUpdate()">
+        <i class="far fa-edit"></i> Agregar Dirección
+      </button>
+      <button class="bg-blue-500 text-white font-bold py-2 px-4 w-full" routerLink="../../">
+        <i class="fas fa-arrow-alt-circle-left"></i> Regresar
+      </button>
+    </form>
+    <button class="bg-indigo-500 text-white font-bold py-2 px-4 w-full mt-3" (click)="addAnotherPhone()">
+      <i class="fas fa-plus-circle"></i> Agregar Otro Teléfono
+    </button>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="container mx-auto mt-5 bg-white w-full">
+  <div class="max-w-md mx-auto">
+    <h4 class="text-center text-lg font-bold">Actualizar Cliente</h4>
+    <form (ngSubmit)="onUpdate()" novalidate #f="ngForm">
+      <div class="mb-3">
+        <label for="name" class="block text-sm font-medium text-gray-700">Nombre:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="name" name="name" placeholder="Ingrese el nombre" autocomplete="off"  [(ngModel)]="cliente.firstName">
+      </div>
+      
+      <div class="mb-3">
+        <label for="lastname" class="block text-sm font-medium text-gray-700">Apellido:</label>
+        <input type="text" class="form-input mt-1 block w-full" id="lastname" name="lastname" placeholder="Ingrese el apellido" autocomplete="off"[(ngModel)]="cliente.lastName">
+      </div>
+      <div class="mb-3">
+        <label for="gender" class="block text-sm font-medium text-gray-700">Género:</label>
+        <select id="gender" name="gender" class="form-select mt-1 block w-full" [(ngModel)]="cliente.gender">
+          <option value="MAS">Masculino</option>
+          <option value="FEM">Femenino</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico:</label>
+        <input type="email" class="form-input mt-1 block w-full" id="email" name="email" placeholder="Ingrese el correo electrónico" autocomplete="off"  [(ngModel)]="cliente.emailAddress">
+      </div>
+      <div class="mb-3">
+        <label for="phoneNumber" class="block text-sm font-medium text-gray-700">Teléfono:</label>
+        <input type="phoneNumber" class="form-input mt-1 block w-full" id="phoneNumber" name="phoneNumber" placeholder="Ingrese el telefono" autocomplete="off"  [(ngModel)]="cliente.phoneNumbers[0].phoneNumber">
+      </div>
+      <div class="mb-3">
+        <label for="addresses" class="block text-sm font-medium text-gray-700"> Calle Principal</label>
+        <input type="addresses" class="form-input mt-1 block w-full" id="addresses" name="addresses" placeholder="Calle Principal" autocomplete="off"  [(ngModel)]="cliente.addresses[0].line1">
+      </div>
+      <div class="mb-3">
+        <label for="addresses1" class="block text-sm font-medium text-gray-700">Calle Secundaria</label>
+        <input type="addresses1" class="form-input mt-1 block w-full" id="addresses1" name="addresses1" placeholder="Calle Secundaria" autocomplete="off"  [(ngModel)]="cliente.addresses[0].line2">
+      </div>
+      <div class="mb-3">
+        <label for="role" class="block text-sm font-medium text-gray-700">Rol:</label>
+        <select id="role" name="role" class="form-select mt-1 block w-full" [(ngModel)]="cliente.role">
+          <option value="BEN">Beneficiario</option>
+          <option value="DUE">Dueño</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="comments" class="block text-sm font-medium text-gray-700">Comentarios:</label>
+        <textarea class="form-textarea mt-1 block w-full" id="comments" name="comments" rows="3" placeholder="Ingrese los comentarios" [(ngModel)]="cliente.comments"></textarea>
+      </div>
+      <button class="bg-green-500 text-white font-bold py-2 px-4 w-full mb-3" [disabled]="!f.valid">
+        <i class="far fa-edit"></i> Actualizar
+      </button>
+      <button class="bg-blue-500 text-white font-bold py-2 px-4 w-full" routerLink="../../">
+        <i class="fas fa-arrow-alt-circle-left"></i> Regresar
+      </button>
+    </form>
+  </div>
+</div>
