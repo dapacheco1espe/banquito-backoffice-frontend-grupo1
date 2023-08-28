@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
+import { AccountRQ } from '../Models/AccountRQ';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,9 @@ export class GestionCuentasService {
 
   public getCompanyByGroupName(groupName:string):Observable<any>{
     return this._http.get(`${this._baseURL}/v2/companies/${groupName}`);
+  }
+
+  public createCompany(accountRQ:AccountRQ):Observable<any>{
+    return this._http.post(`${this._baseURL}/v1/accounts`,accountRQ);
   }
 }
