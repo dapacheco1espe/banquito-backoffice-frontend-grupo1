@@ -20,6 +20,7 @@ export class GestionCuentasService {
   }
 
   public createCompany(accountRQ:AccountRQ):Observable<any>{
+    this._baseURL = environment.apiURLAccounts;
     return this._http.post(`${this._baseURL}/v1/accounts`,accountRQ);
   }
 }
