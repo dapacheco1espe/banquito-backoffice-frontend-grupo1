@@ -13,7 +13,42 @@
         </div>
     </div>
     <div class="border-b"></div>
-    <main>
+    <main class="flex flex-col">
+        <div class="flex flex-row gap-3 w-full p-6">
+            <mat-form-field class="w-full sm:w-1/2 input-search">
+                <mat-label>Busca la empresa para crear una cuenta</mat-label>
+                <span matPrefix>
+                    <mat-icon class="icon-size-4" svgIcon="heroicons_outline:search"></mat-icon>
+                </span>
+                <input matInput [formControl]="searchInputControl" type="text" placeholder="Buscar empresa">
+            </mat-form-field>
+            <div class="w-full sm:w-1/2 flex flex-row items-center flex-wrap" *ngIf="company.uniqueKey !='';else emptyCompany">
+                <div class="font-bold text-lg  flex flex-col w-1/2 text-center">Empresa <span class="text-md font-medium text-gray-500">{{company.groupName}}</span></div>
+                <div class="font-bold text-lg  flex flex-col w-1/2 text-center">Email <span class="text-md font-medium text-gray-500">{{company.emailAddress }}</span></div>
+                <div class="font-bold text-lg  flex flex-col w-1/2 text-center">Direccion <span class="text-md font-medium text-gray-500">{{company.line1}} {{company.line2 != null && company.line2 !='' ? "y "+company.line2 : ''}}</span></div>
+                <div class="font-bold text-lg  flex flex-col w-1/2 text-center">Telefono <span class="text-md font-medium text-gray-500">{{company.phoneNumber}}</span></div>
+                <button mat-flat-button color="primary" class="place-content-center w-full mt-4" (click)="enableOtherFieldsToCreateAccount();">Usar empresa para crear cuenta</button>
+            </div>
+            <ng-template #emptyCompany>
+                <p class="text-gray-500 text-lg font-semibold text-center align-middle">No se han encontrado empresas con el nombre proporcionado. Inicia una nueva búsqueda</p>
+            </ng-template>
+        </div>
+        <div class="border-b"></div>
+        <div class="flex flex-row gap-3 w-full p-6" [hidden]="!isEnabledMoreFields">
+            <form class="w-1/2">
+                <mat-form-field class="w-1/2">
+                    <mat-label>Seleccione el tipo de cuenta</mat-label>
+                    <mat-select>
+                      <mat-option value="AHO">
+                        Cuenta de Ahorros
+                      </mat-option>
+                      <mat-option value="CO">
+                        Cuenta Corriente
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
 
+            </form>
+        </div>
     </main>
 </div>
