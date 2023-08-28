@@ -10,7 +10,6 @@ import { AccountRQ } from '../Models/AccountRQ';
 })
 export class GestionCuentasService {
   private _baseURL:string ;
-  private _company
   constructor(private _http:HttpClient) {
     this._baseURL = environment.apiURLClient;
   }
