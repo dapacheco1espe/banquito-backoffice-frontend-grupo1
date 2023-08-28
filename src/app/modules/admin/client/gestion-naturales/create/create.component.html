@@ -16,7 +16,6 @@
             <label for="branchId" class="block mb-1">Sucursal:</label>
             <select id="branchId" name="branchId" class="w-full border-gray-300 border p-2 rounded h-10"
               [(ngModel)]="branchId" required>
-              <option value="">Seleccione Sucursal</option>
               <option *ngFor="let agencia of agencias" [value]="agencia.code">{{ agencia.name }}</option>
             </select>
           </div>
@@ -72,7 +71,6 @@
             <label for="gender" class="block mb-1">Género:</label>
             <select id="gender" name="gender" class="w-full border-gray-300 border p-2 rounded h-10"
               [(ngModel)]="gender" required>
-              <option value="">Seleccione Género</option>
               <option value="MAS">Masculino</option>
               <option value="FEM">Femenino</option>
             </select>

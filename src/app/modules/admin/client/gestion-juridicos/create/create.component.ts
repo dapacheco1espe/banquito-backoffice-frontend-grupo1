@@ -5,11 +5,12 @@ import { Company } from '../model/company';
 
 import Swal from 'sweetalert2';
 import { CompanyMember } from '../model/companyMember';
-import { Agency } from '../../agency/agency-model/agency';
-import { Location } from '../../location/location-model/location';
+
+import { Location } from 'app/modules/admin/location/location-model/location';
 import { AgencyService } from 'app/services/agency.service';
 import { LocationService } from 'app/services/location.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Agency } from 'app/modules/admin/agency/agency-model/agency';
 
 
 @Component({
@@ -110,7 +111,7 @@ export class CreateComponent implements OnInit {
             this.isSaved = true;
             this.errorMessage = null;
             // Opcional: Puedes redirigir a otra página o realizar alguna acción adicional
-            this.router.navigate(['/gestion/gestion-juridicos/createRole/' + this.createForm.value.groupName]);
+            this.router.navigate(['/admin/gestion-juridicos/createRole/' + this.createForm.value.groupName]);
           });
         },
         err => {

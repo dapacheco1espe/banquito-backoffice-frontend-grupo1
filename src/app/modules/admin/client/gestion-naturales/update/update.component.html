@@ -35,11 +35,8 @@
         <input type="addresses1" class="form-input mt-1 block w-full" id="addresses1" name="addresses1" placeholder="Calle Secundaria" autocomplete="off"  [(ngModel)]="cliente.addresses[0].line2">
       </div>
       <div class="mb-3">
-        <label for="role" class="block text-sm font-medium text-gray-700">Rol:</label>
-        <select id="role" name="role" class="form-select mt-1 block w-full" [(ngModel)]="cliente.role">
-          <option value="BEN">Beneficiario</option>
-          <option value="DUE">Dueño</option>
-        </select>
+        <label for="role1" class="block text-sm font-medium text-gray-700">Rol: </label>
+        <input type="role1" class="form-input mt-1 block w-full" id="role1" name="role1" placeholder="Rol" autocomplete="off"  [(ngModel)]="cliente.role" disabled>
       </div>
       <div class="mb-3">
         <label for="comments" class="block text-sm font-medium text-gray-700">Comentarios:</label>
@@ -48,7 +45,7 @@
       <button class="bg-green-500 text-white font-bold py-2 px-4 w-full mb-3" [disabled]="!f.valid">
         <i class="far fa-edit"></i> Actualizar
       </button>
-      <button class="bg-blue-500 text-white font-bold py-2 px-4 w-full" routerLink="../../">
+      <button class="bg-blue-500 text-white font-bold py-2 px-4 w-full" routerLink="../">
         <i class="fas fa-arrow-alt-circle-left"></i> Regresar
       </button>
     </form>

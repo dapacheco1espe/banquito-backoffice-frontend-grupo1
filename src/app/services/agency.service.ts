@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
-import { Agency } from 'app/modules/admin/client/agency/agency-model/agency';
-import { Geolocation } from 'app/modules/admin/client/geostructure/geostructure-model/geolocation';
+
+import { Geolocation } from 'app/modules/admin/geostructure/geostructure-model/geolocation';
+import { Agency } from 'app/modules/admin/agency/agency-model/agency';
 
 @Injectable({
     providedIn: 'root',
@@ -80,4 +81,6 @@ export class AgencyService {
             null
         );
     }
+    
+    
 }
