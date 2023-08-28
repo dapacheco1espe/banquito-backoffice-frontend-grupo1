@@ -29,6 +29,7 @@ export class GeostructureUpdateComponent implements OnInit {
 
     newElement!: string;
     level: any;
+    insertLevelFlag: boolean = true;
 
     isSaved: boolean | null = null;
     errorMessage: string | null = null;
@@ -63,7 +64,13 @@ export class GeostructureUpdateComponent implements OnInit {
             },
             (err) => {
                 console.log('No encuentra NADA');
-                this.router.navigate(['']);
+                Swal.fire(
+                    'Advertencia',
+                    'El registro no existe',
+                    'warning'
+                ).then(() => {
+                    this.router.navigate(['/admin/geostructure']);
+                });
             }
         );
     }
@@ -79,6 +86,8 @@ export class GeostructureUpdateComponent implements OnInit {
             return;
         }
 
+        this.geostructureLevels = [];
+
         this.items.forEach((element) => {
             console.log('element', element);
             console.log('index', index);
@@ -90,12 +99,14 @@ export class GeostructureUpdateComponent implements OnInit {
             index++;
         });
 
+        console.log('geostructureLevels', this.geostructureLevels);
+
         const id = this.activatedRoute.snapshot.params.id;
 
         const anyArr = {
             name: this.name,
             phoneCode: this.phoneCode,
-            geoStructures: this.geoStructures,
+            geoStructures: this.geostructureLevels,
         };
 
         console.log('enviar a back', anyArr);
@@ -161,10 +172,20 @@ export class GeostructureUpdateComponent implements OnInit {
             this.items.push(this.newElement);
             this.newElement = ''; // Limpiar el campo de entrada después de agregar
             console.log('this.items', this.items);
+            if (this.items.length > 4) {
+                this.insertLevelFlag = false;
+            } else {
+                this.insertLevelFlag = true;
+            }
         }
     }
 
     deleteElement(index: number) {
         this.items.splice(index, 1);
+        if (this.items.length > 4) {
+            this.insertLevelFlag = false;
+        } else {
+            this.insertLevelFlag = true;
+        }
     }
 }

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -12,7 +11,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    public navigateToPages(page: 'admin-management' | 'gestion') {
+    public navigateToPages(page: 'admin-management' | 'gestion' | 'gestion-cuentas') {
         this.router.navigateByUrl(`/admin/${page}`);
     }
 }

@@ -30,4 +30,31 @@ export class HolidayService {
     public update(uuid: any, holiday: any): Observable<any> {
         return this.http.put(this.baseURL + '/holiday/update/' + uuid, holiday);
     }
+
+    public generateWeekends(
+        countryId: any,
+        year: any,
+        month: any,
+        saturday: any,
+        sunday: any
+    ) {
+        return this.http.post(
+            this.baseURL +
+                '/holiday/holidayCountry/generate-weekends/' +
+                countryId +
+                '?year=' +
+                year +
+                '&month=' +
+                month +
+                '&saturday=' +
+                saturday +
+                '&sunday=' +
+                sunday,
+            null
+        );
+    }
+
+    public delete(uuid: any): Observable<any> {
+        return this.http.put(this.baseURL + '/holiday/delete/' + uuid, uuid);
+    }
 }

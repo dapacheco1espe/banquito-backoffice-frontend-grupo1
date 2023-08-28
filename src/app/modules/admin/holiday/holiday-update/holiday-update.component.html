@@ -45,15 +45,31 @@
                 >
                     Fecha del Feriado
                 </label>
-                <input
-                    type="date"
+                <!-- <input
+                    type="text"
                     id="date"
                     name="date"
                     class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                     autocomplete="off"
                     required
                     [(ngModel)]="holidayDate"
-                />
+                    [value]="holidayDate | date : 'yyyy-MM-dd'"
+                /> -->
+                <mat-form-field class="w-full">
+                    <input
+                        id="date"
+                        name="date"
+                        matInput
+                        [matDatepicker]="picker"
+                        [(ngModel)]="holidayDate"
+                    />
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle
+                        matIconSuffix
+                        [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
                 <div
                     *ngIf="f.submitted && f.controls.date.invalid"
                     class="text-red-500 text-xs italic"
@@ -201,7 +217,7 @@
                 </button>
                 <a
                     class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                    href="/admin/agency"
+                    href="/admin/holiday"
                 >
                     Regresar
                 </a>

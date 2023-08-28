@@ -8,13 +8,13 @@ import { Location } from 'app/modules/admin/location/location-model/location';
     providedIn: 'root',
 })
 export class LocationService {
-    private baseURL = environment.administrationAPIUrl;
+    private baseURL = environment.administrationAPIUrl + '/api/v1';
     constructor(private http: HttpClient) {}
 
     public list(countryCode: any, level: any): Observable<Location[]> {
         return this.http.get<Location[]>(
             this.baseURL +
-                '/api/v1/geoLocation/countryCode-levelCode/' +
+                '/geoLocation/countryCode-levelCode/' +
                 countryCode +
                 '/' +
                 level
@@ -22,14 +22,31 @@ export class LocationService {
     }
     public listAllLocations(): Observable<Location[]> {
         return this.http.get<Location[]>(
-            this.baseURL + '/api/v1/geoLocation/countryCode-levelCode/ECU/1'
+            this.baseURL + '/geoLocation/countryCode-levelCode/ECU/1'
         );
     }
 
     public create(location: any): Observable<any> {
         return this.http.post<any>(
-            this.baseURL + '/api/v1/geoLocation/create',
+            this.baseURL + '/geoLocation/create',
             location
         );
+    }
+
+    public detail(uuid: any): Observable<Location> {
+        return this.http.get<Location>(
+            this.baseURL + '/geoLocation/findByUuid/' + uuid
+        );
+    }
+
+    public update(code: any, location: any): Observable<any> {
+        return this.http.put(
+            this.baseURL + '/geoLocation/update/' + code,
+            location
+        );
+    }
+
+    public delete(code: any): Observable<any> {
+        return this.http.delete(this.baseURL + '/geoLocation/delete/' + code);
     }
 }

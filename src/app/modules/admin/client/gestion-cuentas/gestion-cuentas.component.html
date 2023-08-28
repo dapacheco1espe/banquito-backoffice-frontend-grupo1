@@ -1,0 +1,33 @@
+<div class="w-full rounded-md bg-white">
+    <div class="p-6 justify-between items-center flex flex-row w-full">
+        <h2 class="font-bold text-xl">Cuentas Juridicas</h2>
+        <div class="flex flex-row items-center gap-4">
+            <mat-form-field class="w-72">
+                <span matPrefix>
+                    <mat-icon class="icon-size-4" svgIcon="heroicons_outline:search"></mat-icon>
+                </span>
+                <input matInput type="text" placeholder="Buscar">
+            </mat-form-field>
+            <button mat-flat-button color="primary" (click)="navigateToPages('management');">Agregar</button>
+        </div>
+    </div>
+    <div class="border-b"></div>
+    <div class="flex">
+        <table class="border-collapse w-full table-auto mt-4 overflow">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2 bg-gray-50">Nro.</th>
+                    <th class="px-4 py-2 bg-gray-50">Ubicación</th>
+                    <th class="px-4 py-2 bg-gray-50">Nombre</th>
+                    <th class="px-4 py-2 bg-gray-50">Estado</th>
+                    <th class="px-4 py-2 bg-gray-50">Email</th>
+                    <th class="px-4 py-2 bg-gray-50">Teléfono</th>
+                    <th class="px-4 py-2 bg-gray-50">Dirección</th>
+                    <th class="px-4 py-2 bg-gray-50">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
