@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    apiResrURL: 'https://banquito-ws-client-zsorzzk5da-uc.a.run.app/api',
+    apiResrURL: 'https://banquito-ws-client-zsorzzk5da-uc.a.run.app/',
     administrationAPIUrl:
         'https://banquito-ws-administracion2-zsorzzk5da-uc.a.run.app/',
     apiURLClient: 'https://banquito-ws-client-zsorzzk5da-uc.a.run.app/api',
