@@ -134,6 +134,15 @@ export class HolidayUpdateComponent implements OnInit {
         return true;
     }
 
+    formatDateToMMDDYYYY(inputDate: string): string {
+        const date = new Date(inputDate); // Convertir la cadena en un objeto Date
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        const year = date.getFullYear();
+
+        return `${year}-${month}-${day}`;
+    }
+
     getDetail(): void {
         const uuid = this.activatedRoute.snapshot.params.uuid;
         this.holidayService.detail(uuid).subscribe(
@@ -148,7 +157,13 @@ export class HolidayUpdateComponent implements OnInit {
             },
             (err) => {
                 console.log('No encuentra NADA');
-                this.router.navigate(['']);
+                Swal.fire(
+                    'Advertencia',
+                    'El registro no existe',
+                    'warning'
+                ).then(() => {
+                    this.router.navigate(['/admin/holiday']);
+                });
             }
         );
     }

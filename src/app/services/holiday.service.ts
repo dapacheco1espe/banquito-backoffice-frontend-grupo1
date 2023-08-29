@@ -53,4 +53,8 @@ export class HolidayService {
             null
         );
     }
+
+    public delete(uuid: any): Observable<any> {
+        return this.http.put(this.baseURL + '/holiday/delete/' + uuid, uuid);
+    }
 }

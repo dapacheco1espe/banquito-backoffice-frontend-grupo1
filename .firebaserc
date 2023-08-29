@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "bquito-g1-boffice": {
+      "hosting": {
+        "fuse": [
+          "dist/bquito-g1-boffice"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "bquito-g1-boffice"
+  }
+}

@@ -131,6 +131,7 @@ export class HolidayComponent implements OnInit {
 
     onSelectPais(pais: string) {
         console.log(pais);
+        this.holidays = [];
         this.selectedPais = pais;
         this.getHolidays(pais);
     }
@@ -261,5 +262,41 @@ export class HolidayComponent implements OnInit {
                 return isDateInRange && isNameMatch;
             })
             .slice(startIndex, endIndex);
+    }
+
+    mostrarAdvertencia(code: any) {
+        // Utilizamos SweetAlert para mostrar la alerta
+        console.log(code);
+        Swal.fire({
+            title: 'Advertencia',
+            text: 'Esta acción inactivará el registro. ¿Estás seguro?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, borrar',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.HolidayService.delete(code).subscribe(
+                    (data) => {
+                        Swal.fire(
+                            'Listo',
+                            'El registro ha sido deshabilitado',
+                            'success'
+                        ).then(() => {
+                            window.location.reload();
+                        });
+                    },
+                    (err) => {
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'Hubo un error al ejecutra la transacción',
+                            icon: 'error',
+                        });
+                    }
+                );
+            }
+        });
     }
 }
