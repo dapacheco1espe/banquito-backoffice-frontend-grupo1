@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GeostructureService } from 'app/services/geostructure.service';
 import { LocationService } from 'app/services/location.service';
 import Swal from 'sweetalert2';
-import { toLower } from 'lodash';
 import {
     Geostructure,
     GeostructureLevel,
@@ -55,10 +54,10 @@ export class LocationUpdateComponent implements OnInit {
 
     getGeostructures(): void {
         this.geostructureService.list().subscribe((data) => {
-            console.log(data);
+            //(data);
             this.paises = data;
-            console.log(this.paises);
-            console.log(this.paises.length);
+            //(this.paises);
+            //(this.paises.length);
         });
     }
 
@@ -66,9 +65,9 @@ export class LocationUpdateComponent implements OnInit {
         this.geostructureService
             .getGeostructureByCode(pais)
             .subscribe((data) => {
-                console.log('getLevelsPorPais', data.geoStructures);
+                //('getLevelsPorPais', data.geoStructures);
                 this.levels = data.geoStructures;
-                console.log('this.levels', this.levels);
+                //('this.levels', this.levels);
                 const selectedLevelObj = this.levels.find(
                     (level) =>
                         level.name.toLowerCase() ===
@@ -79,17 +78,17 @@ export class LocationUpdateComponent implements OnInit {
                 this.levelName = this.selectedLevelObj.name;
                 this.levelParentName = this.dataUrl.levelParentName;
                 this.parentLevel = this.levelCode - 1;
-                console.log('parentLevel', this.parentLevel);
+                //('parentLevel', this.parentLevel);
                 if (this.parentLevel > 0) {
                     this.highLevel = false;
                     this.locationService
                         .list(this.selectedPais, this.parentLevel)
                         .subscribe((data) => {
-                            console.log('pronz', data);
+                            //('pronz', data);
                             this.elements = data;
-                            console.log(this.elements);
-                            console.log('thisParentName', this.levelParentName);
-                            console.log(
+                            //(this.elements);
+                            //('thisParentName', this.levelParentName);
+                            //(
                                 'thisSelecteLevel before',
                                 this.selectedLevelObj
                             );
@@ -100,12 +99,12 @@ export class LocationUpdateComponent implements OnInit {
                                     element.name.toLowerCase() ===
                                     lowerLevelName
                             );
-                            console.log(
+                            //(
                                 'selectedElementObj',
                                 selectedElementObj
                             );
                             this.selectedElement = selectedElementObj.uuid;
-                            // console.log(
+                            // //(
                             //     'thisSelecteLevel after',
                             //     this.selectedLevelObj
                             // );
@@ -122,7 +121,7 @@ export class LocationUpdateComponent implements OnInit {
         this.selectedPais = '';
         this.selectedLevelObj = { levelCode: null, name: '' };
         this.selectedElement = null;
-        console.log(pais);
+        //(pais);
         this.selectedPais = pais;
         this.countryCode = this.selectedPais;
         this.getLevelsPorPais(pais);
@@ -131,19 +130,19 @@ export class LocationUpdateComponent implements OnInit {
     onSelectLevel(level: any) {
         //this.selectedLevel = null;
         this.elements = [];
-        console.log('level', level);
+        //('level', level);
         this.levelCode = level.levelCode;
         this.levelName = level.name;
         this.parentLevel = this.levelCode - 1;
-        console.log('parentLevel', this.parentLevel);
+        //('parentLevel', this.parentLevel);
         if (this.parentLevel > 0) {
             this.highLevel = false;
             this.locationService
                 .list(this.selectedPais, this.parentLevel)
                 .subscribe((data) => {
-                    console.log('pronz', data);
+                    //('pronz', data);
                     this.elements = data;
-                    console.log(this.elements);
+                    //(this.elements);
                 });
         } else if (this.parentLevel === 0) {
             this.highLevel = true;
@@ -154,13 +153,13 @@ export class LocationUpdateComponent implements OnInit {
     }
 
     onSelectElement(element: any) {
-        console.log('element', element);
+        //('element', element);
         this.getElementProperties(element);
     }
 
     getElementProperties(elementUuid: any) {
         this.geostructureService.getGeoById(elementUuid).subscribe((data) => {
-            console.log('data getGeoById', data);
+            //('data getGeoById', data);
             this.levelParentId = this.parentLevel;
             this.levelParentName = data.name;
         });
@@ -171,20 +170,20 @@ export class LocationUpdateComponent implements OnInit {
 
         this.locationService.detail(uuid).subscribe(
             (data) => {
-                console.log('getDetail', data);
+                //('getDetail', data);
                 this.dataUrl = data;
                 this.selectedPais = this.dataUrl.countryCode;
                 this.getLevelsPorPais(this.selectedPais);
                 this.name = this.dataUrl.name;
                 this.areaPhoneCode = this.dataUrl.areaPhoneCode;
                 this.zipCode = this.dataUrl.zipCode;
-                console.log(
+                //(
                     'thisSelecteLevel before getDetail',
                     this.selectedLevelObj
                 );
             },
             (err) => {
-                console.log('No encuentra NADA');
+                //('No encuentra NADA');
                 Swal.fire(
                     'Advertencia',
                     'El registro no existe',
@@ -222,11 +221,11 @@ export class LocationUpdateComponent implements OnInit {
             zipCode: this.zipCode,
         };
 
-        console.log('const location', newLocation);
+        //('const location', newLocation);
 
         this.locationService.update(uuid, newLocation).subscribe(
             (data) => {
-                console.log('Hola');
+                //('Hola');
                 Swal.fire({
                     title: '¡Éxito!',
                     text: 'La locaion se ha actualizado correctamente.',
@@ -258,7 +257,7 @@ export class LocationUpdateComponent implements OnInit {
 
         // this.agencyService.update(id, anyArr).subscribe(
         //     (data) => {
-        //         console.log('Hola');
+        //         //('Hola');
         //         Swal.fire({
         //             title: '¡Éxito!',
         //             text: 'La agencia se ha actualizado correctamente.',
@@ -291,7 +290,7 @@ export class LocationUpdateComponent implements OnInit {
                 !this.levelName ||
                 !this.name
             ) {
-                console.log('if 1');
+                //('if 1');
                 this.errorMessage = 'Por favor, completa todos los campos.';
                 return false;
             }
@@ -304,7 +303,7 @@ export class LocationUpdateComponent implements OnInit {
                 !this.levelName ||
                 !this.name
             ) {
-                console.log('if 2');
+                //('if 2');
                 this.errorMessage = 'Por favor, completa todos los campos.';
                 return false;
             }

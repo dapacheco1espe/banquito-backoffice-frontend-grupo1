@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { fuseAnimations } from '@fuse/animations';
-import Swal from 'sweetalert2';
-import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
-import { Cliente } from './model/cliente';
-import { ClienteService } from 'app/services/clienteService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { fuseAnimations } from '@fuse/animations';
+import { ClienteService } from 'app/services/clienteService';
+import Swal from 'sweetalert2';
+import { Cliente } from './model/cliente';
 
 @Component({
   selector: 'app-gestion-naturales',
@@ -31,7 +30,7 @@ export class GestionNaturalesComponent implements OnInit {
     this.clienteService.detail(this.typeDocumentId, this.documentId).subscribe(
       (data) => {
         this.cliente = data;
-        console.log(this.cliente);
+        //(this.cliente);
       },
       (err) => {
         // Mostrar mensaje de error con SweetAlert
@@ -42,7 +41,7 @@ export class GestionNaturalesComponent implements OnInit {
     this.clienteService.detail(this.typeDocumentId, this.documentId).subscribe(
       (data) => {
         this.cliente = data;
-        console.log(this.cliente);
+        //(this.cliente);
   
         // Mostrar mensaje de éxito con SweetAlert
         Swal.fire({

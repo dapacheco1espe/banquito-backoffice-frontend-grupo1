@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from './location-model/location';
+import { LocationService } from 'app/services/location.service';
+import Swal from 'sweetalert2';
+import { GeostructureService } from '../../../services/geostructure.service';
 import {
     Geostructure,
     GeostructureLevel,
 } from '../geostructure/geostructure-model/geostructure';
-import { GeostructureService } from '../../../services/geostructure.service';
-import { LocationService } from 'app/services/location.service';
-import Swal from 'sweetalert2';
+import { Location } from './location-model/location';
 
 @Component({
     selector: 'app-location',
@@ -40,16 +40,16 @@ export class LocationComponent implements OnInit {
 
     getGeostructures(): void {
         this.geostructureService.list().subscribe((data) => {
-            console.log(data);
+            //(data);
             this.paises = data;
-            console.log(this.paises);
-            console.log(this.paises.length);
+            //(this.paises);
+            //(this.paises.length);
         });
     }
 
     onSelectPais(pais: string) {
         this.locations = [];
-        console.log(pais);
+        //(pais);
         this.selectedPais = pais;
         this.selectedLevel = '';
         this.getLevelsPorPais(pais);
@@ -59,9 +59,9 @@ export class LocationComponent implements OnInit {
         this.locationService
             .list(this.selectedPais, level)
             .subscribe((data) => {
-                console.log(data);
+                //(data);
                 this.locations = data;
-                console.log(this.locations);
+                //(this.locations);
             });
     }
 
@@ -69,9 +69,9 @@ export class LocationComponent implements OnInit {
         this.geostructureService
             .getGeostructureByCode(pais)
             .subscribe((data) => {
-                console.log('getLevelsPorPais', data.geoStructures);
+                //('getLevelsPorPais', data.geoStructures);
                 this.levels = data.geoStructures;
-                console.log('this.levels', this.levels);
+                //('this.levels', this.levels);
             });
     }
 
@@ -109,7 +109,7 @@ export class LocationComponent implements OnInit {
     rowClick(index: number) {
         this.selectedRowIndex = index;
         this.showButtons = true;
-        console.log(this.selectedRowIndex);
+        //(this.selectedRowIndex);
     }
 
     resetSelection() {
@@ -132,7 +132,7 @@ export class LocationComponent implements OnInit {
             if (result.isConfirmed) {
                 this.locationService.delete(code).subscribe(
                     (response) => {
-                        console.log('Respuesta exitosa:', response);
+                        //('Respuesta exitosa:', response);
                         Swal.fire(
                             'Listo',
                             'El registro ha sido deshabilitado',

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GeostructureService } from 'app/services/geostructure.service';
+import { HolidayService } from 'app/services/holiday.service';
+import { LocationService } from 'app/services/location.service';
+import Swal from 'sweetalert2';
 import {
     Geostructure,
     GeostructureLevel,
 } from '../../geostructure/geostructure-model/geostructure';
-import Swal from 'sweetalert2';
-import { LocationService } from 'app/services/location.service';
-import { HolidayService } from 'app/services/holiday.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-holiday-detail',
@@ -52,21 +52,21 @@ export class HolidayDetailComponent implements OnInit {
     }
     getGeostructures(): void {
         this.geostructureService.list().subscribe((data) => {
-            console.log(data);
+            //(data);
             this.paises = data;
-            console.log(this.paises);
-            console.log(this.paises.length);
+            //(this.paises);
+            //(this.paises.length);
         });
     }
 
     onSelectPais(pais: string) {
-        console.log(pais);
+        //(pais);
         this.selectedPais = pais;
     }
 
     onSelectType(type: string) {
         this.geoLocationId = null;
-        console.log(type);
+        //(type);
         this.selectedType = type;
         if (this.selectedType === 'Regional') {
             this.choiceLocation = true;
@@ -80,33 +80,33 @@ export class HolidayDetailComponent implements OnInit {
         this.geostructureService
             .getGeostructureByCode(pais)
             .subscribe((data) => {
-                console.log('getLevelsPorPais', data.geoStructures);
+                //('getLevelsPorPais', data.geoStructures);
                 this.levels = data.geoStructures;
-                console.log('this.levels', this.levels);
+                //('this.levels', this.levels);
             });
     }
 
     onSelectLevel(level: any) {
         this.elements = [];
-        console.log('level', level);
+        //('level', level);
         this.locationService
             .list(this.selectedPais, level.levelCode)
             .subscribe((data) => {
-                console.log('pronz', data);
+                //('pronz', data);
                 this.elements = data;
-                console.log(this.elements);
+                //(this.elements);
             });
     }
 
     onSelectElement(element: any) {
-        console.log('element', element);
+        //('element', element);
         this.geoLocationId = element;
     }
     getDetail(): void {
         const uuid = this.activatedRoute.snapshot.params.uuid;
         this.holidayService.detail(uuid).subscribe(
             (data) => {
-                console.log('getDetail update', data);
+                //('getDetail update', data);
                 this.dataUrl = data;
                 this.holidayDate = new Date(this.dataUrl.holidayDate);
                 const formattedDate = `${this.holidayDate.getFullYear()}/${
@@ -119,7 +119,7 @@ export class HolidayDetailComponent implements OnInit {
                 this.type = this.dataUrl.type;
             },
             (err) => {
-                console.log('No encuentra NADA');
+                //('No encuentra NADA');
                 Swal.fire(
                     'Advertencia',
                     'El registro no existe',

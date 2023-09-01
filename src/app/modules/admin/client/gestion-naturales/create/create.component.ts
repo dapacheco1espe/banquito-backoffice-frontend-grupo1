@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ClienteService } from 'app/services/clienteService';
-import { Cliente, clienteAddress, clientePhone } from '../model/cliente';
 import Swal from 'sweetalert2';
+import { Cliente, clienteAddress, clientePhone } from '../model/cliente';
 
-import { AgencyService } from 'app/services/agency.service';
 import { Agency } from 'app/modules/admin/agency/agency-model/agency';
+import { AgencyService } from 'app/services/agency.service';
 
 @Component({
   selector: 'app-create',
@@ -47,7 +47,7 @@ export class CreateComponent implements OnInit {
           this.agencias=response;
       }
   );
-  console.log(this.agencias);
+  //(this.agencias);
   }
 
   onCreate(): void {
@@ -94,7 +94,7 @@ export class CreateComponent implements OnInit {
     // Si todos los campos son válidos, procedemos a crear el cliente
     const cliente = new Cliente(this.branchId, this.typeDocumentId, this.documentId, this.firstName, this.lastName,
       this.gender, this.birthDate, this.emailAddress, this.role, this.comments, this.phoneNumbers, this.addresses);
-      console.log(cliente)
+      //(cliente)
     this.clienteService.create(cliente).subscribe(
       data => {
         Swal.fire({

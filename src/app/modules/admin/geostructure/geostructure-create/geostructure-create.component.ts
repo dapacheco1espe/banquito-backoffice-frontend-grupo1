@@ -1,13 +1,11 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-    GeostructureLevel,
-    Geostructure,
-} from '../geostructure-model/geostructure';
 import { GeostructureService } from 'app/services/geostructure.service';
-import { v4 as uuidv4 } from 'uuid';
 import Swal from 'sweetalert2';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import {
+    Geostructure
+} from '../geostructure-model/geostructure';
 
 @Component({
     selector: 'app-geostructure-create',
@@ -46,8 +44,8 @@ export class GeostructureCreateComponent implements OnInit {
         }
 
         this.items.forEach((element) => {
-            console.log('element', element);
-            console.log('index', index);
+            //('element', element);
+            //('index', index);
             this.level = {
                 levelCode: index,
                 name: element,
@@ -56,7 +54,7 @@ export class GeostructureCreateComponent implements OnInit {
             index++;
         });
 
-        console.log(this.geostructureLevels);
+        //(this.geostructureLevels);
 
         const geostructure = new Geostructure(
             this.countryCode,
@@ -65,11 +63,11 @@ export class GeostructureCreateComponent implements OnInit {
             this.geostructureLevels
         );
 
-        console.log('enviar a back', geostructure);
+        //('enviar a back', geostructure);
 
         this.geostructureService.create(geostructure).subscribe(
             (data) => {
-                console.log('Hola');
+                //('Hola');
                 Swal.fire({
                     title: '¡Éxito!',
                     text: 'La nueva estructura se ha guardado correctamente.',
@@ -101,7 +99,7 @@ export class GeostructureCreateComponent implements OnInit {
             !this.name ||
             !this.geostructureLevels
         ) {
-            console.log('if');
+            //('if');
             this.errorMessage = 'Por favor, completa todos los campos.';
             return false;
         }
@@ -111,13 +109,13 @@ export class GeostructureCreateComponent implements OnInit {
         if (!/^[A-Z]{3}$/.test(this.countryCode)) {
             this.errorMessage =
                 'El codigo SWIFT debe seguir el formato estandar';
-            console.log('ECU Alfa');
+            //('ECU Alfa');
             return false;
         }
         // Codigo Telefónico
         if (!/^\+\d{1,3}$/.test(this.phoneCode)) {
             this.errorMessage = 'El email debe tener un estructura estándar';
-            console.log('Codigo');
+            //('Codigo');
             return false;
         }
         this.errorMessage = null;
@@ -126,14 +124,14 @@ export class GeostructureCreateComponent implements OnInit {
 
     dropItem(event: CdkDragDrop<string[]>) {
         moveItemInArray(this.items, event.previousIndex, event.currentIndex);
-        console.log('this.items', this.items);
+        //('this.items', this.items);
     }
 
     newElementFoo() {
         if (this.newElement.trim()) {
             this.items.push(this.newElement);
             this.newElement = ''; // Limpiar el campo de entrada después de agregar
-            console.log('this.items', this.items);
+            //('this.items', this.items);
         }
     }
 

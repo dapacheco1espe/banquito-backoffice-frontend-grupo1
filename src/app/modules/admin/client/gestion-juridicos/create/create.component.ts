@@ -6,11 +6,11 @@ import { Company } from '../model/company';
 import Swal from 'sweetalert2';
 import { CompanyMember } from '../model/companyMember';
 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Agency } from 'app/modules/admin/agency/agency-model/agency';
 import { Location } from 'app/modules/admin/location/location-model/location';
 import { AgencyService } from 'app/services/agency.service';
 import { LocationService } from 'app/services/location.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Agency } from 'app/modules/admin/agency/agency-model/agency';
 
 
 @Component({
@@ -81,7 +81,7 @@ export class CreateComponent implements OnInit {
   }
 
   onCreate(): void {
-    console.log('Formulario válido:', this.createForm.valid);
+    //('Formulario válido:', this.createForm.valid);
     if (this.createForm.valid) {
       const company = new Company(
         this.createForm.value.branchId,

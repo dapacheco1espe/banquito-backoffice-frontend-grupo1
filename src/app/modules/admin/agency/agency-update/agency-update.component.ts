@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AgencyService } from 'app/services/agency.service';
-import { Agency } from '../agency-model/agency';
-import { Geolocation } from '../../geostructure/geostructure-model/geolocation';
-import { v4 as uuidv4 } from 'uuid';
-import Swal from 'sweetalert2';
-import { GeostructureService } from 'app/services/geostructure.service';
 import { GeolocationService } from 'app/services/geolocation.service';
+import Swal from 'sweetalert2';
+import { Geolocation } from '../../geostructure/geostructure-model/geolocation';
+import { Agency } from '../agency-model/agency';
 
 @Component({
     selector: 'app-agency-update',
@@ -65,7 +63,7 @@ export class AgencyUpdateComponent implements OnInit {
         this.agencyService.detail(id).subscribe(
             (data) => {
                 this.dataUrl = data;
-                console.log('getDetail update', this.dataUrl);
+                //('getDetail update', this.dataUrl);
                 this.id = this.dataUrl.id || 0;
                 this.ubication = this.dataUrl.ubication || '';
                 this.code = this.dataUrl.code || '';
@@ -89,7 +87,7 @@ export class AgencyUpdateComponent implements OnInit {
                     });
             },
             (err) => {
-                console.log('No encuentra NADA');
+                //('No encuentra NADA');
                 Swal.fire(
                     'Advertencia',
                     'El registro no existe',
@@ -141,7 +139,7 @@ export class AgencyUpdateComponent implements OnInit {
 
         this.agencyService.update(id, anyArr).subscribe(
             (data) => {
-                console.log('Hola');
+                //('Hola');
                 Swal.fire({
                     title: '¡Éxito!',
                     text: 'La agencia se ha actualizado correctamente.',
@@ -177,14 +175,14 @@ export class AgencyUpdateComponent implements OnInit {
             !this.longitude
         ) {
             this.errorMessage = 'Por favor, completa todos los campos.';
-            console.log('if');
+            //('if');
             return false;
         }
 
         // Validar el formato de los campos
         // Codigo SWIFT
         if (!/^BAQECEQ\d{3}$/.test(this.code)) {
-            console.log('baqeceq');
+            //('baqeceq');
             this.errorMessage =
                 'El codigo SWIFT debe seguir el formato estandar';
             return false;
@@ -195,13 +193,13 @@ export class AgencyUpdateComponent implements OnInit {
                 this.emailAddress
             )
         ) {
-            console.log('email');
+            //('email');
             this.errorMessage = 'El email debe tener un estructura estándar';
             return false;
         }
         // Telefono
         if (!/^[\d\s()]+$/.test(this.phoneNumber)) {
-            console.log('telf');
+            //('telf');
             this.errorMessage = 'El número debe contener el formato estándar';
             return false;
         }
@@ -210,7 +208,7 @@ export class AgencyUpdateComponent implements OnInit {
     }
 
     onSelectProvincia(provincia: string) {
-        console.log(provincia);
+        //(provincia);
         this.selectedProvincia = provincia;
         this.selectedCanton = '';
         this.selectedParroquia = '';
@@ -226,30 +224,30 @@ export class AgencyUpdateComponent implements OnInit {
 
     onSelectParroquia(parroquia: any) {
         this.selectedParroquia = parroquia;
-        console.log(parroquia);
+        //(parroquia);
     }
 
     getProvincias(): void {
         this.agencyService.listProv().subscribe((data) => {
-            console.log(data);
+            //(data);
             this.provincias = data;
-            console.log(this.provincias);
+            //(this.provincias);
         });
     }
 
     getCantonesPorProvincia(provincia: string): void {
         this.agencyService.listCant(provincia).subscribe((data) => {
-            console.log(data);
+            //(data);
             this.cantones = data;
-            console.log(this.cantones);
+            //(this.cantones);
         });
     }
 
     getParroquiasPorCanton(canton: string): void {
         this.agencyService.listParr(canton).subscribe((data) => {
-            console.log(data);
+            //(data);
             this.parroquias = data;
-            console.log(this.parroquias);
+            //(this.parroquias);
         });
     }
 }

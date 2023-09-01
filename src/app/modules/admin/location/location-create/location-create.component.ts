@@ -49,15 +49,15 @@ export class LocationCreateComponent implements OnInit {
 
     getGeostructures(): void {
         this.geostructureService.list().subscribe((data) => {
-            console.log(data);
+            //(data);
             this.paises = data;
-            console.log(this.paises);
-            console.log(this.paises.length);
+            //(this.paises);
+            //(this.paises.length);
         });
     }
 
     onCreate() {
-        console.log('onCreate()');
+        //('onCreate()');
         if (!this.validateForm()) {
             Swal.fire({
                 title: 'Error',
@@ -78,11 +78,11 @@ export class LocationCreateComponent implements OnInit {
             zipCode: this.zipCode,
         };
 
-        //console.log(anyLocation);
+        ////(anyLocation);
 
         this.locationService.create(anyLocation).subscribe(
             (data) => {
-                console.log('Hola');
+                //('Hola');
                 Swal.fire({
                     title: '¡Éxito!',
                     text: 'La nueva localización se ha guardado correctamente.',
@@ -108,7 +108,7 @@ export class LocationCreateComponent implements OnInit {
     }
 
     onSelectPais(pais: string) {
-        console.log(pais);
+        //(pais);
         this.selectedPais = pais;
         this.countryCode = this.selectedPais;
         this.getLevelsPorPais(pais);
@@ -117,19 +117,19 @@ export class LocationCreateComponent implements OnInit {
     onSelectLevel(level: any) {
         //this.selectedLevel = null;
         this.elements = [];
-        console.log('level', level);
+        //('level', level);
         this.levelCode = level.levelCode;
         this.levelName = level.name;
         this.parentLevel = this.levelCode - 1;
-        console.log('parentLevel', this.parentLevel);
+        //('parentLevel', this.parentLevel);
         if (this.parentLevel > 0) {
             this.highLevel = false;
             this.locationService
                 .list(this.selectedPais, this.parentLevel)
                 .subscribe((data) => {
-                    console.log('pronz', data);
+                    //('pronz', data);
                     this.elements = data;
-                    console.log(this.elements);
+                    //(this.elements);
                 });
         } else if (this.parentLevel === 0) {
             this.highLevel = true;
@@ -140,7 +140,7 @@ export class LocationCreateComponent implements OnInit {
     }
 
     onSelectElement(element: any) {
-        console.log('element', element);
+        //('element', element);
         this.getElementProperties(element);
     }
 
@@ -148,15 +148,15 @@ export class LocationCreateComponent implements OnInit {
         this.geostructureService
             .getGeostructureByCode(pais)
             .subscribe((data) => {
-                console.log('getLevelsPorPais', data.geoStructures);
+                //('getLevelsPorPais', data.geoStructures);
                 this.levels = data.geoStructures;
-                console.log('this.levels', this.levels);
+                //('this.levels', this.levels);
             });
     }
 
     getElementProperties(elementUuid: any) {
         this.geostructureService.getGeoById(elementUuid).subscribe((data) => {
-            console.log('data getGeoById', data);
+            //('data getGeoById', data);
             this.levelParentId = this.parentLevel;
             this.levelParentName = data.name;
         });
@@ -173,7 +173,7 @@ export class LocationCreateComponent implements OnInit {
             !this.areaPhoneCode ||
             !this.zipCode
         ) {
-            console.log('if');
+            //('if');
             this.errorMessage = 'Por favor, completa todos los campos.';
             return false;
         }
@@ -183,13 +183,13 @@ export class LocationCreateComponent implements OnInit {
         // if (!/^[A-Z]{3}$/.test(this.countryCode)) {
         //     this.errorMessage =
         //         'El codigo SWIFT debe seguir el formato estandar';
-        //     console.log('ECU Alfa');
+        //     //('ECU Alfa');
         //     return false;
         // }
         // Codigo Telefónico
         // if (!/^\d{1,2}$/.test(this.areaPhoneCode)) {
         //     this.errorMessage = 'El email debe tener un estructura estándar';
-        //     console.log('Codigo');
+        //     //('Codigo');
         //     return false;
         // }
         // this.errorMessage = null;

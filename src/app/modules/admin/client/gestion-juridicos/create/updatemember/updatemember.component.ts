@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente } from '../../../gestion-naturales/model/cliente';
-import { ClienteService } from 'app/services/clienteService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ClienteService } from 'app/services/clienteService';
 import Swal from 'sweetalert2';
+import { Cliente } from '../../../gestion-naturales/model/cliente';
 
 @Component({
   selector: 'app-updatemember',
@@ -31,7 +31,7 @@ export class UpdatememberComponent implements OnInit {
     this.clienteService.detail(this.typeDocumentId, this.documentId).subscribe(
       (data) => {
         this.cliente = data;
-        console.log(this.cliente);
+        //(this.cliente);
       },
       (err) => {
         // Mostrar mensaje de error con SweetAlert
@@ -39,12 +39,12 @@ export class UpdatememberComponent implements OnInit {
     );
   }
   buscarCliente(): void {
-    console.log(this.activatedRoute.snapshot.params['uniqueKey'])
+    //(this.activatedRoute.snapshot.params['uniqueKey'])
     this.clienteService.detail(this.typeDocumentId, this.documentId).subscribe(
       (data) => {
         this.cliente = data;
         this.uniqueKey = this.cliente.uniqueKey;
-        console.log(this.uniqueKey);
+        //(this.uniqueKey);
   
         // Mostrar mensaje de éxito con SweetAlert
         Swal.fire({

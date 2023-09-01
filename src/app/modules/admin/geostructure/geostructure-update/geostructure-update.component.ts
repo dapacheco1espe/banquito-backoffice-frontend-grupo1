@@ -1,16 +1,11 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Geolocation } from '../../geostructure/geostructure-model/geolocation';
-import { v4 as uuidv4 } from 'uuid';
+import { GeostructureService } from 'app/services/geostructure.service';
 import Swal from 'sweetalert2';
 import {
-    Geostructure,
-    GeostructureLevel,
+    GeostructureLevel
 } from '../geostructure-model/geostructure';
-import { GeostructureService } from 'app/services/geostructure.service';
-import { GeolocationService } from 'app/services/geolocation.service';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { forEach } from 'lodash';
 
 @Component({
     selector: 'app-geostructure-update',
@@ -51,19 +46,19 @@ export class GeostructureUpdateComponent implements OnInit {
         this.geostructureService.detail(id).subscribe(
             (data) => {
                 this.dataUrl = data;
-                console.log('getDetail update', this.dataUrl);
+                //('getDetail update', this.dataUrl);
                 this.countryCode = this.dataUrl.countryCode;
                 this.name = this.dataUrl.name;
                 this.phoneCode = this.dataUrl.phoneCode;
                 this.geoStructures = this.dataUrl.geoStructures;
                 this.geoStructures.forEach((element) => {
-                    console.log('element', element);
+                    //('element', element);
                     this.items.push(element.name);
                 });
-                console.log(this.items);
+                //(this.items);
             },
             (err) => {
-                console.log('No encuentra NADA');
+                //('No encuentra NADA');
                 Swal.fire(
                     'Advertencia',
                     'El registro no existe',
@@ -89,8 +84,8 @@ export class GeostructureUpdateComponent implements OnInit {
         this.geostructureLevels = [];
 
         this.items.forEach((element) => {
-            console.log('element', element);
-            console.log('index', index);
+            //('element', element);
+            //('index', index);
             this.level = {
                 levelCode: index,
                 name: element,
@@ -99,7 +94,7 @@ export class GeostructureUpdateComponent implements OnInit {
             index++;
         });
 
-        console.log('geostructureLevels', this.geostructureLevels);
+        //('geostructureLevels', this.geostructureLevels);
 
         const id = this.activatedRoute.snapshot.params.id;
 
@@ -109,11 +104,11 @@ export class GeostructureUpdateComponent implements OnInit {
             geoStructures: this.geostructureLevels,
         };
 
-        console.log('enviar a back', anyArr);
+        //('enviar a back', anyArr);
 
         this.geostructureService.update(id, anyArr).subscribe(
             (data) => {
-                console.log('Hola');
+                //('Hola');
                 Swal.fire({
                     title: '¡Éxito!',
                     text: 'La agencia se ha actualizado correctamente.',
@@ -139,7 +134,7 @@ export class GeostructureUpdateComponent implements OnInit {
             !this.name ||
             !this.geoStructures
         ) {
-            console.log('if');
+            //('if');
             this.errorMessage = 'Por favor, completa todos los campos.';
             return false;
         }
@@ -149,13 +144,13 @@ export class GeostructureUpdateComponent implements OnInit {
         if (!/^[A-Z]{3}$/.test(this.countryCode)) {
             this.errorMessage =
                 'El codigo SWIFT debe seguir el formato estandar';
-            console.log('ECU Alfa');
+            //('ECU Alfa');
             return false;
         }
         // Codigo Telefónico
         if (!/^\+\d{1,3}$/.test(this.phoneCode)) {
             this.errorMessage = 'El email debe tener un estructura estándar';
-            console.log('Codigo');
+            //('Codigo');
             return false;
         }
         this.errorMessage = null;
@@ -164,14 +159,14 @@ export class GeostructureUpdateComponent implements OnInit {
 
     dropItem(event: CdkDragDrop<string[]>) {
         moveItemInArray(this.items, event.previousIndex, event.currentIndex);
-        console.log('this.items', this.items);
+        //('this.items', this.items);
     }
 
     newElementFoo() {
         if (this.newElement.trim()) {
             this.items.push(this.newElement);
             this.newElement = ''; // Limpiar el campo de entrada después de agregar
-            console.log('this.items', this.items);
+            //('this.items', this.items);
             if (this.items.length > 4) {
                 this.insertLevelFlag = false;
             } else {

@@ -2,11 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { fuseAnimations } from '@fuse/animations';
 
 
-import Swal from 'sweetalert2';
-import { FormBuilder, FormGroup, FormsModule } from "@angular/forms";
-import {Company} from "./model/company";
-import {CompanyService} from "app/services/companyService";
 import { ActivatedRoute, Router } from "@angular/router";
+import { CompanyService } from "app/services/companyService";
+import Swal from 'sweetalert2';
+import { Company } from "./model/company";
 
 @Component({
   selector: 'app-gestion-juridicos',
@@ -31,7 +30,7 @@ export class GestionJuridicosComponent implements OnInit {
     this.companyService.detail(this.groupName).subscribe(
       (data) => {
         this.company = data;
-        console.log(this.company);
+        //(this.company);
       },
       (err) => {
         // Mostrar mensaje de error con SweetAlert
@@ -42,7 +41,7 @@ export class GestionJuridicosComponent implements OnInit {
     this.companyService.detail(this.groupName).subscribe(
       (data) => {
         this.company = data;
-        console.log(this.company);
+        //(this.company);
   
         // Mostrar mensaje de éxito con SweetAlert
         Swal.fire({

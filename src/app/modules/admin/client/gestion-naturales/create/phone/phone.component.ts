@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteService } from 'app/services/clienteService';
-import { Cliente } from '../../model/cliente';
 import Swal from 'sweetalert2';
+import { Cliente } from '../../model/cliente';
 import { ClientePhone } from '../../model/clientePhone';
 
 @Component({
@@ -100,7 +100,7 @@ export class PhoneComponent implements OnInit {
     this.clienteService.detail(this.typeDocumentId, this.documentId).subscribe(
       data => {
         this.cliente = data;
-        console.log(this.cliente);
+        //(this.cliente);
       },
       err => {
         this.router.navigate(['']);
