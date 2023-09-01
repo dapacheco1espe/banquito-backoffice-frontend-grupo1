@@ -108,11 +108,6 @@ export class AgencyComponent implements OnInit {
     }
 
     get totalPages(): number[] {
-        console.log(
-            Array(Math.ceil(this.agencies.length / this.pageSize))
-                .fill(0)
-                .map((_, i) => i + 1)
-        );
 
         return Array(Math.ceil(this.agencies.length / this.pageSize))
             .fill(0)

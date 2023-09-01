@@ -76,12 +76,6 @@ export class GeostructureComponent implements OnInit {
     }
 
     get totalPages(): number[] {
-        console.log(
-            Array(Math.ceil(this.geostructures.length / this.pageSize))
-                .fill(0)
-                .map((_, i) => i + 1)
-        );
-
         return Array(Math.ceil(this.geostructures.length / this.pageSize))
             .fill(0)
             .map((_, i) => i + 1);
