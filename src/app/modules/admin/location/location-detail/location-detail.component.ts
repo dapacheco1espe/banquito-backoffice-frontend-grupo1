@@ -54,10 +54,10 @@ export class LocationDetailComponent implements OnInit {
 
     getGeostructures(): void {
         this.geostructureService.list().subscribe((data) => {
-            //(data);
+            console.log(data);
             this.paises = data;
-            //(this.paises);
-            //(this.paises.length);
+            console.log(this.paises);
+            console.log(this.paises.length);
         });
     }
 
@@ -65,9 +65,9 @@ export class LocationDetailComponent implements OnInit {
         this.geostructureService
             .getGeostructureByCode(pais)
             .subscribe((data) => {
-                //('getLevelsPorPais', data.geoStructures);
+                console.log('getLevelsPorPais', data.geoStructures);
                 this.levels = data.geoStructures;
-                //('this.levels', this.levels);
+                console.log('this.levels', this.levels);
                 const selectedLevelObj = this.levels.find(
                     (level) =>
                         level.name.toLowerCase() ===
@@ -78,22 +78,22 @@ export class LocationDetailComponent implements OnInit {
                 this.levelName = this.selectedLevelObj.name;
                 this.levelParentName = this.dataUrl.levelParentName;
                 this.parentLevel = this.levelCode - 1;
-                //('parentLevel', this.parentLevel);
+                console.log('parentLevel', this.parentLevel);
                 if (this.parentLevel > 0) {
                     this.highLevel = false;
                     this.locationService
                         .list(this.selectedPais, this.parentLevel)
                         .subscribe((data) => {
-                            //('pronz', data);
+                            console.log('pronz', data);
                             this.elements = data;
-                            //(this.elements);
-                            //('thisParentName', this.levelParentName);
+                            console.log(this.elements);
+                            console.log('thisParentName', this.levelParentName);
                             const selectedElementObj = this.elements.find(
                                 (element) =>
                                     element.name.toLowerCase() ===
                                     this.levelParentName.toLowerCase()
                             );
-                            //(
+                            console.log(
                                 'selectedElementObj',
                                 selectedElementObj
                             );
@@ -110,7 +110,6 @@ export class LocationDetailComponent implements OnInit {
 
         this.locationService.detail(uuid).subscribe(
             (data) => {
-                //('getDetail', data);
                 this.dataUrl = data;
                 this.selectedPais = this.dataUrl.countryCode;
                 this.getLevelsPorPais(this.selectedPais);
@@ -119,7 +118,6 @@ export class LocationDetailComponent implements OnInit {
                 this.zipCode = this.dataUrl.zipCode;
             },
             (err) => {
-                //('No encuentra NADA');
                 Swal.fire(
                     'Advertencia',
                     'El registro no existe',

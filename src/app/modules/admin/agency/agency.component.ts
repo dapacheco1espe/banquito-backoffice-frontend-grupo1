@@ -42,9 +42,9 @@ export class AgencyComponent implements OnInit {
     // Traer agencias existentes
     getAgencies(parroquia: any): void {
         this.agencyService.list(parroquia).subscribe((data) => {
-            //(data);
+            console.log(data);
             this.agencies = data;
-            //(this.agencies);
+            console.log(this.agencies);
             this.showSearch = true;
         });
     }
@@ -99,7 +99,7 @@ export class AgencyComponent implements OnInit {
     rowClick(index: number) {
         this.selectedRowIndex = index;
         this.showButtons = true;
-        //(this.selectedRowIndex);
+        console.log(this.selectedRowIndex);
     }
 
     resetSelection() {
@@ -108,7 +108,7 @@ export class AgencyComponent implements OnInit {
     }
 
     get totalPages(): number[] {
-        //(
+        console.log(
             Array(Math.ceil(this.agencies.length / this.pageSize))
                 .fill(0)
                 .map((_, i) => i + 1)
@@ -125,7 +125,7 @@ export class AgencyComponent implements OnInit {
 
     onSelectProvincia(provincia: string) {
         this.showSearch = false;
-        //(provincia);
+        console.log(provincia);
         this.selectedProvincia = provincia;
         this.selectedCanton = '';
         this.selectedParroquia = '';
@@ -142,31 +142,31 @@ export class AgencyComponent implements OnInit {
 
     onSelectParroquia(parroquia: any) {
         this.selectedParroquia = parroquia;
-        //(parroquia);
+        console.log(parroquia);
         this.getAgencies(parroquia);
     }
 
     getProvincias(): void {
         this.agencyService.listProv().subscribe((data) => {
-            //(data);
+            console.log(data);
             this.provincias = data;
-            //(this.provincias);
+            console.log(this.provincias);
         });
     }
 
     getCantonesPorProvincia(provincia: string): void {
         this.agencyService.listCant(provincia).subscribe((data) => {
-            //(data);
+            console.log(data);
             this.cantones = data;
-            //(this.cantones);
+            console.log(this.cantones);
         });
     }
 
     getParroquiasPorCanton(canton: string): void {
         this.agencyService.listParr(canton).subscribe((data) => {
-            //(data);
+            console.log(data);
             this.parroquias = data;
-            //(this.parroquias);
+            console.log(this.parroquias);
         });
     }
 

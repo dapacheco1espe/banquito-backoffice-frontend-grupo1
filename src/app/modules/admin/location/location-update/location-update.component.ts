@@ -54,10 +54,10 @@ export class LocationUpdateComponent implements OnInit {
 
     getGeostructures(): void {
         this.geostructureService.list().subscribe((data) => {
-            //(data);
+            console.log(data);
             this.paises = data;
-            //(this.paises);
-            //(this.paises.length);
+            console.log(this.paises);
+            console.log(this.paises.length);
         });
     }
 
@@ -65,9 +65,9 @@ export class LocationUpdateComponent implements OnInit {
         this.geostructureService
             .getGeostructureByCode(pais)
             .subscribe((data) => {
-                //('getLevelsPorPais', data.geoStructures);
+                console.log('getLevelsPorPais', data.geoStructures);
                 this.levels = data.geoStructures;
-                //('this.levels', this.levels);
+                console.log('this.levels', this.levels);
                 const selectedLevelObj = this.levels.find(
                     (level) =>
                         level.name.toLowerCase() ===
@@ -78,17 +78,17 @@ export class LocationUpdateComponent implements OnInit {
                 this.levelName = this.selectedLevelObj.name;
                 this.levelParentName = this.dataUrl.levelParentName;
                 this.parentLevel = this.levelCode - 1;
-                //('parentLevel', this.parentLevel);
+                console.log('parentLevel', this.parentLevel);
                 if (this.parentLevel > 0) {
                     this.highLevel = false;
                     this.locationService
                         .list(this.selectedPais, this.parentLevel)
                         .subscribe((data) => {
-                            //('pronz', data);
+                            console.log('pronz', data);
                             this.elements = data;
-                            //(this.elements);
-                            //('thisParentName', this.levelParentName);
-                            //(
+                            console.log(this.elements);
+                            console.log('thisParentName', this.levelParentName);
+                            console.log(
                                 'thisSelecteLevel before',
                                 this.selectedLevelObj
                             );
@@ -99,12 +99,12 @@ export class LocationUpdateComponent implements OnInit {
                                     element.name.toLowerCase() ===
                                     lowerLevelName
                             );
-                            //(
+                            console.log(
                                 'selectedElementObj',
                                 selectedElementObj
                             );
                             this.selectedElement = selectedElementObj.uuid;
-                            // //(
+                            // console.log(
                             //     'thisSelecteLevel after',
                             //     this.selectedLevelObj
                             // );
@@ -121,7 +121,7 @@ export class LocationUpdateComponent implements OnInit {
         this.selectedPais = '';
         this.selectedLevelObj = { levelCode: null, name: '' };
         this.selectedElement = null;
-        //(pais);
+        console.log(pais);
         this.selectedPais = pais;
         this.countryCode = this.selectedPais;
         this.getLevelsPorPais(pais);
@@ -130,19 +130,19 @@ export class LocationUpdateComponent implements OnInit {
     onSelectLevel(level: any) {
         //this.selectedLevel = null;
         this.elements = [];
-        //('level', level);
+        console.log('level', level);
         this.levelCode = level.levelCode;
         this.levelName = level.name;
         this.parentLevel = this.levelCode - 1;
-        //('parentLevel', this.parentLevel);
+        console.log('parentLevel', this.parentLevel);
         if (this.parentLevel > 0) {
             this.highLevel = false;
             this.locationService
                 .list(this.selectedPais, this.parentLevel)
                 .subscribe((data) => {
-                    //('pronz', data);
+                    console.log('pronz', data);
                     this.elements = data;
-                    //(this.elements);
+                    console.log(this.elements);
                 });
         } else if (this.parentLevel === 0) {
             this.highLevel = true;
@@ -153,13 +153,13 @@ export class LocationUpdateComponent implements OnInit {
     }
 
     onSelectElement(element: any) {
-        //('element', element);
+        console.log('element', element);
         this.getElementProperties(element);
     }
 
     getElementProperties(elementUuid: any) {
         this.geostructureService.getGeoById(elementUuid).subscribe((data) => {
-            //('data getGeoById', data);
+            console.log('data getGeoById', data);
             this.levelParentId = this.parentLevel;
             this.levelParentName = data.name;
         });
@@ -170,20 +170,20 @@ export class LocationUpdateComponent implements OnInit {
 
         this.locationService.detail(uuid).subscribe(
             (data) => {
-                //('getDetail', data);
+                console.log('getDetail', data);
                 this.dataUrl = data;
                 this.selectedPais = this.dataUrl.countryCode;
                 this.getLevelsPorPais(this.selectedPais);
                 this.name = this.dataUrl.name;
                 this.areaPhoneCode = this.dataUrl.areaPhoneCode;
                 this.zipCode = this.dataUrl.zipCode;
-                //(
+                console.log(
                     'thisSelecteLevel before getDetail',
                     this.selectedLevelObj
                 );
             },
             (err) => {
-                //('No encuentra NADA');
+                console.log('No encuentra NADA');
                 Swal.fire(
                     'Advertencia',
                     'El registro no existe',
@@ -221,11 +221,11 @@ export class LocationUpdateComponent implements OnInit {
             zipCode: this.zipCode,
         };
 
-        //('const location', newLocation);
+        console.log('const location', newLocation);
 
         this.locationService.update(uuid, newLocation).subscribe(
             (data) => {
-                //('Hola');
+                console.log('Hola');
                 Swal.fire({
                     title: '¡Éxito!',
                     text: 'La locaion se ha actualizado correctamente.',
@@ -257,7 +257,7 @@ export class LocationUpdateComponent implements OnInit {
 
         // this.agencyService.update(id, anyArr).subscribe(
         //     (data) => {
-        //         //('Hola');
+        //         console.log('Hola');
         //         Swal.fire({
         //             title: '¡Éxito!',
         //             text: 'La agencia se ha actualizado correctamente.',
@@ -290,7 +290,7 @@ export class LocationUpdateComponent implements OnInit {
                 !this.levelName ||
                 !this.name
             ) {
-                //('if 1');
+                console.log('if 1');
                 this.errorMessage = 'Por favor, completa todos los campos.';
                 return false;
             }
@@ -303,7 +303,7 @@ export class LocationUpdateComponent implements OnInit {
                 !this.levelName ||
                 !this.name
             ) {
-                //('if 2');
+                console.log('if 2');
                 this.errorMessage = 'Por favor, completa todos los campos.';
                 return false;
             }

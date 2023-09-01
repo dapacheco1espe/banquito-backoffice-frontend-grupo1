@@ -33,10 +33,10 @@ export class GeostructureComponent implements OnInit {
     // Traer agencias existentes
     getGeostructures(): void {
         this.geostructureService.list().subscribe((data) => {
-            //(data);
+            console.log(data);
             this.geostructures = data;
-            //(this.geostructures);
-            //(this.geostructures.length);
+            console.log(this.geostructures);
+            console.log(this.geostructures.length);
         });
     }
 
@@ -76,7 +76,7 @@ export class GeostructureComponent implements OnInit {
     }
 
     get totalPages(): number[] {
-        //(
+        console.log(
             Array(Math.ceil(this.geostructures.length / this.pageSize))
                 .fill(0)
                 .map((_, i) => i + 1)
@@ -94,7 +94,7 @@ export class GeostructureComponent implements OnInit {
     rowClick(index: number) {
         this.selectedRowIndex = index;
         this.showButtons = true;
-        //(this.selectedRowIndex);
+        console.log(this.selectedRowIndex);
     }
 
     resetSelection() {

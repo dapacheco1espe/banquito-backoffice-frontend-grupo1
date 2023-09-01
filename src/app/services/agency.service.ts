@@ -35,11 +35,6 @@ export class AgencyService {
     }
 
     public listCant(prov: string): Observable<Geolocation[]> {
-        //(
-            this.baseURL +
-                '/geoLocation/CountryCodeAndParentName?countryCode=ECU&parentName=' +
-                prov
-        );
         return this.http.get<Geolocation[]>(
             this.baseURL +
                 '/geoLocation/CountryCodeAndParentName?countryCode=ECU&parentName=' +
