@@ -12,7 +12,7 @@ export const environment = {
     administrationAPIUrl:
         'https://arquitectura-1sa89r3l.uc.gateway.dev/',
     apiURLproductsPassive: 'https://arquitectura-1sa89r3l.uc.gateway.dev/api',
-    urlLogin:'http://localhost:8080/login',
+    urlLogin: 'https://banquito-ws-client-emo6wbjuvq-uc.a.run.app/login',
 };
 
 /*
