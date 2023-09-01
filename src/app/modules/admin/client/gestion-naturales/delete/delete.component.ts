@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente } from '../model/cliente';
-import { ClienteService } from 'app/services/clienteService';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ClienteService } from 'app/services/clienteService';
 import Swal from 'sweetalert2';
+import { Cliente } from '../model/cliente';
 
 @Component({
   selector: 'app-delete',
@@ -56,14 +56,14 @@ export class DeleteComponent implements OnInit {
       );
     }
     getCliente(): void {
-      console.log(this.activatedRoute.snapshot)
+      //(this.activatedRoute.snapshot)
       const typeDocumentId = this.activatedRoute.snapshot.params['typeDocumentId'];
       const documentId = this.activatedRoute.snapshot.params['documentId'];
-      console.log(this.typeDocumentId, this.documentId);
+      //(this.typeDocumentId, this.documentId);
       this.clienteService.detail(typeDocumentId, documentId).subscribe(
         data => {
           this.cliente = data;
-          console.log(this.cliente);
+          //(this.cliente);
         },
         err => {
           this.router.navigate(['']);

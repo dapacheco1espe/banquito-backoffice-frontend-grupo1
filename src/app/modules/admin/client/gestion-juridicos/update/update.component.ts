@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import Swal from 'sweetalert2';
-import { Company } from '../model/company';
 import { CompanyService } from 'app/services/companyService';
+import Swal from 'sweetalert2';
 import { Cliente } from '../../gestion-naturales/model/cliente';
+import { Company } from '../model/company';
 
 @Component({
   selector: 'app-update',
@@ -58,7 +58,7 @@ export class UpdateComponent implements OnInit {
       );
     }
     getCompany(): void {
-      console.log(this.activatedRoute.snapshot.data)
+      //(this.activatedRoute.snapshot.data)
       const groupName = this.activatedRoute.snapshot.params['groupName'];
       this.companyService.detail(groupName).subscribe(
         (data) => {

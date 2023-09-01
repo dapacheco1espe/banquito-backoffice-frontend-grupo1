@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
-import { Geolocation } from 'app/modules/admin/geostructure/geostructure-model/geolocation';
 import { Agency } from 'app/modules/admin/agency/agency-model/agency';
+import { Geolocation } from 'app/modules/admin/geostructure/geostructure-model/geolocation';
 
 @Injectable({
     providedIn: 'root',
@@ -35,7 +35,7 @@ export class AgencyService {
     }
 
     public listCant(prov: string): Observable<Geolocation[]> {
-        console.log(
+        //(
             this.baseURL +
                 '/geoLocation/CountryCodeAndParentName?countryCode=ECU&parentName=' +
                 prov

@@ -1,21 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { fuseAnimations } from '@fuse/animations';
-import Swal from 'sweetalert2';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
-    FormGroup,
     FormControl,
-    FormsModule,
-    ReactiveFormsModule,
+    FormGroup
 } from '@angular/forms';
+import { Router } from '@angular/router';
+import { fuseAnimations } from '@fuse/animations';
 import { GeostructureService } from 'app/services/geostructure.service';
+import Swal from 'sweetalert2';
+import { HolidayService } from '../../../services/holiday.service';
 import {
-    Geostructure,
-    GeostructureLevel,
+    Geostructure
 } from '../geostructure/geostructure-model/geostructure';
 import { Holiday } from './holiday-model/holiday';
-import { HolidayService } from '../../../services/holiday.service';
-import { ActivatedRoute, Router, Resolve } from '@angular/router';
 
 @Component({
     selector: 'app-holiday',
@@ -60,14 +56,14 @@ export class HolidayComponent implements OnInit {
 
         this.range.controls.start.valueChanges.subscribe((startDate) => {
             // Función a ejecutar cuando cambia la fecha de inicio
-            console.log('Fecha de inicio cambiada:', startDate);
+            //('Fecha de inicio cambiada:', startDate);
             // Llamar a la función que deseas ejecutar aquí
             this.startDate = startDate;
         });
 
         this.range.controls.end.valueChanges.subscribe((endDate) => {
             // Función a ejecutar cuando cambia la fecha de fin
-            console.log('Fecha de fin cambiada:', endDate);
+            //('Fecha de fin cambiada:', endDate);
             // Llamar a la función que deseas ejecutar aquí
             this.endDate = endDate;
             this.filterData();
@@ -122,22 +118,22 @@ export class HolidayComponent implements OnInit {
 
     getGeostructures(): void {
         this.geostructureService.list().subscribe((data) => {
-            console.log(data);
+            //(data);
             this.paises = data;
-            console.log(this.paises);
-            console.log(this.paises.length);
+            //(this.paises);
+            //(this.paises.length);
         });
     }
 
     onSelectPais(pais: string) {
-        console.log(pais);
+        //(pais);
         this.holidays = [];
         this.selectedPais = pais;
         this.getHolidays(pais);
     }
 
     onSelectMonth(month: number) {
-        console.log(month);
+        //(month);
         this.selectedMonth = month;
     }
 
@@ -148,9 +144,9 @@ export class HolidayComponent implements OnInit {
 
     getHolidays(paisId: any): void {
         this.HolidayService.list(paisId).subscribe((data) => {
-            console.log(data);
+            //(data);
             this.holidays = data;
-            console.log(this.holidays);
+            //(this.holidays);
         });
     }
 
@@ -170,13 +166,13 @@ export class HolidayComponent implements OnInit {
     }
 
     onCreate() {
-        console.log('onCreate');
+        //('onCreate');
 
         const monthVal = this.monthOptions.find(
             (month) => month.value === Number(this.selectedMonth)
         );
 
-        console.log('month', monthVal);
+        //('month', monthVal);
 
         Swal.fire({
             title: 'Advertencia',
@@ -211,7 +207,7 @@ export class HolidayComponent implements OnInit {
                         sunday: '' + this.sunday,
                     };
 
-                    console.log('weekendaArr', weekendaArr);
+                    //('weekendaArr', weekendaArr);
 
                     this.HolidayService.generateWeekends(
                         this.selectedPaisWeekend,
@@ -266,7 +262,7 @@ export class HolidayComponent implements OnInit {
 
     mostrarAdvertencia(code: any) {
         // Utilizamos SweetAlert para mostrar la alerta
-        console.log(code);
+        //(code);
         Swal.fire({
             title: 'Advertencia',
             text: 'Esta acción inactivará el registro. ¿Estás seguro?',

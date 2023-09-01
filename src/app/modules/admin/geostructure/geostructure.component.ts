@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { GeostructureService } from 'app/services/geostructure.service';
-import { Geostructure } from './geostructure-model/geostructure';
-import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Geostructure } from './geostructure-model/geostructure';
 
 @Component({
     selector: 'app-geostructure',
@@ -33,10 +33,10 @@ export class GeostructureComponent implements OnInit {
     // Traer agencias existentes
     getGeostructures(): void {
         this.geostructureService.list().subscribe((data) => {
-            console.log(data);
+            //(data);
             this.geostructures = data;
-            console.log(this.geostructures);
-            console.log(this.geostructures.length);
+            //(this.geostructures);
+            //(this.geostructures.length);
         });
     }
 
@@ -76,7 +76,7 @@ export class GeostructureComponent implements OnInit {
     }
 
     get totalPages(): number[] {
-        console.log(
+        //(
             Array(Math.ceil(this.geostructures.length / this.pageSize))
                 .fill(0)
                 .map((_, i) => i + 1)
@@ -94,7 +94,7 @@ export class GeostructureComponent implements OnInit {
     rowClick(index: number) {
         this.selectedRowIndex = index;
         this.showButtons = true;
-        console.log(this.selectedRowIndex);
+        //(this.selectedRowIndex);
     }
 
     resetSelection() {

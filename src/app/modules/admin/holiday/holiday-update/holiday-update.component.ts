@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GeostructureService } from 'app/services/geostructure.service';
+import { HolidayService } from 'app/services/holiday.service';
+import { LocationService } from 'app/services/location.service';
+import Swal from 'sweetalert2';
 import {
     Geostructure,
     GeostructureLevel,
 } from '../../geostructure/geostructure-model/geostructure';
-import Swal from 'sweetalert2';
-import { LocationService } from 'app/services/location.service';
-import { HolidayService } from 'app/services/holiday.service';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-holiday-update',
@@ -53,21 +53,21 @@ export class HolidayUpdateComponent implements OnInit {
 
     getGeostructures(): void {
         this.geostructureService.list().subscribe((data) => {
-            console.log(data);
+            //(data);
             this.paises = data;
-            console.log(this.paises);
-            console.log(this.paises.length);
+            //(this.paises);
+            //(this.paises.length);
         });
     }
 
     onSelectPais(pais: string) {
-        console.log(pais);
+        //(pais);
         this.selectedPais = pais;
     }
 
     onSelectType(type: string) {
         this.geoLocationId = null;
-        console.log(type);
+        //(type);
         this.selectedType = type;
         if (this.selectedType === 'Regional') {
             this.choiceLocation = true;
@@ -81,26 +81,26 @@ export class HolidayUpdateComponent implements OnInit {
         this.geostructureService
             .getGeostructureByCode(pais)
             .subscribe((data) => {
-                console.log('getLevelsPorPais', data.geoStructures);
+                //('getLevelsPorPais', data.geoStructures);
                 this.levels = data.geoStructures;
-                console.log('this.levels', this.levels);
+                //('this.levels', this.levels);
             });
     }
 
     onSelectLevel(level: any) {
         this.elements = [];
-        console.log('level', level);
+        //('level', level);
         this.locationService
             .list(this.selectedPais, level.levelCode)
             .subscribe((data) => {
-                console.log('pronz', data);
+                //('pronz', data);
                 this.elements = data;
-                console.log(this.elements);
+                //(this.elements);
             });
     }
 
     onSelectElement(element: any) {
-        console.log('element', element);
+        //('element', element);
         this.geoLocationId = element;
     }
 
@@ -111,7 +111,7 @@ export class HolidayUpdateComponent implements OnInit {
             !this.name ||
             !this.type
         ) {
-            console.log('if');
+            //('if');
             this.errorMessage = 'Por favor, completa todos los campos.';
             return false;
         }
@@ -121,13 +121,13 @@ export class HolidayUpdateComponent implements OnInit {
         // if (!/^[A-Z]{3}$/.test(this.countryCode)) {
         //     this.errorMessage =
         //         'El codigo SWIFT debe seguir el formato estandar';
-        //     console.log('ECU Alfa');
+        //     //('ECU Alfa');
         //     return false;
         // }
         // Codigo Telefónico
         // if (!/^\d{1,2}$/.test(this.areaPhoneCode)) {
         //     this.errorMessage = 'El email debe tener un estructura estándar';
-        //     console.log('Codigo');
+        //     //('Codigo');
         //     return false;
         // }
         // this.errorMessage = null;
@@ -147,7 +147,7 @@ export class HolidayUpdateComponent implements OnInit {
         const uuid = this.activatedRoute.snapshot.params.uuid;
         this.holidayService.detail(uuid).subscribe(
             (data) => {
-                console.log('getDetail update', data);
+                //('getDetail update', data);
                 this.dataUrl = data;
                 this.holidayDate = this.dataUrl.holidayDate;
                 this.countryCode = this.dataUrl.countryCode;
@@ -156,7 +156,7 @@ export class HolidayUpdateComponent implements OnInit {
                 this.type = this.dataUrl.type;
             },
             (err) => {
-                console.log('No encuentra NADA');
+                //('No encuentra NADA');
                 Swal.fire(
                     'Advertencia',
                     'El registro no existe',
@@ -169,7 +169,7 @@ export class HolidayUpdateComponent implements OnInit {
     }
 
     onUpdate() {
-        console.log('onUpdate()');
+        //('onUpdate()');
         if (!this.validateForm()) {
             Swal.fire({
                 title: 'Error',
@@ -191,11 +191,11 @@ export class HolidayUpdateComponent implements OnInit {
             type: this.type,
         };
 
-        console.log(anyHoliday);
+        //(anyHoliday);
         const uuid = this.activatedRoute.snapshot.params.uuid;
         this.holidayService.update(uuid, anyHoliday).subscribe(
             (data) => {
-                console.log('Hola');
+                //('Hola');
                 Swal.fire({
                     title: '¡Éxito!',
                     text: 'El feriado se ha actualizado correctamente.',
@@ -221,7 +221,7 @@ export class HolidayUpdateComponent implements OnInit {
 
         // this.holidayService.create(anyHoliday).subscribe(
         //     (data) => {
-        //         console.log('Hola');
+        //         //('Hola');
         //         Swal.fire({
         //             title: '¡Éxito!',
         //             text: 'La nueva localización se ha guardado correctamente.',

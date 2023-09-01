@@ -1,5 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { EMPTY, Subject } from 'rxjs';
 import {
     catchError,
@@ -8,9 +10,9 @@ import {
     switchMap,
     takeUntil,
 } from 'rxjs/operators';
-import { v4 as uuidv4 } from 'uuid';
 import { AccountRQ } from '../Models/AccountRQ';
 import { Company } from '../Models/Company';
+import { Product } from '../Models/Product';
 import { GestionCuentasService } from '../services/gestion-cuentas.service';
 @Component({
     selector: 'app-management',
@@ -23,11 +25,13 @@ export class ManagementComponent implements OnInit {
     public searchInputControl!: FormControl;
     public accountForm:FormGroup;
     public searchQuery: string = '';
+    public passiveProductsList:Array<Product>;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _gestionCuentasService: GestionCuentasService,
         private _formBuilder:FormBuilder,
+        private _alertService:FuseConfirmationService
     ) {
         this.searchInputControl = new FormControl();
         this._initCompany();
@@ -35,6 +39,13 @@ export class ManagementComponent implements OnInit {
 
     ngOnInit(): void {
         setTimeout(() => {
+            this._gestionCuentasService.listPassiveProducts()
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe({
+                next:(response:Array<Product>)=>{
+                    this.passiveProductsList = [...response];
+                }
+            });
             this.accountForm = this._formBuilder.group({
                 accountType:[null,Validators.required],
                 interestRate:[null,Validators.required],
@@ -46,27 +57,56 @@ export class ManagementComponent implements OnInit {
 
     public createAccountForCompany(){
         const account:AccountRQ = {
-            name: this.accountForm.value.accountType,
-            blockedBalance:0,
-            codeInternationalAccount:'',
-            lastInterestCalculationDate:'',
-            interestRate: this.accountForm.value.interestRate,
-            productUk:'',
             codeInternalAccount:"",
+            name: this.accountForm.value.accountType,
             totalBalance: 0,
+            availableBalance: 0,
+            blockedBalance:0,
+            lastInterestCalculationDate:new Date().toISOString(),
+            codeInternationalAccount:'',
             allowOverdraft: false,
             maxOverdraft: 0,
-            accountHolderCode: this.accountForm.value.accountType+uuidv4(),
+            accountHolderCode: this.accountForm.value.accountType,
             accountHolderType:'GRO',
             state: 'ACT',
+            interestRate: this.accountForm.value.interestRate,
+            productUk:this.accountForm.get('accountType').value,
             groupUk: this.company.uniqueKey,
-            availableBalance: 0,
-            clientUk: this.company.members[0].clientId,
-
+            clientUk: '',
         };
         this._gestionCuentasService.createCompany(account).subscribe({
             next:(res)=>{
-                console.log(res);
+                const confirmation = this._alertService.open({
+                    title:'Creación de cuentas',
+                    message:'La cuenta ha sido creada de forma exitosa',
+                    icon:{
+                        color:'success',
+                        name:'heroicons_outline:check-badge',
+                    },
+                    actions:{
+                        confirm:{
+                            label:'Aceptar',
+                            color:'primary',
+                        },
+                        cancel:{
+                            show:false,
+                        }
+                    }
+                });
+            },
+            error:(error:HttpErrorResponse)=>{
+                const confirmation = this._alertService.open({
+                    title:'Error al crear cuenta',
+                    message:'No se pudo crear la cuenta debido a que ya existe o hubo un error en el proceso',
+                    actions:{
+                        confirm:{
+                            label:'Aceptar',
+                        },
+                        cancel:{
+                            show:false,
+                        }
+                    }
+                });
             }
         });
     }

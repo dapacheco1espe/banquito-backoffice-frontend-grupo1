@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ClienteAddress } from '../../model/clienteAddress';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ClienteService } from 'app/services/clienteService';
 import Swal from 'sweetalert2';
 import { Cliente } from '../../model/cliente';
-import { ClienteService } from 'app/services/clienteService';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ClienteAddress } from '../../model/clienteAddress';
 
 @Component({
   selector: 'app-address',
@@ -104,7 +104,7 @@ export class AddressComponent implements OnInit {
     this.clienteService.detail(this.typeDocumentId, this.documentId).subscribe(
       data => {
         this.cliente = data;
-        console.log(this.cliente);
+        //(this.cliente);
       },
       err => {
         this.router.navigate(['']);

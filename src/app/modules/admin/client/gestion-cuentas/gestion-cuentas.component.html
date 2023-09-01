@@ -6,28 +6,42 @@
                 <span matPrefix>
                     <mat-icon class="icon-size-4" svgIcon="heroicons_outline:search"></mat-icon>
                 </span>
-                <input matInput type="text" placeholder="Buscar">
+                <input matInput [formControl]="searchInputControl" type="text" placeholder="Buscar">
             </mat-form-field>
             <button mat-flat-button color="primary" (click)="navigateToPages('management');">Agregar</button>
         </div>
     </div>
     <div class="border-b"></div>
-    <div class="flex">
+    <div class="flex flex-col">
         <table class="border-collapse w-full table-auto mt-4 overflow">
             <thead>
                 <tr>
                     <th class="px-4 py-2 bg-gray-50">Nro.</th>
-                    <th class="px-4 py-2 bg-gray-50">Ubicación</th>
                     <th class="px-4 py-2 bg-gray-50">Nombre</th>
-                    <th class="px-4 py-2 bg-gray-50">Estado</th>
                     <th class="px-4 py-2 bg-gray-50">Email</th>
                     <th class="px-4 py-2 bg-gray-50">Teléfono</th>
                     <th class="px-4 py-2 bg-gray-50">Dirección</th>
-                    <th class="px-4 py-2 bg-gray-50">Acciones</th>
+                    <th class="px-4 py-2 bg-gray-50">Estado</th>
+                    <th class="px-4 py-2 bg-gray-50">Cantidad empleados</th>
                 </tr>
             </thead>
             <tbody>
+                <ng-container *ngIf="company != null">
+                    <tr>
+                        <td class="px-4 py-2 text-center">1</td>
+                        <td class="px-4 py-2 text-center">{{company.groupName}}</td>
+                        <td class="px-4 py-2 text-center">{{company.emailAddress}}</td>
+                        <td class="px-4 py-2 text-center">{{company.phoneNumber}}</td>
+                        <td class="px-4 py-2 text-center">{{company.line1 +","+company.line2 }}</td>
+                        <td class="px-4 py-2 text-center">{{company.state == 'ACT' ? 'Activo' : 'Inactivo'}}</td>
+                        <td class="px-4 py-2 text-center">{{company.members.length}}</td>
+                    </tr>
+                </ng-container>
+                
             </tbody>
         </table>
+        <ng-container *ngIf="company == null">
+            <p class="text-xl font-bold text-gray-400 mt-8 text-center w-full">Realiza una búsqueda para obtener resultados</p>
+        </ng-container>
     </div>
 </div>

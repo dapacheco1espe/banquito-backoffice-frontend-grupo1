@@ -8,6 +8,7 @@ export const environment = {
     apiURLAccounts: 'https://arquitectura-1sa89r3l.uc.gateway.dev',
     apiResrURL: 'https://arquitectura-1sa89r3l.uc.gateway.dev',
     administrationAPIUrl: 'https://arquitectura-1sa89r3l.uc.gateway.dev',
+    apiURLproductsPassive: 'https://arquitectura-1sa89r3l.uc.gateway.dev/api',
 };
 
 /*

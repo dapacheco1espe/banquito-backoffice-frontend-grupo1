@@ -22,4 +22,8 @@ export class GestionCuentasService {
     this._baseURL = environment.apiURLAccounts;
     return this._http.post(`${this._baseURL}/v1/accounts`,accountRQ);
   }
+
+  public listPassiveProducts():Observable<any>{
+    return this._http.get(`${environment.apiURLproductsPassive}/v1/productAccount/productos`);
+  }
 }

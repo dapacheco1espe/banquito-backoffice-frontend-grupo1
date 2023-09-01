@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 // import { Agency } from '../model/agency';
-import { AgencyService } from 'app/services/agency.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AgencyService } from 'app/services/agency.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -27,10 +27,10 @@ export class AgencyDetailComponent implements OnInit {
         this.agencyService.detail(id).subscribe(
             (data) => {
                 this.dataUrl = data;
-                console.log(this.dataUrl);
+                //(this.dataUrl);
             },
             (err) => {
-                console.log('No encuentra NADA');
+                //('No encuentra NADA');
                 Swal.fire(
                     'Advertencia',
                     'El registro no existe',
