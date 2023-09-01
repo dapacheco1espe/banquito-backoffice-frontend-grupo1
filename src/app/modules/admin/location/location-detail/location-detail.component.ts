@@ -93,10 +93,6 @@ export class LocationDetailComponent implements OnInit {
                                     element.name.toLowerCase() ===
                                     this.levelParentName.toLowerCase()
                             );
-                            //(
-                                'selectedElementObj',
-                                selectedElementObj
-                            );
                             this.selectedElement = selectedElementObj.uuid;
                         });
                 } else if (this.parentLevel === 0) {

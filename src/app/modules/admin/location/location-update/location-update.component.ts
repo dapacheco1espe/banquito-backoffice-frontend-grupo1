@@ -86,12 +86,6 @@ export class LocationUpdateComponent implements OnInit {
                         .subscribe((data) => {
                             //('pronz', data);
                             this.elements = data;
-                            //(this.elements);
-                            //('thisParentName', this.levelParentName);
-                            //(
-                                'thisSelecteLevel before',
-                                this.selectedLevelObj
-                            );
                             const lowerLevelName =
                                 this.levelParentName.toLowerCase();
                             const selectedElementObj = this.elements.find(
@@ -99,15 +93,7 @@ export class LocationUpdateComponent implements OnInit {
                                     element.name.toLowerCase() ===
                                     lowerLevelName
                             );
-                            //(
-                                'selectedElementObj',
-                                selectedElementObj
-                            );
                             this.selectedElement = selectedElementObj.uuid;
-                            // //(
-                            //     'thisSelecteLevel after',
-                            //     this.selectedLevelObj
-                            // );
                         });
                 } else if (this.parentLevel === 0) {
                     this.highLevel = true;
@@ -170,20 +156,14 @@ export class LocationUpdateComponent implements OnInit {
 
         this.locationService.detail(uuid).subscribe(
             (data) => {
-                //('getDetail', data);
                 this.dataUrl = data;
                 this.selectedPais = this.dataUrl.countryCode;
                 this.getLevelsPorPais(this.selectedPais);
                 this.name = this.dataUrl.name;
                 this.areaPhoneCode = this.dataUrl.areaPhoneCode;
                 this.zipCode = this.dataUrl.zipCode;
-                //(
-                    'thisSelecteLevel before getDetail',
-                    this.selectedLevelObj
-                );
             },
             (err) => {
-                //('No encuentra NADA');
                 Swal.fire(
                     'Advertencia',
                     'El registro no existe',
@@ -220,8 +200,6 @@ export class LocationUpdateComponent implements OnInit {
             areaPhoneCode: this.areaPhoneCode,
             zipCode: this.zipCode,
         };
-
-        //('const location', newLocation);
 
         this.locationService.update(uuid, newLocation).subscribe(
             (data) => {
