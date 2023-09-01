@@ -11,6 +11,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { AccountRQ } from '../Models/AccountRQ';
 import { Company } from '../Models/Company';
+import { Product } from '../Models/Product';
 import { GestionCuentasService } from '../services/gestion-cuentas.service';
 @Component({
     selector: 'app-management',
@@ -23,6 +24,7 @@ export class ManagementComponent implements OnInit {
     public searchInputControl!: FormControl;
     public accountForm:FormGroup;
     public searchQuery: string = '';
+    public passiveProductsList:Array<Product>;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
@@ -35,6 +37,13 @@ export class ManagementComponent implements OnInit {
 
     ngOnInit(): void {
         setTimeout(() => {
+            this._gestionCuentasService.listPassiveProducts()
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe({
+                next:(response:Array<Product>)=>{
+                    this.passiveProductsList = [...response];
+                }
+            });
             this.accountForm = this._formBuilder.group({
                 accountType:[null,Validators.required],
                 interestRate:[null,Validators.required],
